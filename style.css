@@ -1,0 +1,39 @@
+body{
+	background-image: url('img/desert-duotone.png');
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+
+}
+
+.haven-button{
+	background-color: rgba(255,255,255,0.8);
+	border: solid white 2px;
+	border: none;
+	border-radius: 0;
+	-webkit-transition: all 0.3s; /* Safari */
+    transition: all 0.3s;
+    font-size: 3em;
+    font-weight: 100;
+    padding: 15px 30px;
+    margin-bottom: 15px;
+}
+
+.haven-button:hover{
+	background-color: rgba(255,255,255,1);
+	cursor: pointer;
+}
+
+#stopButton{
+	background: transparent;
+
+	color: white;
+}
+#stopButton:hover{
+	background-color: rgba(255,255,255,1);
+	cursor: pointer;
+	color: #333;
+}
