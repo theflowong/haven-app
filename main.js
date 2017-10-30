@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-  	var audio = new Audio('audio/sample-audio.mp3');
+  	var audio = new Audio('audio/HAVEN_Music1.mp3');
     var url_ip = 'http://192.168.0.182/api/P5L62etgqpkSUikcmdABFSCox4cOoyk7SIMefkO3'
         // Flo's room: 'http://192.168.0.182/api/P5L62etgqpkSUikcmdABFSCox4cOoyk7SIMefkO3',
         // Daniel's room: 'http://192.168.86.31/api/EQMB5CwjE2hYxWK4a-lqCvk9pKN5VoNoTvEACoDz'
