@@ -53,7 +53,9 @@ $( document ).ready(function() {
                 }
             });
         }
-        requestAnimationFrame(updateExperience(cycle_theme));
+        requestAnimationFrame(function() {
+            updateExperience(cycle_experiment);
+        });
     }
 
   	function stopExperience(){
@@ -71,13 +73,14 @@ $( document ).ready(function() {
 
     $('#startButton').on('click', function(){
     	startExperience();
-        requestAnimationFrame(updateExperience(cycle_experiment));
+        requestAnimationFrame(function() {
+            updateExperience(cycle_experiment);
+        });
     });
-
 
     $('#stopButton').on('click', function(){
+        console.log('clicked stop');
     	stopExperience();
     });
-
 
 });
