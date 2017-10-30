@@ -25,6 +25,14 @@ $( document ).ready(function() {
         return('{"on":true, "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
     }
 
+    function sleep(miliseconds) {
+        var currentTime = new Date().getTime();
+
+        while (currentTime + miliseconds >= new Date().getTime()) {
+            // execute function
+        }
+    }
+
   	function startExperience(){
         $.ajax({
             url: url_ip+url_lights,
@@ -39,20 +47,19 @@ $( document ).ready(function() {
   	}
 
     function updateExperience(cycle_theme){
-
-        setTimeout(function() {
-            for (i = 0; i < cycle_theme.length; i++) {
-                console.log(i + ' timeout', cycle_theme[i]);
-                $.ajax({
-                    url: url_ip+url_lights,
-                    type: 'PUT',
-                    data: convertColourArrayToDict(cycle_theme[i]),
-                    success: function() {
-                    }
-                });
-            }
-        }, 5000);
-
+        for (i = 0; i < cycle_theme.length; i++) {
+            console.log('sleep before', i);
+            sleep(2000);
+            console.log('sleep after', i);
+            console.log(i + ' timeout', cycle_theme[i]);
+            $.ajax({
+                url: url_ip+url_lights,
+                type: 'PUT',
+                data: convertColourArrayToDict(cycle_theme[i]),
+                success: function() {
+                }
+            });
+        }
     }
 
   	function stopExperience(){
