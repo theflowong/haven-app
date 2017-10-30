@@ -7,6 +7,7 @@ $( document ).ready(function() {
     var url_lights = '/groups/0/action';
         // or /lights/3/state (depending on light)
 
+    var stopped;
     var bri, sat, hue;
     var colour_seawater = [30,255,255,56100]; // 3 seconds, pink
     var cycle_experiment = [[30,255,255,25500],[30,255,255,46920]] // 3 seconds, green, blue
@@ -53,9 +54,11 @@ $( document ).ready(function() {
                 }
             });
         }
-        requestAnimationFrame(function() {
-            updateExperience(cycle_experiment);
-        });
+        if (!stopped) {
+            requestAnimationFrame(function() {
+                updateExperience(cycle_experiment);
+            });
+        }
     }
 
   	function stopExperience(){
@@ -72,6 +75,7 @@ $( document ).ready(function() {
 
 
     $('#startButton').on('click', function(){
+        stopped = false;
     	startExperience();
         requestAnimationFrame(function() {
             updateExperience(cycle_experiment);
@@ -79,6 +83,7 @@ $( document ).ready(function() {
     });
 
     $('#stopButton').on('click', function(){
+        stopped = true;
         console.log('clicked stop');
     	stopExperience();
     });
