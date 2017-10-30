@@ -7,6 +7,17 @@ $( document ).ready(function() {
     var url_lights = '/groups/0/action';
       // or /lights/3/state (depending on light)
 
+    var bri, sat, hue;
+    var sea_water = ['255','255','11400'];
+
+    function updateLoop(colour_theme){
+      // creates ajax string for updating loop based on colour theme values
+      bri = colour_theme[0];
+      sat = colour_theme[1];
+      hue = colour_theme[2];
+      return('{"on":true, "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
+    }
+
   	function startExperience(){
 
         $.ajax({
@@ -15,11 +26,11 @@ $( document ).ready(function() {
 //            this one makes a nice simple colour loop but we probably won't need to use it
 //            data: '{"on":true,"bri":255,"sat":255,"hue":46920, "effect":"colorloop"}',
 //            blue
-            data: '{"on":true,"bri":255,"sat":255,"hue":46920}',
+            data: updateLoop(sea_water),
             success: function () {
             }
         });
-        
+
   		audio.play();
   	}
 
