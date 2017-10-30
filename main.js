@@ -8,28 +8,23 @@ $( document ).ready(function() {
         // or /lights/3/state (depending on light)
 
     var bri, sat, hue;
-    var colour_seawater = [255,255,21400];
-    var cycle_experiment = [[255,255,00400],[10,255,45000]]
+    var colour_seawater = [30,255,255,56100]; // 3 seconds, pink
+    var cycle_experiment = [[30,255,255,25500],[30,255,255,46920]] // 3 seconds, green, blue
 
     function convertColourArrayToDict(colour_theme){
-        // takes an array of three int color values [bri, sat, hue]
+        // takes an array of four int color values [transitiontime, bri, sat, hue]
         // returns ajax string format
+        tt = colour_theme[0]
+        bri = colour_theme[1];
+        sat = colour_theme[2];
+        hue = colour_theme[3];
 
-        bri = colour_theme[0];
-        sat = colour_theme[1];
-        hue = colour_theme[2];
-
-        console.log('b: ' + bri + ', s: ' + sat + ', h: ' + hue);
-            // for testing purposes
-
-        return('{"on":true, "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
+        return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
     }
 
-    function sleep(miliseconds) {
+    function sleep(milliseconds) {
         var currentTime = new Date().getTime();
-
-        while (currentTime + miliseconds >= new Date().getTime()) {
-            // execute function
+        while (currentTime + milliseconds >= new Date().getTime()) {
         }
     }
 
@@ -48,10 +43,8 @@ $( document ).ready(function() {
 
     function updateExperience(cycle_theme){
         for (i = 0; i < cycle_theme.length; i++) {
-            console.log('sleep before', i);
-            sleep(2000);
-            console.log('sleep after', i);
-            console.log(i + ' timeout', cycle_theme[i]);
+            sleep(3000); // 3000 milliseconds = 3 second
+            console.log(i, cycle_theme[i]);
             $.ajax({
                 url: url_ip+url_lights,
                 type: 'PUT',
@@ -60,6 +53,7 @@ $( document ).ready(function() {
                 }
             });
         }
+        requestAnimationFrame(updateExperience(cycle_theme));
     }
 
   	function stopExperience(){
@@ -77,7 +71,7 @@ $( document ).ready(function() {
 
     $('#startButton').on('click', function(){
     	startExperience();
-        updateExperience(cycle_experiment);
+        requestAnimationFrame(updateExperience(cycle_experiment));
     });
 
 
