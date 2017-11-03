@@ -8,10 +8,20 @@ $( document ).ready(function() {
         // or /lights/3/state (depending on light)
 
     var stopped;
+    var fps = 1;
     var bri, sat, hue;
     var colour_seawater = [30,255,255,56100]; // 3 seconds, pink
     var cycle_experiment = [[30,255,255,25500],[30,255,255,46920]] // 3 seconds, green, blue
-
+/*
+    window.requestAnimFrame = (function() {
+        return  window.requestAnimationFrame        ||
+                window.webkitRequestAnimationFrame  ||
+                window.mozRequestAnimationFrame     ||
+                function( callback ) {
+                    window.setTimeout(callback, 1000 / fps);
+                };
+    })();
+*/
     function convertColourArrayToDict(colour_theme){
         // takes an array of four int color values [transitiontime, bri, sat, hue]
         // returns ajax string format
@@ -55,10 +65,22 @@ $( document ).ready(function() {
             });
         }
         if (!stopped) {
-            requestAnimationFrame(function() {
+            console.log('stopped ', stopped);
+
+            setTimeout(function() {
+                updateExperience(cycle_experiment);
+            }, 1000/fps);
+            /*
+            requestAnimFrame(function() {
                 updateExperience(cycle_experiment);
             });
+            */
         }
+/*
+        requestAnimFrame(function() {
+            updateExperience(cycle_experiment);
+        });
+*/
     }
 
   	function stopExperience(){
@@ -77,9 +99,13 @@ $( document ).ready(function() {
     $('#startButton').on('click', function(){
         stopped = false;
     	startExperience();
-        requestAnimationFrame(function() {
+        updateExperience(cycle_experiment);
+        /*
+        requestAnimFrame(function() {
+            console.log('test 2');
             updateExperience(cycle_experiment);
         });
+        */
     });
 
     $('#stopButton').on('click', function(){
