@@ -56,17 +56,19 @@ $( document ).ready(function() {
   	}
 
     function updateExperience(cycle_theme){
-        for (i = 0; i < cycle_theme.length; i++) {
-            sleep(3000); // 3000 milliseconds = 3 second
-            console.log(i, cycle_theme[i]);
-            $.ajax({
-                url: url_ip+url_lights,
-                type: 'PUT',
-                data: convertColourArrayToDict(cycle_theme[i]),
-                success: function() {
-                }
-            });
-        }
+        console.log('cycle_theme in updateExperience ', cycle_theme);
+        setInterval(function() {
+            for (i = 0; i < cycle_theme.length; i++) {
+                console.log(i, cycle_theme[i]);
+                $.ajax({
+                    url: url_ip+url_lights,
+                    type: 'PUT',
+                    data: convertColourArrayToAjax(cycle_theme[i]),
+                    success: function() {
+                    }
+                });
+            }
+        }, 3000);
         if (!stopped) {
             console.log('stopped ', stopped);
 
