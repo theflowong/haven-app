@@ -1,4 +1,4 @@
-# README.md
+# Haven: Room Interactions
 
 *App in development, to be fully released Dec 2017*
 
