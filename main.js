@@ -10,7 +10,7 @@ $( document ).ready(function() {
         // or /lights/3/state (depending on light)
 
     var stopped;
-    var fps = 1;
+    var fps = 1/3.0;
     var bri, sat, hue;
     var colour_seawater = [30,255,255,56100]; // 3 seconds, pink
     var cycle_experiment = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
@@ -57,24 +57,29 @@ $( document ).ready(function() {
 
     function updateExperience(cycle_theme){
         console.log('cycle_theme in updateExperience ', cycle_theme);
-        setInterval(function() {
-            for (i = 0; i < cycle_theme.length; i++) {
-                console.log(i, cycle_theme[i]);
-                $.ajax({
-                    url: url_ip+url_lights,
-                    type: 'PUT',
-                    data: convertColourArrayToAjax(cycle_theme[i]),
-                    success: function() {
-                    }
-                });
-            }
-        }, 3000);
         if (!stopped) {
-            console.log('stopped ', stopped);
 
+            console.log('stopped: ', stopped);
             setTimeout(function() {
-                updateExperience(cycle_theme);
+                for (i = 0; i < cycle_theme.length; i++) {
+                    console.log(i, cycle_theme[i]);
+                    $.ajax({
+                        url: url_ip+url_lights,
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(cycle_theme[i]),
+                        success: function() {
+                        }
+                    });
+                }
             }, 1000/fps);
+
+            if (!stopped) {
+                setTimeout(function() {
+                    updateExperience(cycle_theme);
+                }, 1000/fps);
+            }
+
+
             /*
             requestAnimFrame(function() {
                 updateExperience(cycle_theme);
