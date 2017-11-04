@@ -12,8 +12,8 @@ $( document ).ready(function() {
     var stopped;
     var fps = 1/3.0;
     var bri, sat, hue;
-    var colour_seawater = [30,255,255,56100]; // 3 seconds, pink
-    var cycle_experiment = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
+    var colour_pink = [30,255,255,56100]; // 3 seconds, pink
+    var cycle_seawater = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
 /*
     window.requestAnimFrame = (function() {
         return  window.requestAnimationFrame        ||
@@ -48,7 +48,7 @@ $( document ).ready(function() {
             type: 'PUT',
                 // this one makes a nice simple colour loop but we probably won't need to use it
             //data: '{"on":true,"bri":255,"sat":255,"hue":46920, "effect":"colorloop"}',
-            data: convertColourArrayToAjax(colour_seawater),
+            data: convertColourArrayToAjax(colour_pink),
             success: function () {
             }
         });
@@ -109,12 +109,12 @@ $( document ).ready(function() {
     $('#startButton').on('click', function(){
         stopped = false;
     	startExperience();
-        console.log('cycle_experiment ', cycle_experiment);
-        updateExperience(cycle_experiment);
+        console.log('cycle_seawater ', cycle_seawater);
+        updateExperience(cycle_seawater);
         /*
         requestAnimFrame(function() {
             console.log('test 2');
-            updateExperience(cycle_experiment);
+            updateExperience(cycle_seawater);
         });
         */
     });
