@@ -35,12 +35,6 @@ $( document ).ready(function() {
         return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
     }
 
-    function sleep(milliseconds) {
-        var currentTime = new Date().getTime();
-        while (currentTime + milliseconds >= new Date().getTime()) {
-        }
-    }
-
   	function startExperience(){
         console.log('starting');
         $.ajax({
@@ -56,10 +50,29 @@ $( document ).ready(function() {
   	}
 
     function updateExperience(cycle_theme){
-        console.log('cycle_theme in updateExperience ', cycle_theme);
-        if (!stopped) {
+        console.log('\nstarting updateExperience');
 
-            console.log('stopped: ', stopped);
+        if (!stopped) {
+            console.log('!stopped: ', stopped);
+
+            for (var i = 0; i < cycle_theme.length; i++) {
+                (function(n){
+                    setTimeout(function(){
+                        console.log(n, cycle_theme[n]);
+                        $.ajax({
+                            url: url_ip+url_lights,
+                            type: 'PUT',
+                            data: convertColourArrayToAjax(cycle_theme[n]),
+                            success: function() {
+                            }
+                        });
+                    }, 1000/fps);
+                }(i));
+            }
+// somehow fix the timing for actual lights within the cycle.
+// try solution above, research more
+
+/*
             setTimeout(function() {
                 for (i = 0; i < cycle_theme.length; i++) {
                     console.log(i, cycle_theme[i]);
@@ -72,25 +85,17 @@ $( document ).ready(function() {
                     });
                 }
             }, 1000/fps);
+*/
 
             if (!stopped) {
+                console.log('!stopped2: ', stopped)
                 setTimeout(function() {
                     updateExperience(cycle_theme);
                 }, 1000/fps);
             }
 
 
-            /*
-            requestAnimFrame(function() {
-                updateExperience(cycle_theme);
-            });
-            */
         }
-/*
-        requestAnimFrame(function() {
-            updateExperience(cycle_theme);
-        });
-*/
     }
 
   	function stopExperience(){
