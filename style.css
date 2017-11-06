@@ -6,7 +6,13 @@ body{
 	justify-content: center;
 	flex-direction: column;
 	height: 100vh;
+}
 
+body[data-mode="modeOne"]{
+	background-image: url('img/mode-one-preview.jpg');
+}
+body[data-mode="modeTwo"]{
+	background-image: url('img/mode-two-preview.jpg');
 }
 
 .haven-button{
@@ -29,11 +35,17 @@ body{
 
 #stopButton{
 	background: transparent;
-
+	display: none;
 	color: white;
 }
 #stopButton:hover{
 	background-color: rgba(255,255,255,1);
 	cursor: pointer;
 	color: #333;
+}
+
+
+
+#controls.hidden{
+	display: none;
 }
