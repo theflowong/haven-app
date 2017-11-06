@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+
+  console.log('loaded');
   
     // JSON of mode content
     var data = [
@@ -11,6 +13,67 @@ $( document ).ready(function() {
 
     var $controls = $('#controls');
     var $modeButtonWrapper = $('#mode-button-wrapper');
+
+    function convertColourArrayToAjax(colour_theme){
+        // takes an array of four int color values [transitiontime, bri, sat, hue]
+        // returns ajax string format
+        tt = colour_theme[0];
+        bri = colour_theme[1];
+        sat = colour_theme[2];
+        hue = colour_theme[3];
+
+       return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
+    }
+
+    function updateExperience(cycle_theme){
+        console.log('\nstarting updateExperience');
+
+       if (!stopped) {
+            console.log('!stopped: ', stopped);
+
+           for (var i = 0; i < cycle_theme.length; i++) {
+                (function(n){
+                    setTimeout(function(){
+                        console.log(n, cycle_theme[n]);
+                        $.ajax({
+                            url: url_ip+url_lights,
+                            type: 'PUT',
+                            data: convertColourArrayToAjax(cycle_theme[n]),
+                            success: function() {
+                            }
+                        });
+                    }, 1000/fps);
+                }(i));
+            }
+// somehow fix the timing for actual lights within the cycle.
+// try solution above, research more
+
+/*
+            setTimeout(function() {
+                for (i = 0; i < cycle_theme.length; i++) {
+                    console.log(i, cycle_theme[i]);
+                    $.ajax({
+                        url: url_ip+url_lights,
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(cycle_theme[i]),
+                        success: function() {
+                        }
+                    });
+                }
+            }, 1000/fps);
+*/
+
+           if (!stopped) {
+                console.log('!stopped2: ', stopped)
+                setTimeout(function() {
+                    updateExperience(cycle_theme);
+                }, 1000/fps);
+            }
+
+
+       }
+    }
+
 
     $('.mode-button').on('click', function(){
       
@@ -27,15 +90,7 @@ $( document ).ready(function() {
 
     });
 
-
-  	function startExperience(light,audio){
-  		// ADD HUE API STUFF HERE
-      // alert(selected.light);
-      audioFile = new Audio(audio);
-  		audioFile.play();
-      console.log('from startExperience function', light, audio)
-
-  	var audio = new Audio('audio/HAVEN_Music1.mp3');
+    // var audio = new Audio('audio/HAVEN_Music1.mp3');
     var url_ip = 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
         // http://<bridge ip address>/debug/clip.html
         // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
@@ -49,35 +104,17 @@ $( document ).ready(function() {
     var bri, sat, hue;
     var colour_pink = [30,255,255,56100]; // 3 seconds, pink
     var cycle_seawater = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
-/*
-    window.requestAnimFrame = (function() {
-        return  window.requestAnimationFrame        ||
-                window.webkitRequestAnimationFrame  ||
-                window.mozRequestAnimationFrame     ||
-                function( callback ) {
-                    window.setTimeout(callback, 1000 / fps);
-                };
-    })();
-*/
-    function convertColourArrayToAjax(colour_theme){
-        // takes an array of four int color values [transitiontime, bri, sat, hue]
-        // returns ajax string format
-        tt = colour_theme[0];
-        bri = colour_theme[1];
-        sat = colour_theme[2];
-        hue = colour_theme[3];
 
-        return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
-    }
 
-    function sleep(milliseconds) {
-        var currentTime = new Date().getTime();
-        while (currentTime + milliseconds >= new Date().getTime()) {
-        }
-    }
 
-  	function startExperience(){
-        console.log('starting');
+  	function startExperience(light,audio){
+  		// ADD HUE API STUFF HERE
+      // alert(selected.light);
+      audioFile = new Audio(audio);
+
+      console.log('from startExperience function', light, audio)
+
+      console.log('starting');
         $.ajax({
             url: url_ip+url_lights,
             type: 'PUT',
@@ -87,51 +124,13 @@ $( document ).ready(function() {
             success: function () {
             }
         });
-  		audio.play();
+      audioFile.play();
 
-  	}
-
-    function updateExperience(cycle_theme){
-        console.log('cycle_theme in updateExperience ', cycle_theme);
-        if (!stopped) {
-
-            console.log('stopped: ', stopped);
-            setTimeout(function() {
-                for (i = 0; i < cycle_theme.length; i++) {
-                    console.log(i, cycle_theme[i]);
-                    $.ajax({
-                        url: url_ip+url_lights,
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(cycle_theme[i]),
-                        success: function() {
-                        }
-                    });
-                }
-            }, 1000/fps);
-
-            if (!stopped) {
-                setTimeout(function() {
-                    updateExperience(cycle_theme);
-                }, 1000/fps);
-            }
-
-
-            /*
-            requestAnimFrame(function() {
-                updateExperience(cycle_theme);
-            });
-            */
-        }
-/*
-        requestAnimFrame(function() {
-            updateExperience(cycle_theme);
-        });
-*/
     }
 
-  	function stopExperience(){
+    function stopExperience(){
 
-  		audioFile.pause();
+      audioFile.pause();
 
         $.ajax({
             url: url_ip+url_lights,
@@ -141,11 +140,8 @@ $( document ).ready(function() {
             }
         });
 
-  		audio.pause();
 
-  	}
-
-
+    }
 
 
     $('#startButton').on('click', function(){
@@ -172,7 +168,7 @@ $( document ).ready(function() {
 
 
         stopped = false;
-    	startExperience();
+      startExperience();
         console.log('cycle_seawater ', cycle_seawater);
         updateExperience(cycle_seawater);
         /*
@@ -188,8 +184,9 @@ $( document ).ready(function() {
 
       $(this).fadeOut();
       $("#startButton").fadeIn();
-
-    	stopExperience();
+      stopped = true;
+      console.log('clicked stop');
+      stopExperience();
     });
 
     $("#backButton").on('click', function(){
@@ -201,13 +198,8 @@ $( document ).ready(function() {
       // stopExperience();
     });
 
-
-});
-
-        stopped = true;
-        console.log('clicked stop');
-    	stopExperience();
-    });
+      
+ 
 
 });
 
