@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-  
+
     // JSON of mode content
     var data = [
       {"name":"modeZero","light":"purple","audio":"audio/mode-zero.mp3", "thumbnail": "img/mode-zero-preview.jpg"},
@@ -13,7 +13,10 @@ $( document ).ready(function() {
     var $modeButtonWrapper = $('#mode-button-wrapper');
 
     $('.mode-button').on('click', function(){
-      
+
+      console.log('mode click');
+
+
       // Show controls
       $controls.fadeIn(2000);
       // Get the selected mode
@@ -193,7 +196,7 @@ $( document ).ready(function() {
     });
 
     $("#backButton").on('click', function(){
-      
+
       $controls.fadeOut();
       $modeButtonWrapper.fadeIn();
       $('body').attr('data-mode', '');
@@ -202,12 +205,9 @@ $( document ).ready(function() {
     });
 
 
-});
-
         stopped = true;
         console.log('clicked stop');
     	stopExperience();
     });
 
 });
-
