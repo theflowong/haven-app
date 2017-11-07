@@ -1,9 +1,6 @@
 $( document ).ready(function() {
 
-    console.log('loaded');
-
-
-    // var audio = new Audio('audio/HAVEN_Music1.mp3');
+  	var audio = new Audio('audio/HAVEN_Music1.mp3');
     var url_ip = 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
         // http://<bridge ip address>/debug/clip.html
         // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
@@ -17,19 +14,16 @@ $( document ).ready(function() {
     var bri, sat, hue;
     var colour_pink = [30,255,255,56100]; // 3 seconds, pink
     var cycle_seawater = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
-
-    // JSON of mode content
-    var data = [
-      {"name":"modeZero","light":"purple","audio":"audio/mode-zero.mp3", "thumbnail": "img/mode-zero-preview.jpg"},
-      {"name":"modeOne","light":"red","audio":"audio/mode-one.mp3", "thumbnail": "img/mode-one-preview.jpg"},
-      {"name":"modeTwo","light":"blue","audio":"audio/mode-two.mp3", "thumbnail": "img/mode-two-preview.jpg"},
-      {"name":"modeThree","light":"green","audio":"audio/mode-three.mp3", "thumbnail": "img/mode.jpg"},
-      {"name":"modeFour","light":"orange","audio":"audio/mode-four.mp3", "thumbnail": "img/mode.jpg"}
-    ]
-
-    var $controls = $('#controls');
-    var $modeButtonWrapper = $('#mode-button-wrapper');
-
+/*
+    window.requestAnimFrame = (function() {
+        return  window.requestAnimationFrame        ||
+                window.webkitRequestAnimationFrame  ||
+                window.mozRequestAnimationFrame     ||
+                function( callback ) {
+                    window.setTimeout(callback, 1000 / fps);
+                };
+    })();
+*/
     function convertColourArrayToAjax(colour_theme){
         // takes an array of four int color values [transitiontime, bri, sat, hue]
         // returns ajax string format
@@ -38,8 +32,22 @@ $( document ).ready(function() {
         sat = colour_theme[2];
         hue = colour_theme[3];
 
-       return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
+        return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
     }
+
+  	function startExperience(){
+        console.log('starting');
+        $.ajax({
+            url: url_ip+url_lights,
+            type: 'PUT',
+                // this one makes a nice simple colour loop but we probably won't need to use it
+            //data: '{"on":true,"bri":255,"sat":255,"hue":46920, "effect":"colorloop"}',
+            data: convertColourArrayToAjax(colour_pink),
+            success: function () {
+            }
+        });
+  		audio.play();
+  	}
 
     function updateExperience(cycle_theme){
         console.log('\nstarting updateExperience');
@@ -79,7 +87,7 @@ $( document ).ready(function() {
             }, 1000/fps);
 */
 
-           if (!stopped) {
+            if (!stopped) {
                 console.log('!stopped2: ', stopped)
                 setTimeout(function() {
                     updateExperience(cycle_theme);
@@ -87,39 +95,10 @@ $( document ).ready(function() {
             }
 
 
-       }
+        }
     }
 
-    function fetchAudioAndPlay(audioFile) {
-        fetch(audioFile);
-        return audioFile.play();
-    }
-
-  	function startExperience(light,audio){
-  		// ADD HUE API STUFF HERE
-      // alert(selected.light);
-      audioFile = new Audio(audio);
-
-      console.log('from startExperience function', light, audio)
-
-      console.log('starting');
-        $.ajax({
-            url: url_ip+url_lights,
-            type: 'PUT',
-                // this one makes a nice simple colour loop but we probably won't need to use it
-            //data: '{"on":true,"bri":255,"sat":255,"hue":46920, "effect":"colorloop"}',
-            data: convertColourArrayToAjax(colour_pink),
-            success: function () {
-            }
-        });
-      fetchAudioAndPlay(audioFile);
-
-    }
-
-    function stopExperience(){
-
-      audioFile.pause();
-
+  	function stopExperience(){
         $.ajax({
             url: url_ip+url_lights,
             type: 'PUT',
@@ -128,50 +107,13 @@ $( document ).ready(function() {
             }
         });
 
+  		audio.pause();
+  	}
 
-    }
-
-
-    $('.mode-button').on('click', function(){
-
-        console.log('mode click');
-
-        // Show controls
-        $controls.fadeIn(2000);
-        // Get the selected mode
-        var dataMode = $(this).attr('data-mode');
-        // Assign mode to the controls
-        $controls.attr('data-mode', dataMode);
-        // Hide mode buttons
-        $modeButtonWrapper.fadeOut(1000);
-        $('body').attr('data-mode', dataMode);
-
-
-    });
 
     $('#startButton').on('click', function(){
-
-        // Hide Start Button and show stop button
-        $(this).fadeOut();
-        $("#stopButton").fadeIn();
-
-        var dataMode = $("#controls").attr('data-mode'),
-            index = -1;
-
-        var selectedMode = data.find(function(item, i){
-            if(item.name === dataMode){
-                index = i;
-                return i;
-            }
-        });
-
-        var selectedModeLight = selectedMode.light,
-            selectedModeAudio  = selectedMode.audio;
-
-        startExperience(selectedModeLight, selectedModeAudio);
-
         stopped = false;
-        startExperience();
+    	startExperience();
         console.log('cycle_seawater ', cycle_seawater);
         updateExperience(cycle_seawater);
         /*
@@ -180,26 +122,12 @@ $( document ).ready(function() {
             updateExperience(cycle_seawater);
         });
         */
-
     });
 
     $('#stopButton').on('click', function(){
-
-      $(this).fadeOut();
-      $("#startButton").fadeIn();
-      stopped = true;
-      console.log('clicked stop');
-      stopExperience();
+        stopped = true;
+        console.log('clicked stop');
+    	stopExperience();
     });
-
-    $("#backButton").on('click', function(){
-
-      $controls.fadeOut();
-      $modeButtonWrapper.fadeIn();
-      $('body').attr('data-mode', '');
-
-      // stopExperience();
-    });
-
 
 });
