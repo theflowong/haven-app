@@ -1,7 +1,23 @@
 $( document ).ready(function() {
 
-  console.log('loaded');
+    console.log('loaded');
   
+
+    // var audio = new Audio('audio/HAVEN_Music1.mp3');
+    var url_ip = 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
+        // http://<bridge ip address>/debug/clip.html
+        // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
+        // Flo's room: 'http://192.168.0.182/api/P5L62etgqpkSUikcmdABFSCox4cOoyk7SIMefkO3',
+        // Daniel's room: 'http://192.168.86.31/api/EQMB5CwjE2hYxWK4a-lqCvk9pKN5VoNoTvEACoDz'
+    var url_lights = '/groups/0/action';
+        // or /lights/3/state (depending on light)
+
+    var stopped;
+    var fps = 1/3.0;
+    var bri, sat, hue;
+    var colour_pink = [30,255,255,56100]; // 3 seconds, pink
+    var cycle_seawater = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
+
     // JSON of mode content
     var data = [
       {"name":"modeZero","light":"purple","audio":"audio/mode-zero.mp3", "thumbnail": "img/mode-zero-preview.jpg"},
@@ -28,10 +44,10 @@ $( document ).ready(function() {
     function updateExperience(cycle_theme){
         console.log('\nstarting updateExperience');
 
-       if (!stopped) {
+        if (!stopped) {
             console.log('!stopped: ', stopped);
 
-           for (var i = 0; i < cycle_theme.length; i++) {
+            for (var i = 0; i < cycle_theme.length; i++) {
                 (function(n){
                     setTimeout(function(){
                         console.log(n, cycle_theme[n]);
@@ -76,7 +92,10 @@ $( document ).ready(function() {
 
 
     $('.mode-button').on('click', function(){
-      
+
+      console.log('mode click');
+
+
       // Show controls
       $controls.fadeIn(2000);
       // Get the selected mode
@@ -90,22 +109,10 @@ $( document ).ready(function() {
 
     });
 
-    // var audio = new Audio('audio/HAVEN_Music1.mp3');
-    var url_ip = 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
-        // http://<bridge ip address>/debug/clip.html
-        // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
-        // Flo's room: 'http://192.168.0.182/api/P5L62etgqpkSUikcmdABFSCox4cOoyk7SIMefkO3',
-        // Daniel's room: 'http://192.168.86.31/api/EQMB5CwjE2hYxWK4a-lqCvk9pKN5VoNoTvEACoDz'
-    var url_lights = '/groups/0/action';
-        // or /lights/3/state (depending on light)
-
-    var stopped;
-    var fps = 1/3.0;
-    var bri, sat, hue;
-    var colour_pink = [30,255,255,56100]; // 3 seconds, pink
-    var cycle_seawater = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
-
-
+    function fetchAudioAndPlay(audioFile) {
+        fetch(audioFile);
+        return audioFile.play();
+    }
 
   	function startExperience(light,audio){
   		// ADD HUE API STUFF HERE
@@ -124,7 +131,7 @@ $( document ).ready(function() {
             success: function () {
             }
         });
-      audioFile.play();
+      fetchAudioAndPlay(audioFile);
 
     }
 
@@ -190,7 +197,7 @@ $( document ).ready(function() {
     });
 
     $("#backButton").on('click', function(){
-      
+
       $controls.fadeOut();
       $modeButtonWrapper.fadeIn();
       $('body').attr('data-mode', '');
@@ -198,8 +205,5 @@ $( document ).ready(function() {
       // stopExperience();
     });
 
-      
- 
 
 });
-
