@@ -20,11 +20,34 @@ $( document ).ready(function() {
 
     // JSON of mode content
     var data = [
-      {"name":"modeZero","light":"purple","audio":"audio/mode-zero.mp3", "thumbnail": "img/mode-zero-preview.jpg"},
-      {"name":"modeOne","light":"red","audio":"audio/mode-one.mp3", "thumbnail": "img/mode-one-preview.jpg"},
-      {"name":"modeTwo","light":"blue","audio":"audio/mode-two.mp3", "thumbnail": "img/mode-two-preview.jpg"},
-      {"name":"modeThree","light":"green","audio":"audio/mode-three.mp3", "thumbnail": "img/mode.jpg"},
-      {"name":"modeFour","light":"orange","audio":"audio/mode-four.mp3", "thumbnail": "img/mode.jpg"}
+        {
+            "name":"modeZero",
+            "light":"purple",
+            "audio":"audio/mode-zero.mp3",
+            "thumbnail": "img/mode-zero-preview.jpg"
+        },
+        {
+            "name":"modeOne",
+            "light":"red",
+            "audio":"audio/mode-one.mp3",
+            "thumbnail": "img/mode-one-preview.jpg"},
+        {
+            "name":"modeTwo",
+            "light":"blue",
+            "audio":"audio/mode-two.mp3",
+            "thumbnail": "img/mode-two-preview.jpg"},
+        {
+            "name":"modeThree",
+            "light":"green",
+            "audio":"audio/mode-three.mp3",
+            "thumbnail": "img/mode.jpg"
+        },
+        {
+            "name":"modeFour",
+            "light":"orange",
+            "audio":"audio/mode-four.mp3",
+            "thumbnail": "img/mode.jpg"
+        }
     ]
 
     var $controls = $('#controls');
@@ -61,10 +84,10 @@ $( document ).ready(function() {
                     }, 1000/fps);
                 }(i));
             }
-// somehow fix the timing for actual lights within the cycle.
-// try solution above, research more
+            // somehow fix the timing for actual lights within the cycle.
+            // try solution above, research more
 
-/*
+            /*
             setTimeout(function() {
                 for (i = 0; i < cycle_theme.length; i++) {
                     console.log(i, cycle_theme[i]);
@@ -77,7 +100,7 @@ $( document ).ready(function() {
                     });
                 }
             }, 1000/fps);
-*/
+            */
 
            if (!stopped) {
                 console.log('!stopped2: ', stopped)
@@ -85,8 +108,6 @@ $( document ).ready(function() {
                     updateExperience(cycle_theme);
                 }, 1000/fps);
             }
-
-
        }
     }
 
@@ -96,13 +117,12 @@ $( document ).ready(function() {
     }
 
   	function startExperience(light,audio){
-  		// ADD HUE API STUFF HERE
-      // alert(selected.light);
-      audioFile = new Audio(audio);
+        // alert(selected.light);
+        audioFile = new Audio(audio);
 
-      console.log('from startExperience function', light, audio)
+        console.log('from startExperience function', light, audio)
 
-      console.log('starting');
+        // Hue API
         $.ajax({
             url: url_ip+url_lights,
             type: 'PUT',
@@ -112,14 +132,11 @@ $( document ).ready(function() {
             success: function () {
             }
         });
-      fetchAudioAndPlay(audioFile);
+        fetchAudioAndPlay(audioFile);
 
     }
 
     function stopExperience(){
-
-      audioFile.pause();
-
         $.ajax({
             url: url_ip+url_lights,
             type: 'PUT',
@@ -127,15 +144,11 @@ $( document ).ready(function() {
             success: function () {
             }
         });
-
-
+        audioFile.pause();
     }
 
-
     $('.mode-button').on('click', function(){
-
         console.log('mode click');
-
         // Show controls
         $controls.fadeIn(2000);
         // Get the selected mode
@@ -145,12 +158,9 @@ $( document ).ready(function() {
         // Hide mode buttons
         $modeButtonWrapper.fadeOut(1000);
         $('body').attr('data-mode', dataMode);
-
-
     });
 
     $('#startButton').on('click', function(){
-
         // Hide Start Button and show stop button
         $(this).fadeOut();
         $("#stopButton").fadeIn();
@@ -171,7 +181,6 @@ $( document ).ready(function() {
         startExperience(selectedModeLight, selectedModeAudio);
 
         stopped = false;
-        startExperience();
         console.log('cycle_seawater ', cycle_seawater);
         updateExperience(cycle_seawater);
         /*
@@ -185,21 +194,19 @@ $( document ).ready(function() {
 
     $('#stopButton').on('click', function(){
 
-      $(this).fadeOut();
-      $("#startButton").fadeIn();
-      stopped = true;
-      console.log('clicked stop');
-      stopExperience();
+        $(this).fadeOut();
+        $("#startButton").fadeIn();
+        stopped = true;
+        console.log('clicked stop');
+        stopExperience();
     });
 
     $("#backButton").on('click', function(){
 
-      $controls.fadeOut();
-      $modeButtonWrapper.fadeIn();
-      $('body').attr('data-mode', '');
+        $controls.fadeOut();
+        $modeButtonWrapper.fadeIn();
+        $('body').attr('data-mode', '');
 
-      // stopExperience();
+        // stopExperience();
     });
-
-
 });
