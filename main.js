@@ -1,9 +1,13 @@
 $( document ).ready(function() {
 
+// -------------------- DECLARE VARIABLES -------------------- \\
+
+    // Web Interface controls
     console.log('loaded');
+    var $controls = $('#controls');
+    var $modeButtonWrapper = $('#mode-button-wrapper');
 
-
-    // var audio = new Audio('audio/HAVEN_Music1.mp3');
+    // Hue System
     var url_ip = 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
         // http://<bridge ip address>/debug/clip.html
         // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
@@ -12,11 +16,15 @@ $( document ).ready(function() {
     var url_lights = '/groups/0/action';
         // or /lights/3/state (depending on light)
 
+    // Hue Lights
     var stopped;
     var fps = 1/3.0;
     var bri, sat, hue;
     var colour_pink = [30,255,255,56100]; // 3 seconds, pink
     var cycle_seawater = [[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
+
+    // Audio
+    // var audio = new Audio('audio/HAVEN_Music1.mp3');
 
     // JSON of mode content
     var data = [
@@ -50,8 +58,7 @@ $( document ).ready(function() {
         }
     ]
 
-    var $controls = $('#controls');
-    var $modeButtonWrapper = $('#mode-button-wrapper');
+// -------------------- HELPER FUNCTIONS -------------------- \\
 
     function convertColourArrayToAjax(colour_theme){
         // takes an array of four int color values [transitiontime, bri, sat, hue]
@@ -63,6 +70,13 @@ $( document ).ready(function() {
 
        return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
     }
+
+    function fetchAudioAndPlay(audioFile) {
+        // fetch(audioFile);
+        return audioFile.play();
+    }
+
+// -------------------- LIGHT LOOPS -------------------- \\
 
     function updateExperience(cycle_theme){
         console.log('\nstarting updateExperience');
@@ -111,11 +125,6 @@ $( document ).ready(function() {
        }
     }
 
-    function fetchAudioAndPlay(audioFile) {
-        // fetch(audioFile);
-        return audioFile.play();
-    }
-
   	function startExperience(light,audio){
         // alert(selected.light);
         audioFile = new Audio(audio);
@@ -146,6 +155,8 @@ $( document ).ready(function() {
         });
         audioFile.pause();
     }
+
+// -------------------- BUTTON FUNCTIONS -------------------- \\
 
     $('.mode-button').on('click', function(){
         console.log('mode click');
