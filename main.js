@@ -176,7 +176,7 @@ $( document ).ready(function() {
         });
 
         var selectedModeLight = selectedMode.light,
-            selectedModeAudio  = selectedMode.audio;
+            selectedModeAudio = selectedMode.audio;
 
         startExperience(selectedModeLight, selectedModeAudio);
 
