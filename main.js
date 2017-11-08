@@ -112,7 +112,7 @@ $( document ).ready(function() {
     }
 
     function fetchAudioAndPlay(audioFile) {
-        fetch(audioFile);
+        // fetch(audioFile);
         return audioFile.play();
     }
 
@@ -183,21 +183,15 @@ $( document ).ready(function() {
         stopped = false;
         console.log('cycle_seawater ', cycle_seawater);
         updateExperience(cycle_seawater);
-        /*
-        requestAnimFrame(function() {
-            console.log('test 2');
-            updateExperience(cycle_seawater);
-        });
-        */
 
     });
 
     $('#stopButton').on('click', function(){
+        console.log('clicked stop');
 
         $(this).fadeOut();
         $("#startButton").fadeIn();
         stopped = true;
-        console.log('clicked stop');
         stopExperience();
     });
 
