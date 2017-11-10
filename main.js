@@ -131,7 +131,8 @@ $( document ).ready(function() {
             success: function () {
             }
         });
-      fetchAudioAndPlay(audioFile);
+        // console.log("audioFile", audioFile);
+      fetchAudioAndPlay(audio);
 
     }
 
