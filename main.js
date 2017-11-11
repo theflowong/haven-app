@@ -32,13 +32,13 @@ $( document ).ready(function() {
 
     var data = [
 
-        {
-            // First Object is intentionally empty, don't remove
-            "name":"modeZero",
-            "light":"purple",
-            "audio":"audio/mode-zero.mp3",
-            "thumbnail": "img/mode-zero-preview.jpg"
-        },
+            // {
+            //     // First Object is intentionally empty, don't remove
+            //     "name":"modeZero",
+            //     "light":"purple",
+            //     "audio":"audio/mode-zero.mp3",
+            //     "thumbnail": "img/mode-zero-preview.jpg"
+            // },
         {
             "name":"modeOne",
             "light": cycle_seawater,
@@ -53,15 +53,17 @@ $( document ).ready(function() {
             "name":"modeThree",
             "light":"green",
             "audio":"audio/mode-three.mp3",
-            "thumbnail": "img/mode.jpg"
+            "thumbnail": "img/mode-three-preview.jpg"
         },
         {
             "name":"modeFour",
             "light":"orange",
             "audio":"audio/mode-four.mp3",
-            "thumbnail": "img/mode.jpg"
+            "thumbnail": "img/mode-four-preview.jpg"
         }
     ]
+
+
 
 // -------------------- HELPER FUNCTIONS -------------------- \\
 
@@ -166,7 +168,7 @@ $( document ).ready(function() {
 
 // -------------------- BUTTON FUNCTIONS -------------------- \\
 
-    $('.mode-button').on('click', function(){
+    $(document).on('click', '.mode-button', function(){
         console.log('mode click');
         // Show controls
         $controls.fadeIn(2000);
@@ -223,4 +225,13 @@ $( document ).ready(function() {
 
         // stopExperience();
     });
+
+
+    //HANDLEBARS TEMPLATING SCRIPTS
+    var $placeHolder = $("#placeholder")
+    var handlebarsTemplate = $("#handlebars-template").html()
+    var templateCompile = Handlebars.compile(handlebarsTemplate)
+    var processedData = data;
+    $placeHolder.html(templateCompile(processedData));
+
 });
