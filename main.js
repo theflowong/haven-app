@@ -24,15 +24,15 @@ $( document ).ready(function() {
 
 // -------------------- DATA -------------------- \\
 
-    // Colours: [time, bri, sat, hue]
+    // Colours: [transition time, bri, sat, hue]
     const colour_pink = [30,255,255,56100]; // 3 seconds, pink
     // Cycle of colours: [[time,bri,sat,hue], [time,bri,sat,hue]]
     const cycle_seawater = [colour_pink,[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
 
     const waterfall = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
     // Sunset: ()
-    const sunset_a = [[30,15,0,0],[30,30,0,0],[30,50,0,0]];
-    const sunset_b = [[30,15,0,0],[30,30,0,0],[30,50,0,0]];
+    const sunset_a = [[30,15,254,2707],[30,30,126,60053],[30,50,186,52740]];
+    const sunset_b = [[30,15,254,7107],[30,30,169,61749],[30,50,254,14727]];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -44,61 +44,41 @@ $( document ).ready(function() {
         {
             // First Object is intentionally empty, don't remove
             "name":"modeZero",
-            "light":"purple",
+            "loops":false,
+            "colours":"purple",
             "audio":"audio/mode-zero.mp3",
             "thumbnail": "img/mode-zero-preview.jpg"
         },
         {
-            "name":"modeOne",
-            "light": cycle_seawater,
+            "name":"sunset",
+            "loops": true,
+            "colours": sunset_a,
             "audio":"audio/mode-one.mp3",
             "thumbnail": "img/mode-one-preview.jpg"},
         {
-            "name":"modeTwo",
-            "light":"blue",
+            "name":"waterfall",
+            "loops": true,
+            "colours": waterfall,
             "audio":"audio/mode-two.mp3",
             "thumbnail": "img/mode-two-preview.jpg"},
         {
-            "name":"modeThree",
-            "light":"green",
+            "name":"cycle_seawater",
+            "loops":true,
+            "colours":cycle_seawater,
             "audio":"audio/mode-three.mp3",
             "thumbnail": "img/mode-three-preview.jpg"
         },
         {
             "name":"modeFour",
-            "light":"orange",
+            "loops":false,
+            "colours":"orange",
             "audio":"audio/mode-four.mp3",
             "thumbnail": "img/mode-four-preview.jpg"
         }
     ]
 
 
-
 // -------------------- HELPER FUNCTIONS -------------------- \\
-    function colourXYtoRGB(x,y,brightness) {
-        // takes in colour value of floats x, y and returns colour value in RGB
-        // https://developers.meethue.com/documentation/color-conversions-rgb-xy
-
-        // calculate XYZ values Convert
-        var x = x;
-        var y = y;
-        var z = 1.0 - x - y;
-        var Y = brightness;
-        var X = (Y / y) * x;
-        var Z = (Y / y) * z;
-
-        // calculate RGB using Wide RGB D65 conversion
-        var r = X*1.656492 - Y*0.354851 - Z*0.255038;
-        var g = -X*0.707196 + Y*1.655397 + Z*0.036152;
-        var b =  X*0.051713 - Y*0.121364 + Z*1.011530;
-
-        // apply reverse gamma correction
-        r = r <= 0.0031308 ? 12.92 * r : (1.0 + 0.055) * pow(r, (1.0 / 2.4)) - 0.055;
-        g = g <= 0.0031308 ? 12.92 * g : (1.0 + 0.055) * pow(g, (1.0 / 2.4)) - 0.055;
-        b = b <= 0.0031308 ? 12.92 * b : (1.0 + 0.055) * pow(b, (1.0 / 2.4)) - 0.055;
-
-        return r,g,b;
-    }
 
     function convertColourArrayToAjax(colour_theme) {
         // takes an array of four int color values [transitiontime, bri, sat, hue]
@@ -118,21 +98,23 @@ $( document ).ready(function() {
 
 // -------------------- LIGHT LOOPS -------------------- \\
 
-    // inputs an array of colour arrays [time, bri, sat, hue]
-    function updateExperience(cycle_theme){
+    // inputs a loop array of colour arrays [[time, bri, sat, hue]]
+    function updateExperience(light_cycle){
         console.log('\nstarting updateExperience');
 
+        // track if stop button has been pressed; mode is still continuing if not
         if (!stopped) {
             console.log('!stopped: ', stopped);
 
-            for (var i = 0; i < cycle_theme.length; i++) {
+            //
+            for (var i = 0; i < light_cycle.length; i++) {
                 (function(n){
                     setTimeout(function(){
-                        console.log(n, cycle_theme[n]);
+                        console.log(n, light_cycle[n]);
                         $.ajax({
                             url: url_ip+url_lights,
                             type: 'PUT',
-                            data: convertColourArrayToAjax(cycle_theme[n]),
+                            data: convertColourArrayToAjax(light_cycle[n]),
                             success: function() {
                             }
                         });
@@ -144,12 +126,12 @@ $( document ).ready(function() {
 
             /*
             setTimeout(function() {
-                for (i = 0; i < cycle_theme.length; i++) {
-                    console.log(i, cycle_theme[i]);
+                for (i = 0; i < light_cycle.length; i++) {
+                    console.log(i, light_cycle[i]);
                     $.ajax({
                         url: url_ip+url_lights,
                         type: 'PUT',
-                        data: convertColourArrayToAjax(cycle_theme[i]),
+                        data: convertColourArrayToAjax(light_cycle[i]),
                         success: function() {
                         }
                     });
@@ -157,21 +139,24 @@ $( document ).ready(function() {
             }, 1000/fps);
             */
 
-           if (!stopped) {
+            if (!stopped) {
                 console.log('!stopped2: ', stopped)
                 setTimeout(function() {
-                    updateExperience(cycle_theme);
+                    updateExperience(light_cycle);
                 }, 1000/fps);
             }
-       }
+        }
     }
 
-  	function startExperience(light,audio){
+  	function startExperience_old(light_cycle,audio){
         // alert(selected.light);
         audioFile = new Audio(audio);
+        fetchAudioAndPlay(audioFile);
 
         console.log('from startExperience function', light, audio)
 
+
+        // IF LINEAR:
         // Hue API
         $.ajax({
             url: url_ip+url_lights,
@@ -183,9 +168,61 @@ $( document ).ready(function() {
             }
         });
 
-        fetchAudioAndPlay(audioFile);
+        // IF THERE IS A LOOP:
+        updateExperience(light_cycle);
 
+    }
 
+    function startExperience(isLoops,colours,audio){
+        // alert(selected.light);
+        if (audio) {
+            console.log('there is an audio!');
+            audioFile = new Audio(audio);
+            fetchAudioAndPlay(audioFile);
+        }
+
+        console.log('from startExperience function')
+
+        for (var i = 0; i < colours.length; i++) {
+            (function(n){
+                setTimeout(function(){
+                    console.log(n, colours[n]);
+                    $.ajax({
+                        url: url_ip+url_lights,
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(colours[n]),
+                        success: function() {
+                        }
+                    });
+                }, 1000/fps);
+            }(i));
+        }
+        // somehow fix the timing for actual lights within the cycle.
+        // try solution above, research more
+
+        /*
+        setTimeout(function() {
+            for (i = 0; i < lights.length; i++) {
+                console.log(i, lights[i]);
+                $.ajax({
+                    url: url_ip+url_lights,
+                    type: 'PUT',
+                    data: convertColourArrayToAjax(lights[i]),
+                    success: function() {
+                    }
+                });
+            }
+        }, 1000/fps);
+        */
+
+        if (isLoops) {
+            if (!stopped) {
+                console.log('!stopped2: ', stopped)
+                setTimeout(function() {
+                    startExperience(isLoops,colours,'');
+                }, 1000/fps);
+            }
+        }
     }
 
     function stopExperience(){
@@ -198,6 +235,7 @@ $( document ).ready(function() {
         });
         audioFile.pause();
     }
+
 
 // -------------------- BUTTON FUNCTIONS -------------------- \\
 
@@ -231,14 +269,14 @@ $( document ).ready(function() {
             }
         });
 
-        var selectedModeLight = selectedMode.light,
+        var selectedModeIsLoops = selectedMode.loops,
+            selectedModeColours = selectedMode.colours,
             selectedModeAudio = selectedMode.audio;
 
-        startExperience(selectedModeLight, selectedModeAudio);
-
+        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeAudio);
         stopped = false;
-        console.log('selectedModeLight ', selectedModeLight);
-        updateExperience(selectedModeLight);
+        console.log('selectedModeIsLoops ', selectedModeIsLoops);
+        //updateExperience(selectedModeLight);
 
     });
 
