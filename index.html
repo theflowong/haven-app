@@ -13,9 +13,12 @@
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
       <script src="main.js" type="text/javascript"></script>
+      <script src="handlebars-v4.0.11.js" type="text/javascript"></script>
+
       <link rel="stylesheet" type="text/css" href="style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
         
     </head>
     <body>
@@ -25,19 +28,93 @@
 
       <div id="app">
 
-        <div id="mode-button-wrapper">
-          <button id="modeOne" class="haven-button mode-button" data-mode="modeOne">Mode One</button>
-          <button id="modeTwo" class="haven-button mode-button" data-mode="modeTwo">Mode Two</button>
-        </div>
+        <section class="row header">
+          <div class="container">
+          <h1>Welcome To Haven</h1>
+          <h3>Select Your Mode To Get Started</h3>
+          </div>
+        </section>
+
+        <section id="section--mode-index" class="row">
+
+          <div class="container">
+
+            <div id="mode-button-wrapper">
+              <div id="placeholder"></div>
+
+              <div id="secondPlaceholder"></div>
+
+          <!-- <div class="col-sm-3">
+                <button id="modeOne" class="haven-button mode-button" data-mode="modeOne">Mode One</button>
+              </div>
+              <div class="col-sm-3">
+                <button id="modeTwo" class="haven-button mode-button" data-mode="modeTwo">Mode Two</button>
+              </div>
+              <div class="col-sm-3">
+                <button id="modeThree" class="haven-button mode-button" data-mode="modeThree">Mode Three</button>
+              </div>
+              <div class="col-sm-3">
+                <button id="modeFour" class="haven-button mode-button" data-mode="modeFour">Mode Four</button>
+              </div> 
+ -->
+            </div>
+
+          </div>
+
+        </section>
 
 
-        <div id="controls" class="hidden" data-mode>
+        <div id="controls" class="hidden-on-load" data-mode>
+
           <button id="backButton">Back</button>
           <button id="startButton" data-mode class="haven-button">Start Experience</button>
           <button id="stopButton" class="haven-button">Stop Experience</button>
         </div>
 
       </div>
+
+      </div>
+
+
+    
+      <script type="text/handlebars-template" id="handlebars-template">  
+
+        
+
+          
+
+  
+
+
+        {{#each this}}
+         {{#if @first}}
+         {{else}}
+          <div class="col-sm-3 grid-item">
+            <a class="mode-button" id="{{name}}" data-mode="{{name}}">
+            <div class="grid-item--inner" style="background-image: url({{thumbnail}})">
+              <h3 class="mode-name">{{name}}</h3>
+            </div>  
+            </a>
+          </div>
+          {{/if}}
+        {{/each}}  
+      </script>
+
+      <!--THIS COULD BE WHERE THE SINGLE VIEW TEMPLATE GOES-->
+
+      <script type="text/handlebars-template" id="second-template">
+          {{#each this}}
+          {{#if @first}}
+         {{else}}
+          <div class="col-sm-3 grid-item">
+              <h1 class="mode-name">{{name}}</h1>
+          </div>
+          {{/if}}
+        {{/each}}  
+      </script>
+
+
+
 
 
     </body>
