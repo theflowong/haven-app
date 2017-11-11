@@ -18,8 +18,12 @@ $( document ).ready(function() {
 
     // Hue Lights
     var stopped;
-    var fps = 1/3.0;
+    var fps = 1/3.0; // frame rate for calling hue functions
     var bri, sat, hue;
+
+
+// -------------------- DATA -------------------- \\
+
     // Colours: [time, bri, sat, hue]
     var colour_pink = [30,255,255,56100]; // 3 seconds, pink
     // Cycle of colours: [[time,bri,sat,hue], [time,bri,sat,hue]]
@@ -201,8 +205,8 @@ $( document ).ready(function() {
         startExperience(selectedModeLight, selectedModeAudio);
 
         stopped = false;
-        console.log('cycle_seawater ', cycle_seawater);
-        updateExperience(cycle_seawater);
+        console.log('selectedModeLight ', selectedModeLight);
+        updateExperience(selectedModeLight);
 
     });
 
