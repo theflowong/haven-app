@@ -229,9 +229,23 @@ $( document ).ready(function() {
 
     //HANDLEBARS TEMPLATING SCRIPTS
     var $placeHolder = $("#placeholder")
+    var $secondPlaceholder = $("#secondPlaceholder");
+
     var handlebarsTemplate = $("#handlebars-template").html()
+
+    var secondTemplate = $("#second-template").html()
+
     var templateCompile = Handlebars.compile(handlebarsTemplate)
+
+    var secondTemplateCompile = Handlebars.compile(handlebarsTemplate)
+
+    var secondTemplateCompile = Handlebars.compile(secondTemplate)
+
     var processedData = data;
+
     $placeHolder.html(templateCompile(processedData));
+
+    $secondPlaceholder.html(secondTemplateCompile(processedData));
+
 
 });

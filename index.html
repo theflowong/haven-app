@@ -42,6 +42,8 @@
             <div id="mode-button-wrapper">
               <div id="placeholder"></div>
 
+              <div id="secondPlaceholder"></div>
+
           <!-- <div class="col-sm-3">
                 <button id="modeOne" class="haven-button mode-button" data-mode="modeOne">Mode One</button>
               </div>
@@ -63,6 +65,7 @@
 
 
         <div id="controls" class="hidden-on-load" data-mode>
+
           <button id="backButton">Back</button>
           <button id="startButton" data-mode class="haven-button">Start Experience</button>
           <button id="stopButton" class="haven-button">Stop Experience</button>
@@ -97,11 +100,16 @@
         {{/each}}  
       </script>
 
+      <!--THIS COULD BE WHERE THE SINGLE VIEW TEMPLATE GOES-->
+
       <script type="text/handlebars-template" id="second-template">
           {{#each this}}
+          {{#if @first}}
+         {{else}}
           <div class="col-sm-3 grid-item">
-              <h1 class="mode-name">{audio}</h1>
+              <h1 class="mode-name">{{name}}</h1>
           </div>
+          {{/if}}
         {{/each}}  
       </script>
 
