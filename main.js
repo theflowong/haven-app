@@ -18,16 +18,21 @@ $( document ).ready(function() {
 
     // Hue Lights
     var stopped;
-    var fps = 1/3.0; // frame rate for calling hue functions
+    const fps = 1/3.0; // frame rate for calling hue functions
     var bri, sat, hue;
 
 
 // -------------------- DATA -------------------- \\
 
     // Colours: [time, bri, sat, hue]
-    var colour_pink = [30,255,255,56100]; // 3 seconds, pink
+    const colour_pink = [30,255,255,56100]; // 3 seconds, pink
     // Cycle of colours: [[time,bri,sat,hue], [time,bri,sat,hue]]
-    var cycle_seawater = [colour_pink,[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
+    const cycle_seawater = [colour_pink,[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
+
+    const waterfall = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
+    // Sunset: ()
+    const sunset_a = [[30,15,0,0],[30,30,0,0],[30,50,0,0]];
+    const sunset_b = [[30,15,0,0],[30,30,0,0],[30,50,0,0]];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -36,13 +41,13 @@ $( document ).ready(function() {
 
     var data = [
 
-            {
-                // First Object is intentionally empty, don't remove
-                "name":"modeZero",
-                "light":"purple",
-                "audio":"audio/mode-zero.mp3",
-                "thumbnail": "img/mode-zero-preview.jpg"
-            },
+        {
+            // First Object is intentionally empty, don't remove
+            "name":"modeZero",
+            "light":"purple",
+            "audio":"audio/mode-zero.mp3",
+            "thumbnail": "img/mode-zero-preview.jpg"
+        },
         {
             "name":"modeOne",
             "light": cycle_seawater,
@@ -70,8 +75,32 @@ $( document ).ready(function() {
 
 
 // -------------------- HELPER FUNCTIONS -------------------- \\
+    function colourXYtoRGB(x,y,brightness) {
+        // takes in colour value of floats x, y and returns colour value in RGB
+        // https://developers.meethue.com/documentation/color-conversions-rgb-xy
 
-    function convertColourArrayToAjax(colour_theme){
+        // calculate XYZ values Convert
+        var x = x;
+        var y = y;
+        var z = 1.0 - x - y;
+        var Y = brightness;
+        var X = (Y / y) * x;
+        var Z = (Y / y) * z;
+
+        // calculate RGB using Wide RGB D65 conversion
+        var r = X*1.656492 - Y*0.354851 - Z*0.255038;
+        var g = -X*0.707196 + Y*1.655397 + Z*0.036152;
+        var b =  X*0.051713 - Y*0.121364 + Z*1.011530;
+
+        // apply reverse gamma correction
+        r = r <= 0.0031308 ? 12.92 * r : (1.0 + 0.055) * pow(r, (1.0 / 2.4)) - 0.055;
+        g = g <= 0.0031308 ? 12.92 * g : (1.0 + 0.055) * pow(g, (1.0 / 2.4)) - 0.055;
+        b = b <= 0.0031308 ? 12.92 * b : (1.0 + 0.055) * pow(b, (1.0 / 2.4)) - 0.055;
+
+        return r,g,b;
+    }
+
+    function convertColourArrayToAjax(colour_theme) {
         // takes an array of four int color values [transitiontime, bri, sat, hue]
         // returns ajax string format
         tt = colour_theme[0];
@@ -235,21 +264,14 @@ $( document ).ready(function() {
     var $placeHolder = $("#placeholder")
     var $secondPlaceholder = $("#secondPlaceholder");
 
+// -------------------- HANDLEBAR JS -------------------- \\
     var handlebarsTemplate = $("#handlebars-template").html()
-
     var secondTemplate = $("#second-template").html()
-
     var templateCompile = Handlebars.compile(handlebarsTemplate)
-
     var secondTemplateCompile = Handlebars.compile(handlebarsTemplate)
-
     var secondTemplateCompile = Handlebars.compile(secondTemplate)
-
     var processedData = data;
-
     $placeHolder.html(templateCompile(processedData));
-
     $secondPlaceholder.html(secondTemplateCompile(processedData));
-
 
 });
