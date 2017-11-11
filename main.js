@@ -32,13 +32,13 @@ $( document ).ready(function() {
 
     var data = [
 
-            // {
-            //     // First Object is intentionally empty, don't remove
-            //     "name":"modeZero",
-            //     "light":"purple",
-            //     "audio":"audio/mode-zero.mp3",
-            //     "thumbnail": "img/mode-zero-preview.jpg"
-            // },
+            {
+                // First Object is intentionally empty, don't remove
+                "name":"modeZero",
+                "light":"purple",
+                "audio":"audio/mode-zero.mp3",
+                "thumbnail": "img/mode-zero-preview.jpg"
+            },
         {
             "name":"modeOne",
             "light": cycle_seawater,
@@ -171,7 +171,8 @@ $( document ).ready(function() {
     $(document).on('click', '.mode-button', function(){
         console.log('mode click');
         // Show controls
-        $controls.fadeIn(2000);
+        $controls.fadeIn(1000);
+        console.log('controls fade in');
         // Get the selected mode
         var dataMode = $(this).attr('data-mode');
         // Assign mode to the controls
@@ -210,7 +211,6 @@ $( document ).ready(function() {
 
     $('#stopButton').on('click', function(){
         console.log('clicked stop');
-
         $(this).fadeOut();
         $("#startButton").fadeIn();
         stopped = true;

@@ -62,7 +62,7 @@
         </section>
 
 
-        <div id="controls" class="hidden" data-mode>
+        <div id="controls" class="hidden-on-load" data-mode>
           <button id="backButton">Back</button>
           <button id="startButton" data-mode class="haven-button">Start Experience</button>
           <button id="stopButton" class="haven-button">Stop Experience</button>
@@ -75,13 +75,32 @@
 
     
       <script type="text/handlebars-template" id="handlebars-template">  
+
+        
+
+          
+
+  
+
+
         {{#each this}}
+         {{#if @first}}
+         {{else}}
           <div class="col-sm-3 grid-item">
             <a class="mode-button" id="{{name}}" data-mode="{{name}}">
             <div class="grid-item--inner" style="background-image: url({{thumbnail}})">
               <h3 class="mode-name">{{name}}</h3>
             </div>  
             </a>
+          </div>
+          {{/if}}
+        {{/each}}  
+      </script>
+
+      <script type="text/handlebars-template" id="second-template">
+          {{#each this}}
+          <div class="col-sm-3 grid-item">
+              <h1 class="mode-name">{audio}</h1>
           </div>
         {{/each}}  
       </script>

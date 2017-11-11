@@ -53,7 +53,7 @@ section.header{
 	color: #333;
 }
 
-#controls.hidden{
+#controls.hidden-on-load{
 	display: none;
 }
 
