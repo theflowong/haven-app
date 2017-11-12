@@ -31,7 +31,7 @@
         <section class="row header">
           <div class="container">
           <h1>Welcome To Haven</h1>
-          <h3>Select Your Mode To Get Started</h3>
+          <h3>Select Your Experience To Get Started</h3>
           </div>
         </section>
 
@@ -78,14 +78,6 @@
 
     
       <script type="text/handlebars-template" id="handlebars-template">  
-
-        
-
-          
-
-  
-
-
         {{#each this}}
          {{#if @first}}
          {{else}}
@@ -106,9 +98,11 @@
           {{#each this}}
           {{#if @first}}
          {{else}}
-          <div class="col-sm-3 grid-item">
+          <div class="mode--single">
               <h1 class="mode-name">{{name}}</h1>
           </div>
+
+          <button class="start-experience" data-mode="{{name}}">Start</button>
           {{/if}}
         {{/each}}  
       </script>
