@@ -18,7 +18,7 @@ $( document ).ready(function() {
 
     // Hue Lights
     var stopped;
-    const fps = 1/3.0; // frame rate for calling hue functions
+    const fps = 1; // frame rate for calling hue functions
     var bri, sat, hue;
 
 
@@ -31,8 +31,8 @@ $( document ).ready(function() {
 
     const waterfall = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
     // Sunset: ()
-    const sunset_a = [[500,15,254,2707],[500,30,126,60053],[500,50,186,52740]];
-    const sunset_b = [[500,15,254,7107],[500,30,169,61749],[500,50,254,14727]];
+    const sunset_a = [[500,15,254,254],[500,30,129,63848],[500,50,166,52393]];
+    const sunset_b = [[500,15,254,7107],[500,30,177,64107],[500,50,254,7608]];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -63,20 +63,20 @@ $( document ).ready(function() {
             "name":"waterfall",
             "loops": true,
             "lights_all": [waterfall,waterfall,waterfall,waterfall],
-            "audio":"audio/mode-two.mp3",
+            "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-two-preview.jpg"},
         {
-            "name":"cycle_seawater",
+            "name":"Seawater",
             "loops":true,
-            "lights_all":cycle_seawater,
-            "audio":"audio/mode-three.mp3",
+            "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
+            "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-three-preview.jpg"
         },
         {
             "name":"modeFour",
             "loops":false,
             "lights_all":"orange",
-            "audio":"audio/mode-four.mp3",
+            "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-four-preview.jpg"
         }
     ]
