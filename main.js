@@ -49,34 +49,40 @@ $( document ).ready(function() {
             "loops":false,
             "lights_all":"purple",
             "audio":"audio/mode-zero.mp3",
-            "thumbnail": "img/mode-zero-preview.jpg"
+            "thumbnail": "img/mode-zero-preview.jpg",
+            "description": "mode zero test test test"
         },
         {
             "name":"Sunset",
             "loops": false,
             "lights_all": [sunset_a,sunset_b_bright,sunset_a,sunset_b],
             "audio":"audio/HAVEN_Music1.mp3",
-            "thumbnail": "img/mode-one-preview.jpg"},
+            "thumbnail": "img/mode-one-preview.jpg",
+            "description":  "mode one test test test"
+        },
         {
             "name":"Waterfall",
             "loops":true,
             "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "audio":"audio/HAVEN_Music1.mp3",
-            "thumbnail": "img/mode-four-preview.jpg"
+            "thumbnail": "img/mode-four-preview.jpg",
+            "description": "mode two test test test"
         },
         {
             "name":"Seawater",
             "loops":true,
             "lights_all":[cycle_seawater,cycle_seawater,peach,cycle_seawater],
             "audio":"audio/HAVEN_Music1.mp3",
-            "thumbnail": "img/mode-three-preview.jpg"
+            "thumbnail": "img/mode-three-preview.jpg",
+            "description": "mode three test test test"
         },
         {
-            "name":"Daniel's Idea of Waterfall Colours",
+            "name":"Daniels Idea of Waterfall Colours",
             "loops": true,
             "lights_all": [peach,peach,peach,peach],
             "audio":"audio/HAVEN_Music1.mp3",
-            "thumbnail": "img/mode-two-preview.jpg"
+            "thumbnail": "img/mode-two-preview.jpg",
+            "description": "mode four test test test"
         }
     ]
 
@@ -199,8 +205,7 @@ $( document ).ready(function() {
     $(document).on('click', '.mode-button', function(){
         // Show controls
 
-        $controls.show();
-
+        // $controls.show();
 
         // Get the selected mode
         var dataMode = $(this).attr('data-mode');
@@ -208,8 +213,8 @@ $( document ).ready(function() {
         $controls.attr('data-mode', dataMode);
         // Hide mode buttons
         $modeButtonWrapper.hide();
-        $('body').attr('data-mode', dataMode);
 
+        $('body').attr('data-mode', dataMode);
 
             index = 0;
 
@@ -223,22 +228,32 @@ $( document ).ready(function() {
         var selectedThumb = selectedMode.thumbnail,
             selectedName = selectedMode.name;
 
-        $('section.header').addClass('single-view');
-        $('section.header').css('background-image', 'url(' + selectedThumb + ')' );
+        // $('section.header').addClass('single-view');
+        // $('section.header').css('background-image', 'url(' + selectedThumb + ')' );
 
-        $('section.header h3').text(selectedName);
+        var selectedModeWrapper = $(".mode--single[data-mode='" + dataMode + "']");
+        selectedModeWrapper.show();
+        // singleModeWrapper.show();
+        // singleModeWrapper.removeClass('.hidden-on-load');
+
+        $('section.index-header h3').text(selectedName);
+        $('.index-header').addClass('single-view');
 
         console.log('selectedThumb', selectedThumb);
 
     });
 
-    $('#startButton').on('click', function(){
+    $(document).on('click', '.start-button', function(){
         // Hide Start Button and show stop button
         $(this).hide();
-        $("#stopButton").show();
+        $(".stop-button").show();
+        console.log('clicked .start-button');
 
-        var dataMode = $("#controls").attr('data-mode'),
+        $('.mode--single').addClass('playing');
+
+        var dataMode = $(this).attr('data-mode'),
             index = 0;
+        console.log('dataMode: ', dataMode);
 
         var selectedMode = data.find(function(mode, i){
             if(mode.name === dataMode){
@@ -256,26 +271,30 @@ $( document ).ready(function() {
             selectedModeColours = [selectedMode.light1,selectedMode.light2,selectedMode.light3,selectedMode.light4];
         }
 
+        console.log('selectedModeAudio: ', selectedModeAudio);
+
         stopped = false;
         startExperience(selectedModeIsLoops, selectedModeColours, selectedModeAudio);
 
     });
 
-    $('#stopButton').on('click', function(){
-        console.log('clicked stop');
+    $(document).on('click','.stop-button', function(){
         $(this).hide();
-        $("#startButton").show();
+        $(".start-button").show();
+        $('.mode--single').removeClass('playing');
         stopped = true;
         stopExperience();
     });
 
-    $("#backButton").on('click', function(){
+    $(document).on('click','.back-button', function(){
 
         $controls.hide();
         $modeButtonWrapper.show();
-        $('section.header').removeClass('single-view');
-        $('section.header').css('background-image', 'none');
-        $('section.header h3').text("Select Your Experience");
+        $('.mode--single').hide();
+        $('.mode--single').addClass('hidden-on-load');
+        $('section.index-header').removeClass('single-view');
+        $('section.index-header').css('background-image', 'none');
+        $('section.index-header h3').text("Select Your Experience");
         $('body').attr('data-mode', '');
 
         // stopExperience();
@@ -283,8 +302,8 @@ $( document ).ready(function() {
 
 
     //HANDLEBARS TEMPLATING SCRIPTS
-    var $placeHolder = $("#placeholder")
-    var $secondPlaceholder = $("#secondPlaceholder");
+    var $modeIndex = $("#placeholder")
+    var $singleView = $("#secondPlaceholder");
 
 // -------------------- HANDLEBAR JS -------------------- \\
     var handlebarsTemplate = $("#handlebars-template").html()
@@ -293,7 +312,15 @@ $( document ).ready(function() {
     var secondTemplateCompile = Handlebars.compile(handlebarsTemplate)
     var secondTemplateCompile = Handlebars.compile(secondTemplate)
     var processedData = data;
-    $placeHolder.html(templateCompile(processedData));
-    $secondPlaceholder.html(secondTemplateCompile(processedData));
+    $modeIndex.html(templateCompile(processedData));
+    $singleView.html(secondTemplateCompile(processedData));
+
+});
+
+
+$(window).load(function() {
+      
+      var gridItemWidth = $('.grid-item--inner').width();
+      $('.grid-item--inner').height(gridItemWidth);
 
 });

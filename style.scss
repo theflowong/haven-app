@@ -1,5 +1,8 @@
 @import
-    "sass/_variables"
+    "sass/_variables",
+    "sass/_mixins",
+    "sass/_base",
+    "sass/_single-mode-view"
 ;
 
 
@@ -24,7 +27,15 @@ body[data-mode="modeTwo"]{
 	display: none;
 }
 
-section.header{
+.single-view h3{
+	text-align: center;
+}
+
+.index-header.single-view{
+	display: none;
+}
+
+section.index-header{
 	background-color: $blush;
 	background-size:cover;
 	background-position: center center;
@@ -34,14 +45,14 @@ section.header{
 	align-items: center;
 }
 
-section.header h1{
+section.index-header h1{
 	color: #34334F;
 	font-size: 1.5rem;
 	text-transform: uppercase;
 	font-weight: 600;
 	margin-bottom: 0;
 }
-section.header h3{
+section.index-header h3{
 	color: white;
 	font-weight: 100;
 	font-size: 4rem;
@@ -52,23 +63,7 @@ section.header h3{
 	margin-top: -90px;
 }
 
-.haven-button{
-	background-color: rgba(255,255,255,0.8);
-	border: solid white 2px;
-	border: none;
-	border-radius: 0;
-	-webkit-transition: all 0.3s; /* Safari */
-    transition: all 0.3s;
-    font-size: 3em;
-    font-weight: 100;
-    padding: 15px 30px;
-    margin-bottom: 15px;
-}
 
-.haven-button:hover{
-	background-color: rgba(255,255,255,1);
-	cursor: pointer;
-}
 
 #stopButton{
 	background: transparent;
@@ -93,7 +88,17 @@ section.header h3{
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	-webkit-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
+	-moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
+	box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
+	@include transition(all, 0.3s);
+	margin-bottom: 30px;
+	&:hover{
+		transform: translateY(-15px);
+	}
+
 }
+
 
 .grid-item--inner .mode-name{
 	color: white;

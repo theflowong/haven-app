@@ -1,0 +1,279 @@
+
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+// Usage
+// .element p {
+//   @include vertical-align;
+// }
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin transform($transforms) {
+     -moz-transform: $transforms;
+       -o-transform: $transforms;
+      -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+@mixin overlay($opacity){
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+   @include transition(all 0.3s);
+    background: #333;
+    @include opacity($opacity);
+    z-index: 0;
+  }
+}
+
+@mixin color_overlay($color, $opacity){
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+   @include transition(all 0.3s);
+    background: $color;
+    @include opacity($opacity);
+    z-index: 0;
+  }
+}
+
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}  
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+// .element p {
+//   @include vertical-align;
+// }
+
+@mixin center {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+  display: block;
+}
+
+@mixin alpha-background-color($color, $background) {
+  $percent: alpha($color) * 100%;
+  $opaque: opacify($color, 1);
+  $solid-color: mix($opaque, $background, $percent);
+  background-color: $solid-color;
+  background-color: $color;
+}
+
+//USAGE
+
+// @include alpha-background-color(rgba(#333, 0.7), #333);
+
+
+// Defining values
+// $screen-sm-min: 768px;
+// $screen-xs-max: ($screen-sm-min - 1);
+// $screen-md-min: 992px;
+// $screen-sm-max: ($screen-md-min - 1);
+// $screen-lg-min: 1200px;
+// $screen-md-max: ($screen-lg-min - 1);
+ 
+// Usage
+// @media (max-width: $screen-xs-max) { ... }
+// @media (min-width: $screen-sm-min) { ... }
+// @media (max-width: $screen-sm-max) { ... }
+// @media (min-width: $screen-md-min) { ... }
+// @media (max-width: $screen-md-max) { ... }
+// @media (min-width: $screen-lg-min) { ... }
+
+
+$large-screen-width: 1500px;
+//Large Devices, Desktop
+$desktop-width: 1200px;
+//Medium Devices, Laptop
+$laptop-width: 992px;
+//Small Devices, Tablets 
+$tablet-width: 768px;
+//Extra Small Devices, Phones 
+$phone-width: 480px;
+
+
+@mixin desktop {
+  @media (min-width: $desktop-width) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: #{$laptop-width}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$laptop-width - 1px}) {
+    @content;
+  }
+}
+@mixin phone {
+  @media (max-width: $phone-width - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin tablet-down {
+  @media (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+@mixin large-screen-up {
+  @media (min-width: #{$large-screen-width}) {
+    @content;
+  }
+}
+
+
+
+$large-screen-width: 1500px;
+//Large Devices, Desktop
+$desktop-width: 1200px;
+//Medium Devices, Laptop
+$laptop-width: 992px;
+//Small Devices, Tablets 
+$tablet-width: 768px;
+//Extra Small Devices, Phones 
+$phone-width: 480px;
+
+
+// For Phones (480px and down)
+@mixin phone {
+  @media (max-width: $phone-width - 1px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$phone-width}) and (max-width: #{$tablet-width - 1px})  {
+    @content;
+  }
+}
+
+
+@mixin laptop {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$laptop-width - 1px})  {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$laptop-width}) and (max-width: #{$desktop-width - 1px})  {
+    @content;
+  }
+}
+
+
+
+@mixin large {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin font-size($phone, $tablet, $laptop, $desktop, $large){
+  @include phone{
+    font-size: $phone;
+  }
+  @include tablet{
+    font-size: $tablet;
+  }
+  @include laptop{
+    font-size: $laptop;
+  }
+  @include desktop{
+    font-size: $desktop;
+  }
+  @include large{
+    font-size: $large;
+  }
+}
+
+
+.mq{
+  position: fixed;
+  content: 'sdf';
+  top: 0px;
+  left: 0px;
+  @include alpha-background-color(rgba(orange, 0.5), orange);
+  z-index: 1000000000000;
+  color: white;
+  padding: 10px;
+
+  @include phone{
+    &::before{
+    content:'phone';
+    }
+  }
+    @include tablet{
+      &::before{
+    content:'tablet';
+  }
+  }
+    @include laptop{
+      &::before{
+    content:'laptop';
+  }
+  }
+    @include desktop{
+      &::before{
+    content:'desktop';
+  }
+  }
+    @include large{
+      &::before{
+    content:'large';
+  }
+  }
+}

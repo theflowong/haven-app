@@ -16,6 +16,9 @@
       <script src="main.js" type="text/javascript"></script>
       <script src="handlebars-v4.0.11.js" type="text/javascript"></script>
 
+      <script src="https://use.typekit.net/cng2euq.js"></script>
+      <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
       <link rel="stylesheet" type="text/css" href="style.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -28,7 +31,7 @@
 
       <div id="app">
 
-        <section class="row header">
+        <section class="row index-header">
           <div class="container">
           <h1>Welcome To Haven</h1>
           <h3>Select Your Experience To Get Started</h3>
@@ -42,7 +45,7 @@
             <div id="mode-button-wrapper">
               <div id="placeholder"></div>
 
-              <div id="secondPlaceholder"></div>
+              
 
           <!-- <div class="col-sm-3">
                 <button id="modeOne" class="haven-button mode-button" data-mode="modeOne">Mode One</button>
@@ -64,24 +67,24 @@
         </section>
 
 
-        <div id="controls" class="hidden-on-load" data-mode>
+<!--         <div id="controls" class="hidden-on-load" data-mode>
 
           <button id="backButton">Back</button>
-          <button id="startButton" data-mode class="haven-button">Start Experience</button>
+          <button id="startButton" data-mode class="haven-button start-button">Start</button>
           <button id="stopButton" class="haven-button">Stop Experience</button>
-        </div>
+        </div> -->
 
       </div>
 
       </div>
 
 
-    
+      <div class="mode-index-wrapper row">
       <script type="text/handlebars-template" id="handlebars-template">  
         {{#each this}}
          {{#if @first}}
          {{else}}
-          <div class="col-sm-3 grid-item">
+          <div class="col-sm-6 grid-item">
             <a href="#" class="mode-button" id="{{name}}" data-mode="{{name}}">
             <div class="grid-item--inner" style="background-image: url({{thumbnail}})">
               <h3 class="mode-name">{{name}}</h3>
@@ -91,18 +94,31 @@
           {{/if}}
         {{/each}}  
       </script>
+    </div>
 
       <!--THIS COULD BE WHERE THE SINGLE VIEW TEMPLATE GOES-->
+
+      <div id="secondPlaceholder"></div>
 
       <script type="text/handlebars-template" id="second-template">
           {{#each this}}
           {{#if @first}}
          {{else}}
-          <div class="mode--single">
-              <h1 class="mode-name">{{name}}</h1>
-          </div>
 
-          <button class="start-experience" data-mode="{{name}}">Start</button>
+          <section class="mode--single hidden-on-load" data-mode="{{name}}" >
+          <header class="row" style="background-image: url('{{thumbnail}}')">
+              <h1 class="mode-name">{{name}}</h1>
+              <button class="start-experience start-button haven-button lilac" data-mode="{{name}}">Start</button>
+              <button class="stop-button haven-button lilac" style="display: none;">Stop</button>
+              <button class="back-button">Back</button>
+          </header>
+          
+            <div class="container">
+            <h3>What To Expect</h3>
+            <p>{{description}}</p>
+            </div>
+          </section>
+          
           {{/if}}
         {{/each}}  
       </script>

@@ -1,0 +1,27 @@
+.mode--single header{
+	height: 300px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-position: center center;
+	background-size: cover;
+	@include transition(all, 0.3s);
+	.mode-name{
+		color: white;
+	}
+
+}
+
+.mode--single.hidden-on-load{
+	display: none;
+}
+
+
+.mode--single.playing{
+	header{
+		height: 100vh;
+	}
+}
+
