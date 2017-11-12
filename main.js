@@ -50,7 +50,7 @@ $( document ).ready(function() {
             "lights_all":"purple",
             "audio":"audio/mode-zero.mp3",
             "thumbnail": "img/mode-zero-preview.jpg",
-            "description": "mode zero test test test"
+            "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
         {
             "name":"Sunset",
@@ -58,7 +58,7 @@ $( document ).ready(function() {
             "lights_all": [sunset_a,sunset_b_bright,sunset_a,sunset_b],
             "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-one-preview.jpg",
-            "description":  "mode one test test test"
+            "description":  "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you.s"
         },
         {
             "name":"Waterfall",
@@ -225,8 +225,7 @@ $( document ).ready(function() {
             }
         });
 
-        var selectedThumb = selectedMode.thumbnail,
-            selectedName = selectedMode.name;
+        var selectedName = selectedMode.name;
 
         // $('section.header').addClass('single-view');
         // $('section.header').css('background-image', 'url(' + selectedThumb + ')' );
@@ -236,20 +235,17 @@ $( document ).ready(function() {
         // singleModeWrapper.show();
         // singleModeWrapper.removeClass('.hidden-on-load');
 
-        $('section.index-header h3').text(selectedName);
         $('.index-header').addClass('single-view');
 
-        console.log('selectedThumb', selectedThumb);
 
     });
 
     $(document).on('click', '.start-button', function(){
         // Hide Start Button and show stop button
-        $(this).hide();
-        $(".stop-button").show();
-        console.log('clicked .start-button');
 
-        $('.mode--single').addClass('playing');
+        $(this).hide();
+        $('.stop-button').show();
+        $(this).closest('.mode--single').addClass('playing');
 
         var dataMode = $(this).attr('data-mode'),
             index = 0;
@@ -293,8 +289,6 @@ $( document ).ready(function() {
         $('.mode--single').hide();
         $('.mode--single').addClass('hidden-on-load');
         $('section.index-header').removeClass('single-view');
-        $('section.index-header').css('background-image', 'none');
-        $('section.index-header h3').text("Select Your Experience");
         $('body').attr('data-mode', '');
 
         // stopExperience();
@@ -319,7 +313,7 @@ $( document ).ready(function() {
 
 
 $(window).load(function() {
-      
+      // Resize grid item images so they remain square
       var gridItemWidth = $('.grid-item--inner').width();
       $('.grid-item--inner').height(gridItemWidth);
 

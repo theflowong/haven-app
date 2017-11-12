@@ -29,7 +29,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-      <div id="app">
+    
 
         <section class="row index-header">
           <div class="container">
@@ -43,23 +43,8 @@
           <div class="container">
 
             <div id="mode-button-wrapper">
+              <!-- TARGET FOR HANDLEBARS TO INJECT MARKUP -->
               <div id="placeholder"></div>
-
-              
-
-          <!-- <div class="col-sm-3">
-                <button id="modeOne" class="haven-button mode-button" data-mode="modeOne">Mode One</button>
-              </div>
-              <div class="col-sm-3">
-                <button id="modeTwo" class="haven-button mode-button" data-mode="modeTwo">Mode Two</button>
-              </div>
-              <div class="col-sm-3">
-                <button id="modeThree" class="haven-button mode-button" data-mode="modeThree">Mode Three</button>
-              </div>
-              <div class="col-sm-3">
-                <button id="modeFour" class="haven-button mode-button" data-mode="modeFour">Mode Four</button>
-              </div> 
- -->
             </div>
 
           </div>
@@ -67,24 +52,26 @@
         </section>
 
 
-<!--         <div id="controls" class="hidden-on-load" data-mode>
 
-          <button id="backButton">Back</button>
-          <button id="startButton" data-mode class="haven-button start-button">Start</button>
-          <button id="stopButton" class="haven-button">Stop Experience</button>
-        </div> -->
-
-      </div>
 
       </div>
 
 
-      <div class="mode-index-wrapper row">
+
+
+
+      <!-- TARGET FOR HANDLEBARS TO INJECT MARKUP -->
+      <div id="secondPlaceholder"></div>
+
+
+
+
+      <!-- TEMPLATE FOR MODE INDEX -->
       <script type="text/handlebars-template" id="handlebars-template">  
         {{#each this}}
          {{#if @first}}
          {{else}}
-          <div class="col-sm-6 grid-item">
+          <div class="col-sm-3 grid-item">
             <a href="#" class="mode-button" id="{{name}}" data-mode="{{name}}">
             <div class="grid-item--inner" style="background-image: url({{thumbnail}})">
               <h3 class="mode-name">{{name}}</h3>
@@ -94,12 +81,9 @@
           {{/if}}
         {{/each}}  
       </script>
-    </div>
 
-      <!--THIS COULD BE WHERE THE SINGLE VIEW TEMPLATE GOES-->
 
-      <div id="secondPlaceholder"></div>
-
+      <!-- TEMPLATE FOR SINGLE VIEW -->
       <script type="text/handlebars-template" id="second-template">
           {{#each this}}
           {{#if @first}}
@@ -112,19 +96,22 @@
               <button class="stop-button haven-button lilac" style="display: none;">Stop</button>
               <button class="back-button">Back</button>
           </header>
-          
+
+
+          <div class="mode--single-body">
             <div class="container">
-            <h3>What To Expect</h3>
-            <p>{{description}}</p>
+              <div class="col-sm-10 col-sm-offset-1">
+                <h3 class="description-heading">What To Expect</h3>
+                <p>{{description}}</p>
+              </div>
             </div>
+          </div>
+
           </section>
           
           {{/if}}
         {{/each}}  
       </script>
-
-
-
 
 
     </body>

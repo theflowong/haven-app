@@ -25,3 +25,33 @@
 	}
 }
 
+.back-button{
+	background-color: white;
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	background-color: $blush;
+	color: white;
+	border: none;
+	border-radius: 15px;
+	padding: 10 15px;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+}
+
+.description-heading{
+	text-transform: uppercase;
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: $navy;
+}
+
+.mode--single-body{
+	padding: 45px 0;
+}
+
+.mode--single-body p{
+	font-weight: 100;
+	font-size: 1.6rem;
+}
+
