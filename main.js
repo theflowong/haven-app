@@ -33,6 +33,8 @@ $( document ).ready(function() {
     // Sunset: ()
     const sunset_a = [[500,15,254,254],[500,30,129,63848],[500,50,166,52393]];
     const sunset_b = [[500,15,254,7107],[500,30,177,64107],[500,50,254,7608]];
+    const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
+    const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -50,17 +52,18 @@ $( document ).ready(function() {
             "thumbnail": "img/mode-zero-preview.jpg"
         },
         {
-            "name":"sunset",
+            "name":"Sunset",
             "loops": false,
-            "lights_all": [sunset_a,sunset_b,sunset_a,sunset_b],
-            "audio":"audio/mode-one.mp3",
+            "lights_all": [sunset_a,sunset_b_bright,sunset_a,sunset_b],
+            "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-one-preview.jpg"},
         {
-            "name":"Peachy Therapy",
-            "loops": true,
-            "lights_all": [peach,peach,peach,peach],
+            "name":"Waterfall",
+            "loops":true,
+            "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "audio":"audio/HAVEN_Music1.mp3",
-            "thumbnail": "img/mode-two-preview.jpg"},
+            "thumbnail": "img/mode-four-preview.jpg"
+        },
         {
             "name":"Seawater",
             "loops":true,
@@ -69,11 +72,11 @@ $( document ).ready(function() {
             "thumbnail": "img/mode-three-preview.jpg"
         },
         {
-            "name":"modeFour",
-            "loops":false,
-            "lights_all":"orange",
+            "name":"Peachy Therapy",
+            "loops": true,
+            "lights_all": [peach,peach,peach,peach],
             "audio":"audio/HAVEN_Music1.mp3",
-            "thumbnail": "img/mode-four-preview.jpg"
+            "thumbnail": "img/mode-two-preview.jpg"
         }
     ]
 
@@ -117,7 +120,6 @@ $( document ).ready(function() {
     function startExperience(isLoops,lights_all,audio){
         // alert(selected.light);
         if (audio) {
-            console.log('there is an audio!');
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
         }
