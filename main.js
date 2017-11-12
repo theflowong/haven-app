@@ -53,20 +53,16 @@ $( document ).ready(function() {
             "name":"sunset",
             "loops": false,
             "lights_all": [sunset_a,sunset_b,sunset_a,sunset_b],
-            "light1": sunset_a,
-            "light2": sunset_b,
-            "light3": sunset_a,
-            "light4": sunset_b,
             "audio":"audio/mode-one.mp3",
             "thumbnail": "img/mode-one-preview.jpg"},
         {
-            "name":"waterfall",
+            "name":"SAD Light Therapy (waterfall)",
             "loops": true,
             "lights_all": [waterfall,waterfall,waterfall,waterfall],
             "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-two-preview.jpg"},
         {
-            "name":"Seawater",
+            "name":"Pulsing Seawater Dance",
             "loops":true,
             "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "audio":"audio/HAVEN_Music1.mp3",
@@ -93,6 +89,24 @@ $( document ).ready(function() {
         hue = colour_theme[3];
 
        return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
+    }
+
+    function sendtoHue(colours) {
+        for (var i = 0; i < colours.length; i++) {
+            (function(n){
+                setTimeout(function(){
+                    console.log("colours", colours);
+                    console.log(n, colours[n]);
+                    $.ajax({
+                        url: url_ip+'/lights/1/state',
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(colours[n]),
+                        success: function() {
+                        }
+                    });
+                }, 1000/fps);
+            }(i));
+        }
     }
 
     function fetchAudioAndPlay(audioFile) {
