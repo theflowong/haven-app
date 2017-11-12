@@ -95,8 +95,6 @@ $( document ).ready(function() {
         for (var i = 0; i < colours.length; i++) {
             (function(n){
                 setTimeout(function(){
-                    console.log("colours", colours);
-                    console.log(n, colours[n]);
                     $.ajax({
                         url: url_ip+'/lights/1/state',
                         type: 'PUT',
@@ -116,7 +114,7 @@ $( document ).ready(function() {
 
 // -------------------- LIGHT LOOPS -------------------- \\
 
-    function startExperience(isLoops,colours,audio){
+    function startExperience(isLoops,lights_all,audio){
         // alert(selected.light);
         if (audio) {
             console.log('there is an audio!');
@@ -126,37 +124,42 @@ $( document ).ready(function() {
 
         console.log('from startExperience function')
 
+        // don't have same number of transitions?
+        // for (var i = 0; i < lights_all.length; i++) {
+        //     sendtoHue(lights_all[i]);
+        // }
+
         // assuming they all have the same number of transitions
-        for (var i = 0; i < colours[0].length; i++) {
+        for (var i = 0; i < lights_all[0].length; i++) {
             (function(n){
                 setTimeout(function(){
-                    console.log("colours[0]", colours[0]);
-                    console.log(n, colours[0][n]);
+                    console.log("lights_all[0]", lights_all[0]);
+                    console.log(n, lights_all[0][n]);
                     $.ajax({
                         url: url_ip+'/lights/1/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[0][n]),
+                        data: convertColourArrayToAjax(lights_all[0][n]),
                         success: function() {
                         }
                     });
                     $.ajax({
                         url: url_ip+'/lights/2/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[1][n]),
+                        data: convertColourArrayToAjax(lights_all[1][n]),
                         success: function() {
                         }
                     });
                     $.ajax({
                         url: url_ip+'/lights/3/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[2][n]),
+                        data: convertColourArrayToAjax(lights_all[2][n]),
                         success: function() {
                         }
                     });
                     $.ajax({
                         url: url_ip+'/lights/4/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[3][n]),
+                        data: convertColourArrayToAjax(lights_all[3][n]),
                         success: function() {
                         }
                     });
@@ -167,26 +170,11 @@ $( document ).ready(function() {
         // somehow fix the timing for actual lights within the cycle.
         // try solution above, research more
 
-        /*
-        setTimeout(function() {
-            for (i = 0; i < lights.length; i++) {
-                console.log(i, lights[i]);
-                $.ajax({
-                    url: url_ip+url_lights,
-                    type: 'PUT',
-                    data: convertColourArrayToAjax(lights[i]),
-                    success: function() {
-                    }
-                });
-            }
-        }, 1000/fps);
-        */
-
         if (isLoops) {
             if (!stopped) {
                 console.log('!stopped2: ', stopped)
                 setTimeout(function() {
-                    startExperience(isLoops,colours,'');
+                    startExperience(isLoops,lights_all,'');
                 }, 1000/fps);
             }
         }
