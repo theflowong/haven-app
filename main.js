@@ -208,20 +208,44 @@ $( document ).ready(function() {
 
     $(document).on('click', '.mode-button', function(){
         // Show controls
-        $controls.fadeIn(1000);
+
+        $controls.show();
+
+
         // Get the selected mode
         var dataMode = $(this).attr('data-mode');
         // Assign mode to the controls
         $controls.attr('data-mode', dataMode);
         // Hide mode buttons
-        $modeButtonWrapper.fadeOut(1000);
+        $modeButtonWrapper.hide();
         $('body').attr('data-mode', dataMode);
+
+
+            index = 0;
+
+        var selectedMode = data.find(function(mode, i){
+            if(mode.name === dataMode){
+                index = i;
+                return i;
+            }
+        });
+
+        var selectedThumb = selectedMode.thumbnail,
+            selectedName = selectedMode.name;
+
+        $('section.header').addClass('single-view');
+        $('section.header').css('background-image', 'url(' + selectedThumb + ')' );
+
+        $('section.header h3').text(selectedName);
+
+        console.log('selectedThumb', selectedThumb);
+
     });
 
     $('#startButton').on('click', function(){
         // Hide Start Button and show stop button
-        $(this).fadeOut();
-        $("#stopButton").fadeIn();
+        $(this).hide();
+        $("#stopButton").show();
 
         var dataMode = $("#controls").attr('data-mode'),
             index = 0;
@@ -249,16 +273,19 @@ $( document ).ready(function() {
 
     $('#stopButton').on('click', function(){
         console.log('clicked stop');
-        $(this).fadeOut();
-        $("#startButton").fadeIn();
+        $(this).hide();
+        $("#startButton").show();
         stopped = true;
         stopExperience();
     });
 
     $("#backButton").on('click', function(){
 
-        $controls.fadeOut();
-        $modeButtonWrapper.fadeIn();
+        $controls.hide();
+        $modeButtonWrapper.show();
+        $('section.header').removeClass('single-view');
+        $('section.header').css('background-image', 'none');
+        $('section.header h3').text("Select Your Experience");
         $('body').attr('data-mode', '');
 
         // stopExperience();

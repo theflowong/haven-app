@@ -1,5 +1,5 @@
 body{
-	background-image: url('img/desert-duotone.png');
+	/*background-image: url('img/desert-duotone.png');*/
 	background-size: cover;
 	/*display: flex;*/
 	/*align-items: center;*/
@@ -15,13 +15,36 @@ body[data-mode="modeTwo"]{
 	background-image: url('img/mode-two-preview.jpg');
 }
 
+.single-view h1{
+	display: none;
+}
+
 section.header{
-	background-color: pink;
-	padding: 45px 0;
+	background-color: #EBA687;
+	background-size:cover;
+	background-position: center center;
+	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+section.header h1{
+	color: #34334F;
+	font-size: 1.5rem;
+	text-transform: uppercase;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+section.header h3{
+	color: white;
+	font-weight: 100;
+	font-size: 4rem;
 }
 
 #section--mode-index{
 	padding: 45px 0;
+	margin-top: -90px;
 }
 
 .haven-button{
@@ -59,7 +82,7 @@ section.header{
 
 
 .grid-item--inner{
-	height: 300px;
+	height: 200px;
 	background-size: cover;
 	display: flex;
 	align-items: center;
