@@ -72,7 +72,7 @@ $( document ).ready(function() {
             "thumbnail": "img/mode-three-preview.jpg"
         },
         {
-            "name":"Peachy Therapy",
+            "name":"Daniel's Idea of Waterfall Colours",
             "loops": true,
             "lights_all": [peach,peach,peach,peach],
             "audio":"audio/HAVEN_Music1.mp3",
