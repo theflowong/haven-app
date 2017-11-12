@@ -27,9 +27,9 @@ $( document ).ready(function() {
     // Colours: [transition time, bri, sat, hue]
     const colour_pink = [30,255,255,56100]; // 3 seconds, pink
     // Cycle of colours: [[time,bri,sat,hue], [time,bri,sat,hue]]
-    const cycle_seawater = [colour_pink,[30,255,255,25500],[30,255,255,46920]]; // 3 seconds, green, blue
+    const cycle_seawater = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920]]; // 3 seconds, green, blue
 
-    const waterfall = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
+    const peach = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
     // Sunset: ()
     const sunset_a = [[500,15,254,254],[500,30,129,63848],[500,50,166,52393]];
     const sunset_b = [[500,15,254,7107],[500,30,177,64107],[500,50,254,7608]];
@@ -56,15 +56,15 @@ $( document ).ready(function() {
             "audio":"audio/mode-one.mp3",
             "thumbnail": "img/mode-one-preview.jpg"},
         {
-            "name":"SAD Light Therapy (waterfall)",
+            "name":"Peachy Therapy",
             "loops": true,
-            "lights_all": [waterfall,waterfall,waterfall,waterfall],
+            "lights_all": [peach,peach,peach,peach],
             "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-two-preview.jpg"},
         {
-            "name":"Pulsing Seawater Dance",
+            "name":"Seawater",
             "loops":true,
-            "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
+            "lights_all":[cycle_seawater,cycle_seawater,peach,cycle_seawater],
             "audio":"audio/HAVEN_Music1.mp3",
             "thumbnail": "img/mode-three-preview.jpg"
         },
