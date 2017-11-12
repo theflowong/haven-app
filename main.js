@@ -13,7 +13,7 @@ $( document ).ready(function() {
         // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
         // Flo's room: 'http://192.168.0.182/api/P5L62etgqpkSUikcmdABFSCox4cOoyk7SIMefkO3',
         // Daniel's room: 'http://192.168.86.31/api/EQMB5CwjE2hYxWK4a-lqCvk9pKN5VoNoTvEACoDz'
-    var url_lights = '/groups/0/action';
+    var url_allLights = '/groups/0/action';
         // or /lights/3/state (depending on light)
 
     // Hue Lights
@@ -31,8 +31,8 @@ $( document ).ready(function() {
 
     const waterfall = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
     // Sunset: ()
-    const sunset_a = [[30,15,254,2707],[30,30,126,60053],[30,50,186,52740]];
-    const sunset_b = [[30,15,254,7107],[30,30,169,61749],[30,50,254,14727]];
+    const sunset_a = [[500,15,254,2707],[500,30,126,60053],[500,50,186,52740]];
+    const sunset_b = [[500,15,254,7107],[500,30,169,61749],[500,50,254,14727]];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -51,7 +51,7 @@ $( document ).ready(function() {
         },
         {
             "name":"sunset",
-            "loops": true,
+            "loops": false,
             "colours": sunset_a,
             "audio":"audio/mode-one.mp3",
             "thumbnail": "img/mode-one-preview.jpg"},
@@ -98,81 +98,6 @@ $( document ).ready(function() {
 
 // -------------------- LIGHT LOOPS -------------------- \\
 
-    // inputs a loop array of colour arrays [[time, bri, sat, hue]]
-    function updateExperience(light_cycle){
-        console.log('\nstarting updateExperience');
-
-        // track if stop button has been pressed; mode is still continuing if not
-        if (!stopped) {
-            console.log('!stopped: ', stopped);
-
-            //
-            for (var i = 0; i < light_cycle.length; i++) {
-                (function(n){
-                    setTimeout(function(){
-                        console.log(n, light_cycle[n]);
-                        $.ajax({
-                            url: url_ip+url_lights,
-                            type: 'PUT',
-                            data: convertColourArrayToAjax(light_cycle[n]),
-                            success: function() {
-                            }
-                        });
-                    }, 1000/fps);
-                }(i));
-            }
-            // somehow fix the timing for actual lights within the cycle.
-            // try solution above, research more
-
-            /*
-            setTimeout(function() {
-                for (i = 0; i < light_cycle.length; i++) {
-                    console.log(i, light_cycle[i]);
-                    $.ajax({
-                        url: url_ip+url_lights,
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(light_cycle[i]),
-                        success: function() {
-                        }
-                    });
-                }
-            }, 1000/fps);
-            */
-
-            if (!stopped) {
-                console.log('!stopped2: ', stopped)
-                setTimeout(function() {
-                    updateExperience(light_cycle);
-                }, 1000/fps);
-            }
-        }
-    }
-
-  	function startExperience_old(light_cycle,audio){
-        // alert(selected.light);
-        audioFile = new Audio(audio);
-        fetchAudioAndPlay(audioFile);
-
-        console.log('from startExperience function', light, audio)
-
-
-        // IF LINEAR:
-        // Hue API
-        $.ajax({
-            url: url_ip+url_lights,
-            type: 'PUT',
-                // this one makes a nice simple colour loop but we probably won't need to use it
-            //data: '{"on":true,"bri":255,"sat":255,"hue":46920, "effect":"colorloop"}',
-            data: convertColourArrayToAjax(colour_pink),
-            success: function () {
-            }
-        });
-
-        // IF THERE IS A LOOP:
-        updateExperience(light_cycle);
-
-    }
-
     function startExperience(isLoops,colours,audio){
         // alert(selected.light);
         if (audio) {
@@ -183,12 +108,34 @@ $( document ).ready(function() {
 
         console.log('from startExperience function')
 
+        // for one light
         for (var i = 0; i < colours.length; i++) {
             (function(n){
                 setTimeout(function(){
                     console.log(n, colours[n]);
                     $.ajax({
-                        url: url_ip+url_lights,
+                        url: url_ip+'/lights/1/state',
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(colours[n]),
+                        success: function() {
+                        }
+                    });
+                    $.ajax({
+                        url: url_ip+'/lights/2/state',
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(colours[n]),
+                        success: function() {
+                        }
+                    });
+                    $.ajax({
+                        url: url_ip+'/lights/3/state',
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(colours[n]),
+                        success: function() {
+                        }
+                    });
+                    $.ajax({
+                        url: url_ip+'/lights/4/state',
                         type: 'PUT',
                         data: convertColourArrayToAjax(colours[n]),
                         success: function() {
@@ -197,6 +144,7 @@ $( document ).ready(function() {
                 }, 1000/fps);
             }(i));
         }
+
         // somehow fix the timing for actual lights within the cycle.
         // try solution above, research more
 
@@ -227,7 +175,7 @@ $( document ).ready(function() {
 
     function stopExperience(){
         $.ajax({
-            url: url_ip+url_lights,
+            url: url_ip+url_allLights,
             type: 'PUT',
             data: '{"on":false}',
             success: function () {
@@ -261,7 +209,6 @@ $( document ).ready(function() {
         var dataMode = $("#controls").attr('data-mode'),
             index = 0;
 
-
         var selectedMode = data.find(function(mode, i){
             if(mode.name === dataMode){
                 index = i;
@@ -273,10 +220,9 @@ $( document ).ready(function() {
             selectedModeColours = selectedMode.colours,
             selectedModeAudio = selectedMode.audio;
 
-        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeAudio);
         stopped = false;
+        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeAudio);
         console.log('selectedModeIsLoops ', selectedModeIsLoops);
-        //updateExperience(selectedModeLight);
 
     });
 
