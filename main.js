@@ -45,33 +45,37 @@ $( document ).ready(function() {
             // First Object is intentionally empty, don't remove
             "name":"modeZero",
             "loops":false,
-            "colours":"purple",
+            "lights_all":"purple",
             "audio":"audio/mode-zero.mp3",
             "thumbnail": "img/mode-zero-preview.jpg"
         },
         {
             "name":"sunset",
             "loops": false,
-            "colours": sunset_a,
+            "lights_all": [sunset_a,sunset_b,sunset_a,sunset_b],
+            "light1": sunset_a,
+            "light2": sunset_b,
+            "light3": sunset_a,
+            "light4": sunset_b,
             "audio":"audio/mode-one.mp3",
             "thumbnail": "img/mode-one-preview.jpg"},
         {
             "name":"waterfall",
             "loops": true,
-            "colours": waterfall,
+            "lights_all": [waterfall,waterfall,waterfall,waterfall],
             "audio":"audio/mode-two.mp3",
             "thumbnail": "img/mode-two-preview.jpg"},
         {
             "name":"cycle_seawater",
             "loops":true,
-            "colours":cycle_seawater,
+            "lights_all":cycle_seawater,
             "audio":"audio/mode-three.mp3",
             "thumbnail": "img/mode-three-preview.jpg"
         },
         {
             "name":"modeFour",
             "loops":false,
-            "colours":"orange",
+            "lights_all":"orange",
             "audio":"audio/mode-four.mp3",
             "thumbnail": "img/mode-four-preview.jpg"
         }
@@ -108,36 +112,37 @@ $( document ).ready(function() {
 
         console.log('from startExperience function')
 
-        // for one light
-        for (var i = 0; i < colours.length; i++) {
+        // assuming they all have the same number of transitions
+        for (var i = 0; i < colours[0].length; i++) {
             (function(n){
                 setTimeout(function(){
-                    console.log(n, colours[n]);
+                    console.log("colours[0]", colours[0]);
+                    console.log(n, colours[0][n]);
                     $.ajax({
                         url: url_ip+'/lights/1/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[n]),
+                        data: convertColourArrayToAjax(colours[0][n]),
                         success: function() {
                         }
                     });
                     $.ajax({
                         url: url_ip+'/lights/2/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[n]),
+                        data: convertColourArrayToAjax(colours[1][n]),
                         success: function() {
                         }
                     });
                     $.ajax({
                         url: url_ip+'/lights/3/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[n]),
+                        data: convertColourArrayToAjax(colours[2][n]),
                         success: function() {
                         }
                     });
                     $.ajax({
                         url: url_ip+'/lights/4/state',
                         type: 'PUT',
-                        data: convertColourArrayToAjax(colours[n]),
+                        data: convertColourArrayToAjax(colours[3][n]),
                         success: function() {
                         }
                     });
@@ -188,10 +193,8 @@ $( document ).ready(function() {
 // -------------------- BUTTON FUNCTIONS -------------------- \\
 
     $(document).on('click', '.mode-button', function(){
-        console.log('mode click');
         // Show controls
         $controls.fadeIn(1000);
-        console.log('controls fade in');
         // Get the selected mode
         var dataMode = $(this).attr('data-mode');
         // Assign mode to the controls
@@ -217,12 +220,16 @@ $( document ).ready(function() {
         });
 
         var selectedModeIsLoops = selectedMode.loops,
-            selectedModeColours = selectedMode.colours,
             selectedModeAudio = selectedMode.audio;
+        if (selectedMode.lights_all) {
+            selectedModeColours = selectedMode.lights_all;
+        }
+        else {
+            selectedModeColours = [selectedMode.light1,selectedMode.light2,selectedMode.light3,selectedMode.light4];
+        }
 
         stopped = false;
         startExperience(selectedModeIsLoops, selectedModeColours, selectedModeAudio);
-        console.log('selectedModeIsLoops ', selectedModeIsLoops);
 
     });
 
