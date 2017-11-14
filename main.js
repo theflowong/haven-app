@@ -30,11 +30,19 @@ $( document ).ready(function() {
     const cycle_seawater = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920]]; // 3 seconds, green, blue
 
     const peach = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
-    // Sunset: ()
+
+    // Sunset (linear)
     const sunset_a = [[500,15,254,254],[500,30,129,63848],[500,50,166,52393]];
     const sunset_b = [[500,15,254,7107],[500,30,177,64107],[500,50,254,7608]];
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
+
+    // Waterfall (linear)
+    const waterfall = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
+                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
+                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
+                    [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
+                [120,255,255,33300],[120,255,255,25500],[120,255,255,46920]];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -61,7 +69,7 @@ $( document ).ready(function() {
             "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
-            "name":"Waterfall",
+            "name":"Waterfall (loop)",
             "loops":true,
             "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
@@ -69,9 +77,9 @@ $( document ).ready(function() {
             "description": "mode two test test test"
         },
         {
-            "name":"Seawater",
-            "loops":true,
-            "lights_all":[cycle_seawater,cycle_seawater,peach,cycle_seawater],
+            "name":"Waterfall (linear)",
+            "loops": false,
+            "lights_all":[waterfall,waterfall,waterfall,waterfall],
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "mode three test test test"
