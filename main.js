@@ -64,7 +64,7 @@ $( document ).ready(function() {
             "name":"Waterfall",
             "loops":true,
             "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
-            "audio":"audio/HAVEN_Music1.mp3",
+            "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-four-preview.jpg",
             "description": "mode two test test test"
         },
@@ -72,7 +72,7 @@ $( document ).ready(function() {
             "name":"Seawater",
             "loops":true,
             "lights_all":[cycle_seawater,cycle_seawater,peach,cycle_seawater],
-            "audio":"audio/HAVEN_Music1.mp3",
+            "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "mode three test test test"
         },
@@ -80,7 +80,7 @@ $( document ).ready(function() {
             "name":"Daniels Idea of Waterfall Colours",
             "loops": true,
             "lights_all": [peach,peach,peach,peach],
-            "audio":"audio/HAVEN_Music1.mp3",
+            "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-two-preview.jpg",
             "description": "mode four test test test"
         }
