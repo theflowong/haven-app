@@ -27,12 +27,12 @@ $( document ).ready(function() {
     // Colours (one colour = one array): [transition time, bri, sat, hue]
     const colour_pink = [30,255,255,56100]; // 3 seconds, pink
 
-    const dark_blue;
-    const teal_blue;
-    const light_blue;
+    const dark_blue = [30,255,255,56100]; // 3 seconds, pink;
+    const teal_blue = [30,255,255,56100]; // 3 seconds, pink;
+    const light_blue = [30,255,255,56100]; // 3 seconds, pink;
 
     // finish light: bright white lights to transition back into real world
-    const colour_finish;
+    const colour_finish = [30,255,255,56100]; // 3 seconds, pink;
 
     // Colour Cycles (one cycle = one array of colours): [[time,bri,sat,hue], [time,bri,sat,hue]]
     const cycle_seawater = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920]]; // 3 seconds, green, blue
