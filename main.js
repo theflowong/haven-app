@@ -53,10 +53,14 @@ $( document ).ready(function() {
     const sunset_b = [[500,15,254,7107],[500,30,177,64107],[500,50,254,7608]];
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
+    const sunset_a_backwards = [bright, bright, [500,254,166,52393], [500,150,129,63848],[500,100,254,254]];
+    const sunset_b_backwards = [bright, bright, [500,254,254,7608],[500,150,177,64107],[500,100,254,7107]];
 
     // Waterfall (linear)
-    const waterfall = [bright,[3000,254,121,8597],light_blue,light_blue,light_blue,
+    const waterfall_backwards = [bright,[1000,254,121,8597],light_blue,dark_blue,
+                    light_blue,dark_blue,light_blue,light_blue,aqua,
                     dark_blue,light_blue,dark_blue,light_blue, bright];
+                    // 3 minutes of blueness, 30 sec transitioning into bright
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -85,16 +89,16 @@ $( document ).ready(function() {
         {
             "name":"Waterfall (loop)",
             "loops":true,
-            "lights_all":[waterfall, waterfall, waterfall, waterfall],
-            "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
+            "lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
+            "audio":"audio/HAVEN_Meditation2_GTFO.mp3", // 3:30
             "thumbnail": "img/mode-four-preview.jpg",
             "description": "mode two test test test"
         },
         {
             "name":"Waterfall (linear)",
             "loops": false,
-            "lights_all":[waterfall, waterfall, waterfall, waterfall],
-            "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
+            "lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
+            "audio":"audio/HAVEN_Meditation2_GTFO.mp3", // 3:30
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "mode three test test test"
         },
