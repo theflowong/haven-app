@@ -18,7 +18,7 @@ $( document ).ready(function() {
 
     // Hue Lights
     var stopped;
-    const fps = 1; // frame rate for calling hue functions
+    const fps = 0.2; // frame rate for calling hue functions
     var bri, sat, hue;
 
 
@@ -27,16 +27,26 @@ $( document ).ready(function() {
     // Colours (one colour = one array): [transition time, bri, sat, hue]
     const colour_pink = [30,255,255,56100]; // 3 seconds, pink
 
-    const dark_blue = [30,255,255,56100]; // 3 seconds, pink;
-    const teal_blue = [30,255,255,56100]; // 3 seconds, pink;
-    const light_blue = [30,255,255,56100]; // 3 seconds, pink;
+    const dark_blue = [30,255,255,46920]; // 12 seconds
+    const teal_blue = [30,255,255,33300];
+    const light_blue = [30,255,255,38300];
+    const light_blue1 = [30,169,254,41427];
+    const light_blue2 = [30,169,254,39189];
+    const light_blue3 = [30,169,254,41427]
+    const aqua = [120,255,255,33300];
+    const green = [120,255,255,25500];
+
+    const bright = [30,254,121,8597];
 
     // finish light: bright white lights to transition back into real world
     const colour_finish = [30,255,255,56100]; // 3 seconds, pink;
 
     // Colour Cycles (one cycle = one array of colours): [[time,bri,sat,hue], [time,bri,sat,hue]]
-    const cycle_seawater = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920]]; // 3 seconds, green, blue
+    const cycle_seawater = [light_blue,dark_blue]; // 3 seconds
     const peach = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
+
+
+    const orange = [120,255,255,4000];
 
     // Sunset (linear)
     const sunset_a = [[500,15,254,254],[500,30,129,63848],[500,50,166,52393]];
@@ -45,12 +55,8 @@ $( document ).ready(function() {
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
     // Waterfall (linear)
-    const waterfall = [[60,255,255,33300],[60,255,255,25500],[60,255,255,46920],[120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
-                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
-                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
-                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
-                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
-                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920]];
+    const waterfall = [bright,[3000,254,121,8597],light_blue,light_blue,light_blue,
+                    dark_blue,light_blue,dark_blue,light_blue, bright];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -79,7 +85,7 @@ $( document ).ready(function() {
         {
             "name":"Waterfall (loop)",
             "loops":true,
-            "lights_all":[cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
+            "lights_all":[waterfall, waterfall, waterfall, waterfall],
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-four-preview.jpg",
             "description": "mode two test test test"
@@ -87,7 +93,7 @@ $( document ).ready(function() {
         {
             "name":"Waterfall (linear)",
             "loops": false,
-            "lights_all":[waterfall,waterfall,waterfall,waterfall],
+            "lights_all":[waterfall, waterfall, waterfall, waterfall],
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "mode three test test test"
@@ -146,50 +152,94 @@ $( document ).ready(function() {
             fetchAudioAndPlay(audioFile);
         }
 
-        console.log('from startExperience function')
+        console.log('from startExperience function');
 
         // don't have same number of transitions?
         // for (var i = 0; i < lights_all.length; i++) {
         //     sendtoHue(lights_all[i]);
         // }
 
-        // assuming they all have the same number of transitions
-        for (var i = 0; i < lights_all[0].length; i++) {
-            (function(n){
-                setTimeout(function(){
-                    console.log("lights_all[0]", lights_all[0]);
-                    console.log(n, lights_all[0][n]);
-                    $.ajax({
-                        url: url_ip+'/lights/1/state',
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(lights_all[0][n]),
-                        success: function() {
-                        }
-                    });
-                    $.ajax({
-                        url: url_ip+'/lights/2/state',
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(lights_all[1][n]),
-                        success: function() {
-                        }
-                    });
-                    $.ajax({
-                        url: url_ip+'/lights/3/state',
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(lights_all[2][n]),
-                        success: function() {
-                        }
-                    });
-                    $.ajax({
-                        url: url_ip+'/lights/4/state',
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(lights_all[3][n]),
-                        success: function() {
-                        }
-                    });
-                }, 1000/fps);
-            }(i));
-        }
+        // assuming all lights have the same number of transitions
+        (function theLoop (i) {
+            setTimeout(function () {
+                console.log("iteration - ", i)
+                console.log("current colour", lights_all[0][i]);
+                var n=i;
+                $.ajax({
+                    url: url_ip+'/lights/1/state',
+                    type: 'PUT',
+                    data: convertColourArrayToAjax(lights_all[0][n]),
+                    success: function() {
+                    }
+                });
+                $.ajax({
+                    url: url_ip+'/lights/2/state',
+                    type: 'PUT',
+                    data: convertColourArrayToAjax(lights_all[1][n]),
+                    success: function() {
+                    }
+                });
+                $.ajax({
+                    url: url_ip+'/lights/3/state',
+                    type: 'PUT',
+                    data: convertColourArrayToAjax(lights_all[2][n]),
+                    success: function() {
+                    }
+                });
+                $.ajax({
+                    url: url_ip+'/lights/4/state',
+                    type: 'PUT',
+                    data: convertColourArrayToAjax(lights_all[3][n]),
+                    success: function() {
+                    }
+                });
+
+                if (--i) {          // If i > 0, keep going
+                    theLoop(i);       // Call the loop again, and pass it the current value of i
+                }
+            }, 3000);
+        })(lights_all[0].length-1);
+
+        // for (var i = 0; i < lights_all[0].length; i++)
+        // {
+        //     console.log('start from here');
+        //     (function(index){
+        //         setTimeout(function(n){
+        //             console.log("iteration - ", i)
+        //             console.log("current colour", lights_all[0][n]);
+        //             $.ajax({
+        //                 url: url_ip+'/lights/1/state',
+        //                 type: 'PUT',
+        //                 data: convertColourArrayToAjax(lights_all[0][n]),
+        //                 success: function() {
+        //                 }
+        //             });
+        //             $.ajax({
+        //                 url: url_ip+'/lights/2/state',
+        //                 type: 'PUT',
+        //                 data: convertColourArrayToAjax(lights_all[1][n]),
+        //                 success: function() {
+        //                 }
+        //             });
+        //             $.ajax({
+        //                 url: url_ip+'/lights/3/state',
+        //                 type: 'PUT',
+        //                 data: convertColourArrayToAjax(lights_all[2][n]),
+        //                 success: function() {
+        //                 }
+        //             });
+        //             $.ajax({
+        //                 url: url_ip+'/lights/4/state',
+        //                 type: 'PUT',
+        //                 data: convertColourArrayToAjax(lights_all[3][n]),
+        //                 success: function() {
+        //                 }
+        //             });
+        //         }(index), 1000*(index+1));
+        //     })(i);
+        // };
+
+
 
         // somehow fix the timing for actual lights within the cycle.
         // try solution above, research more
