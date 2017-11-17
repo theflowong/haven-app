@@ -24,11 +24,18 @@ $( document ).ready(function() {
 
 // -------------------- DATA -------------------- \\
 
-    // Colours: [transition time, bri, sat, hue]
+    // Colours (one colour = one array): [transition time, bri, sat, hue]
     const colour_pink = [30,255,255,56100]; // 3 seconds, pink
-    // Cycle of colours: [[time,bri,sat,hue], [time,bri,sat,hue]]
-    const cycle_seawater = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920]]; // 3 seconds, green, blue
 
+    const dark_blue;
+    const teal_blue;
+    const light_blue;
+
+    // finish light: bright white lights to transition back into real world
+    const colour_finish;
+
+    // Colour Cycles (one cycle = one array of colours): [[time,bri,sat,hue], [time,bri,sat,hue]]
+    const cycle_seawater = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920]]; // 3 seconds, green, blue
     const peach = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
 
     // Sunset (linear)
@@ -38,11 +45,12 @@ $( document ).ready(function() {
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
     // Waterfall (linear)
-    const waterfall = [[120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
+    const waterfall = [[60,255,255,33300],[60,255,255,25500],[60,255,255,46920],[120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
                         [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
                         [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
-                    [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
-                [120,255,255,33300],[120,255,255,25500],[120,255,255,46920]];
+                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
+                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920],
+                        [120,255,255,33300],[120,255,255,25500],[120,255,255,46920]];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -61,9 +69,9 @@ $( document ).ready(function() {
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
         {
-            "name":"Sunset",
+            "name":"Adhan Sunset",
             "loops": false,
-            "lights_all": [sunset_a,sunset_b_bright,sunset_a,sunset_b],
+            "lights_all": [sunset_a,sunset_b,sunset_a,sunset_b],
             "audio":"audio/HAVEN_Adhan_Music.mp3",
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
