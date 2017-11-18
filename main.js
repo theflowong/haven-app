@@ -167,23 +167,16 @@ $( document ).ready(function() {
     }
 
     function createTimedColourArray(colours,transitiontime, totaltime) {
-        console.log('time :', totaltime);
-
-        var totaltime_colours = colours.length * transitiontime;
-        var repeats = Math.ceil(totaltime/totaltime_colours);
+        var totaltime_colours = colours.length * transitiontime-10000; // -10000 for the end transition to light
+        var repeats = Math.floor(totaltime/totaltime_colours);
 
         var timed_colours = [bright, bright];
 
         for (i=0;i<repeats;i++) {
             Array.prototype.push.apply(timed_colours, colours);
         }
-        // see how long colours array is (4 items)
-        // multiply by transitiontime to get totaltime of colours
-        // divide or TOTALTIMEsong by totaltimecolours --> to get # of repeats of colours Math.ceil(n)
 
-        // make new array with those repeats of colours
-        // for loop: # of repeats, append colours onto new array
-
+        // do something for sunset (if it's just a linear transition)
 
         console.log('timed colours result :',timed_colours);
         return timed_colours;
