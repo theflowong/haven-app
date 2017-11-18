@@ -18,6 +18,7 @@ $( document ).ready(function() {
 
     // Hue Lights
     var stopped;
+    var goThroughLights;
     const fps = 0.2; // frame rate for calling hue functions
     var bri, sat, hue;
 
@@ -38,10 +39,15 @@ $( document ).ready(function() {
 
     const bright = [30,254,121,8597];
 
+    // hues
+    const h_bright = 8597;
+
     // finish light: bright white lights to transition back into real world
     const colour_finish = [30,255,255,56100]; // 3 seconds, pink;
 
     // Colour Cycles (one cycle = one array of colours): [[time,bri,sat,hue], [time,bri,sat,hue]]
+    const room_bright = ['',bright];
+
     const cycle_seawater = [light_blue,dark_blue]; // 3 seconds
     const peach = [[30,59,84,62],[30,55,69,58],[30,70,100,60],[30,55,100,69]];
 
@@ -53,6 +59,7 @@ $( document ).ready(function() {
     const sunset_b = [[500,15,254,7107],[500,30,177,64107],[500,50,254,7608]];
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
+
     const sunset_a_backwards = [bright, bright, [500,254,166,52393], [500,150,129,63848],[500,100,254,254]];
     const sunset_b_backwards = [bright, bright, [500,254,254,7608],[500,150,177,64107],[500,100,254,7107]];
 
@@ -61,6 +68,9 @@ $( document ).ready(function() {
                     light_blue,dark_blue,light_blue,light_blue,aqua,
                     dark_blue,light_blue,dark_blue,light_blue, bright];
                     // 3 minutes of blueness, 30 sec transitioning into bright
+
+
+
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -74,30 +84,34 @@ $( document ).ready(function() {
             "name":"modeZero",
             "loops":false,
             "lights_all":"purple",
+            "transition_time":3,
             "audio":"audio/mode-zero.mp3",
             "thumbnail": "img/mode-zero-preview.jpg",
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
         {
-            "name":"Adhan Sunset",
+            "name":"Focus",
             "loops": false,
-            "lights_all": [sunset_a,sunset_b,sunset_a,sunset_b],
+            "lights_all": [room_bright, room_bright, room_bright, room_bright],
+            "transition_time":3,
+            "audio":"",
+            "thumbnail": "img/mode-one-preview.jpg",
+            "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        },
+        {
+            "name":"Islamic Prayer",
+            "loops": false,
+            "lights_all": [sunset_a_backwards,sunset_b_backwards,sunset_a_backwards,sunset_b_backwards],
+            "transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
-            "name":"Waterfall (loop)",
-            "loops":true,
-            "lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
-            "audio":"audio/HAVEN_Meditation2_GTFO.mp3", // 3:30
-            "thumbnail": "img/mode-four-preview.jpg",
-            "description": "mode two test test test"
-        },
-        {
             "name":"Waterfall (linear)",
             "loops": false,
             "lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
+            "transition_time":3,
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3", // 3:30
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "mode three test test test"
@@ -105,7 +119,12 @@ $( document ).ready(function() {
         {
             "name":"Daniels Idea of Waterfall Colours",
             "loops": true,
-            "lights_all": [peach,peach,peach,peach],
+            //"lights_all": [peach,peach,peach,peach],
+            "bulb1": peach,
+            "bulb2": waterfall_backwards,
+            "bulb3": room_bright,
+            "bulb4": room_bright,
+            "transition_time":3,
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-two-preview.jpg",
             "description": "mode four test test test"
@@ -126,74 +145,20 @@ $( document ).ready(function() {
        return('{"on":true, "transitiontime":' + tt + ', "bri":' + bri + ', "sat":' + sat + ', "hue":' + hue + '}');
     }
 
-    function sendtoHue(colours) {
-        for (var i = 0; i < colours.length; i++) {
-            (function(n){
-                setTimeout(function(){
-                    $.ajax({
-                        url: url_ip+'/lights/1/state',
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(colours[n]),
-                        success: function() {
-                        }
-                    });
-                }, 1000/fps);
-            }(i));
-        }
-    }
-
     function fetchAudioAndPlay(audioFile) {
         // fetch(audioFile);
         return audioFile.play();
     }
 
-// -------------------- LIGHT LOOPS -------------------- \\
-
-    function startExperience(isLoops,lights_all,audio){
-        // alert(selected.light);
-        if (audio) {
-            audioFile = new Audio(audio);
-            fetchAudioAndPlay(audioFile);
-        }
-
-        console.log('from startExperience function');
-
-        // don't have same number of transitions?
-        // for (var i = 0; i < lights_all.length; i++) {
-        //     sendtoHue(lights_all[i]);
-        // }
-
-        // assuming all lights have the same number of transitions
+    function changeLightColour(bulb,colours,transitiontime) {
         (function theLoop (i) {
-            setTimeout(function () {
+            goThroughLights = setTimeout(function () {
                 console.log("iteration - ", i)
-                console.log("current colour", lights_all[0][i]);
-                var n=i;
+                console.log("current colour", colours[i]);
                 $.ajax({
-                    url: url_ip+'/lights/1/state',
+                    url: url_ip+'/lights/'+bulb+'/state',
                     type: 'PUT',
-                    data: convertColourArrayToAjax(lights_all[0][n]),
-                    success: function() {
-                    }
-                });
-                $.ajax({
-                    url: url_ip+'/lights/2/state',
-                    type: 'PUT',
-                    data: convertColourArrayToAjax(lights_all[1][n]),
-                    success: function() {
-                    }
-                });
-                $.ajax({
-                    url: url_ip+'/lights/3/state',
-                    type: 'PUT',
-                    data: convertColourArrayToAjax(lights_all[2][n]),
-                    success: function() {
-                    }
-                });
-                $.ajax({
-                    url: url_ip+'/lights/4/state',
-                    type: 'PUT',
-                    data: convertColourArrayToAjax(lights_all[3][n]),
+                    data: convertColourArrayToAjax(colours[i]),
                     success: function() {
                     }
                 });
@@ -201,64 +166,95 @@ $( document ).ready(function() {
                 if (--i) {          // If i > 0, keep going
                     theLoop(i);       // Call the loop again, and pass it the current value of i
                 }
-            }, 3000);
-        })(lights_all[0].length-1);
+            }, transitiontime*1000);
+        })(colours.length-1);
+    }
 
-        // for (var i = 0; i < lights_all[0].length; i++)
-        // {
-        //     console.log('start from here');
-        //     (function(index){
-        //         setTimeout(function(n){
-        //             console.log("iteration - ", i)
-        //             console.log("current colour", lights_all[0][n]);
-        //             $.ajax({
-        //                 url: url_ip+'/lights/1/state',
-        //                 type: 'PUT',
-        //                 data: convertColourArrayToAjax(lights_all[0][n]),
-        //                 success: function() {
-        //                 }
-        //             });
-        //             $.ajax({
-        //                 url: url_ip+'/lights/2/state',
-        //                 type: 'PUT',
-        //                 data: convertColourArrayToAjax(lights_all[1][n]),
-        //                 success: function() {
-        //                 }
-        //             });
-        //             $.ajax({
-        //                 url: url_ip+'/lights/3/state',
-        //                 type: 'PUT',
-        //                 data: convertColourArrayToAjax(lights_all[2][n]),
-        //                 success: function() {
-        //                 }
-        //             });
-        //             $.ajax({
-        //                 url: url_ip+'/lights/4/state',
-        //                 type: 'PUT',
-        //                 data: convertColourArrayToAjax(lights_all[3][n]),
-        //                 success: function() {
-        //                 }
-        //             });
-        //         }(index), 1000*(index+1));
-        //     })(i);
-        // };
+// -------------------- LIGHT LOOPS -------------------- \\
+
+    function startExperience(isLoops,bulbs,audio){
+        // alert(selected.light);
+        if (audio) {
+            audioFile = new Audio(audio);
+            fetchAudioAndPlay(audioFile);
+        }
+
+        changeLightColour(1, bulbs[0]);
+        changeLightColour(2, bulbs[1]);
+        changeLightColour(3, bulbs[2]);
+        changeLightColour(4, bulbs[3]);
+
+        //
+        // // assuming all lights have the same number of transitions
+        // (function theLoop (i) {
+        //     goThroughLights = setTimeout(function () {
+        //         console.log("iteration - ", i)
+        //         console.log("current colour", bulbs[0][i]);
+        //         $.ajax({
+        //             url: url_ip+'/lights/1/state',
+        //             type: 'PUT',
+        //             data: convertColourArrayToAjax(bulbs[0][i]),
+        //             success: function() {
+        //             }
+        //         });
+        //         $.ajax({
+        //             url: url_ip+'/lights/2/state',
+        //             type: 'PUT',
+        //             data: convertColourArrayToAjax(bulbs[1][i]),
+        //             success: function() {
+        //             }
+        //         });
+        //
+        //         if (--i) {          // If i > 0, keep going
+        //             theLoop(i);       // Call the loop again, and pass it the current value of i
+        //         }
+        //     }, 3*1000);
+        // })(bulbs[0].length-1);
+        //
+        // (function theLoop (i) {
+        //     goThroughLights = setTimeout(function () {
+        //         console.log("SECOND THELOOP. iteration - ", i)
+        //         console.log("SECOND THELOOP. current colour", bulbs[0][i]);
+        //         $.ajax({
+        //             url: url_ip+'/lights/3/state',
+        //             type: 'PUT',
+        //             data: convertColourArrayToAjax(bulbs[2][i]),
+        //             success: function() {
+        //             }
+        //         });
+        //         $.ajax({
+        //             url: url_ip+'/lights/4/state',
+        //             type: 'PUT',
+        //             data: convertColourArrayToAjax(bulbs[3][i]),
+        //             success: function() {
+        //             }
+        //         });
+        //
+        //         if (--i) {          // If i > 0, keep going
+        //             theLoop(i);       // Call the loop again, and pass it the current value of i
+        //         }
+        //     }, 3*1000);
+        // })(bulbs[0].length-1);
 
 
 
-        // somehow fix the timing for actual lights within the cycle.
-        // try solution above, research more
 
+
+
+        // go through this function again
+        // maybe delete if we're not looping...
         if (isLoops) {
             if (!stopped) {
-                console.log('!stopped2: ', stopped)
                 setTimeout(function() {
-                    startExperience(isLoops,lights_all,'');
+                    startExperience(isLoops,bulbs,'');
                 }, 1000/fps);
             }
         }
     }
 
     function stopExperience(){
+        clearTimeout(goThroughLights);
+        console.log('stop experience, moving on');
         $.ajax({
             url: url_ip+url_allLights,
             type: 'PUT',
@@ -334,7 +330,7 @@ $( document ).ready(function() {
             selectedModeColours = selectedMode.lights_all;
         }
         else {
-            selectedModeColours = [selectedMode.light1,selectedMode.light2,selectedMode.light3,selectedMode.light4];
+            selectedModeColours = [selectedMode.bulb1,selectedMode.bulb2,selectedMode.bulb3,selectedMode.bulb4];
         }
 
         console.log('selectedModeAudio: ', selectedModeAudio);
