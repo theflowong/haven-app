@@ -37,7 +37,7 @@ $( document ).ready(function() {
     const aqua = [120,255,255,33300];
     const green = [120,255,255,25500];
 
-    const bright = [30,254,121,8597];
+    const bright = [1000,254,121,8597];
 
     // hues
     const h_bright = 8597;
@@ -64,12 +64,12 @@ $( document ).ready(function() {
     const sunset_b_backwards = [bright, bright, [500,254,254,7608],[500,150,177,64107],[500,100,254,7107]];
 
     // Waterfall (linear)
-    const waterfall_backwards = [bright,[1000,254,121,8597],light_blue,dark_blue,
+    const waterfall_backwards_old = [bright,[1000,254,121,8597],light_blue,dark_blue,
                     light_blue,dark_blue,light_blue,light_blue,aqua,
                     dark_blue,light_blue,dark_blue,light_blue, bright];
+
+    const waterfall_backwards = [dark_blue, light_blue, aqua];
                     // 3 minutes of blueness, 30 sec transitioning into bright
-
-
 
 
     // Audio
@@ -83,6 +83,7 @@ $( document ).ready(function() {
             // First Object is intentionally empty, don't remove
             "name":"modeZero",
             "loops":false,
+            "duration":180000,
             "lights_all": [cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "transition_time":3,
             "audio":"audio/mode-zero.mp3",
@@ -92,6 +93,7 @@ $( document ).ready(function() {
         {
             "name":"Focus",
             "loops": false,
+            "duration":180000,
             //"lights_all": [room_bright, room_bright, room_bright, room_bright],
             "bulb1": [room_bright, 12000],
             "bulb2": [room_bright, 12000],
@@ -105,6 +107,7 @@ $( document ).ready(function() {
         {
             "name":"Islamic Prayer",
             "loops": false,
+            "duration":180000,
             //"lights_all": [sunset_a_backwards,sunset_b_backwards,sunset_a_backwards,sunset_b_backwards],
             "bulb1": [sunset_a_backwards, 12000],
             "bulb2": [sunset_b_backwards, 12000],
@@ -118,19 +121,21 @@ $( document ).ready(function() {
         {
             "name":"Waterfall",
             "loops": false,
+            "duration":180000,
             //"lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
             "bulb1": [waterfall_backwards, 3000],
             "bulb2": [waterfall_backwards, 4000],
             "bulb3": [waterfall_backwards, 5000],
             "bulb4": [waterfall_backwards, 3000],
             //"transition_time":3,
-            "audio":"audio/HAVEN_Meditation2_GTFO.mp3", // 3:30
+            "audio":"audio/waterfall_3min.mp3", // 3:30
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "mode three test test test"
         },
         {
             "name":"Debug",
             "loops": true,
+            "duration":180000,
             "bulb1": [peach, 3000],
             "bulb2": [waterfall_backwards, 3000],
             "bulb3": [waterfall_backwards, 6000],
@@ -161,10 +166,33 @@ $( document ).ready(function() {
         return audioFile.play();
     }
 
+    function createTimedColourArray(colours,transitiontime, totaltime) {
+        console.log('time :', totaltime);
+
+        var totaltime_colours = colours.length * transitiontime;
+        var repeats = Math.ceil(totaltime/totaltime_colours);
+
+        var timed_colours = [bright, bright];
+
+        for (i=0;i<repeats;i++) {
+            Array.prototype.push.apply(timed_colours, colours);
+        }
+        // see how long colours array is (4 items)
+        // multiply by transitiontime to get totaltime of colours
+        // divide or TOTALTIMEsong by totaltimecolours --> to get # of repeats of colours Math.ceil(n)
+
+        // make new array with those repeats of colours
+        // for loop: # of repeats, append colours onto new array
+
+
+        console.log('timed colours result :',timed_colours);
+        return timed_colours;
+    }
 // -------------------- LIGHT LOOPS -------------------- \\
 
     function changeLightColour(bulb,colours,transitiontime) {
         // transitiontime in miliseconds (tt = 3000 = 3 seconds)
+
         (function theLoop (i) {
             goThroughLights = setTimeout(function () {
                 console.log("iteration - ", i)
@@ -337,16 +365,27 @@ $( document ).ready(function() {
         });
 
         var selectedModeIsLoops = selectedMode.loops,
-            selectedModeAudio = selectedMode.audio;
-        if (selectedMode.lights_all) {
-            selectedModeColours = selectedMode.lights_all;
-        }
-        else {
-            selectedModeColours = [selectedMode.bulb1[0],selectedMode.bulb2[0],selectedMode.bulb3[0],selectedMode.bulb4[0]];
-        }
-            selectedModeTime = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]];
+            selectedModeAudio = selectedMode.audio,
+            time_duration = selectedMode.duration,
+        // if (selectedMode.lights_all) {
+        //     selectedModeColours = selectedMode.lights_all;
+        // }
+        // else {
+            selectedModeColours = [selectedMode.bulb1[0],selectedMode.bulb2[0],selectedMode.bulb3[0],selectedMode.bulb4[0]],
+        // }
+            selectedModeTime = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]],
+            selectedModeColours = [
+                createTimedColourArray(selectedMode.bulb1[0],selectedMode.bulb1[1],time_duration),
+                createTimedColourArray(selectedMode.bulb2[0],selectedMode.bulb2[1],time_duration),
+                createTimedColourArray(selectedMode.bulb3[0],selectedMode.bulb3[1],time_duration),
+                createTimedColourArray(selectedMode.bulb4[0],selectedMode.bulb4[1],time_duration)
+            ];
+            // TODO maybe do something to array here,
+            // add repeating colours to an array based on transitiontime
+            // divide 3:30 by transitiontime or something. 3 minutes = 180 seconds
+            // 180 seconds of colours, and then fade to white
 
-        console.log('selectedModeAudio: ', selectedModeAudio);
+            // createTimedColourArray(colours,time);
 
         stopped = false;
         startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio);
@@ -370,7 +409,7 @@ $( document ).ready(function() {
         $('section.index-header').removeClass('single-view');
         $('body').attr('data-mode', '');
 
-        // stopExperience();
+        stopExperience();
     });
 
 
