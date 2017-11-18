@@ -83,7 +83,7 @@ $( document ).ready(function() {
             // First Object is intentionally empty, don't remove
             "name":"modeZero",
             "loops":false,
-            "lights_all":"purple",
+            "lights_all": [cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "transition_time":3,
             "audio":"audio/mode-zero.mp3",
             "thumbnail": "img/mode-zero-preview.jpg",
@@ -92,8 +92,12 @@ $( document ).ready(function() {
         {
             "name":"Focus",
             "loops": false,
-            "lights_all": [room_bright, room_bright, room_bright, room_bright],
-            "transition_time":3,
+            //"lights_all": [room_bright, room_bright, room_bright, room_bright],
+            "bulb1": [room_bright, 12000],
+            "bulb2": [room_bright, 12000],
+            "bulb3": [room_bright, 12000],
+            "bulb4": [room_bright, 12000],
+            //"transition_time":3,
             "audio":"",
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -101,30 +105,37 @@ $( document ).ready(function() {
         {
             "name":"Islamic Prayer",
             "loops": false,
-            "lights_all": [sunset_a_backwards,sunset_b_backwards,sunset_a_backwards,sunset_b_backwards],
-            "transition_time":3,
+            //"lights_all": [sunset_a_backwards,sunset_b_backwards,sunset_a_backwards,sunset_b_backwards],
+            "bulb1": [sunset_a_backwards, 12000],
+            "bulb2": [sunset_b_backwards, 12000],
+            "bulb3": [sunset_a_backwards, 12000],
+            "bulb4": [sunset_b_backwards, 12000],
+            //"transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
-            "name":"Waterfall (linear)",
+            "name":"Waterfall",
             "loops": false,
-            "lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
-            "transition_time":3,
+            //"lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
+            "bulb1": [waterfall_backwards, 3000],
+            "bulb2": [waterfall_backwards, 4000],
+            "bulb3": [waterfall_backwards, 5000],
+            "bulb4": [waterfall_backwards, 3000],
+            //"transition_time":3,
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3", // 3:30
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "mode three test test test"
         },
         {
-            "name":"Daniels Idea of Waterfall Colours",
+            "name":"Debug",
             "loops": true,
-            //"lights_all": [peach,peach,peach,peach],
-            "bulb1": peach,
-            "bulb2": waterfall_backwards,
-            "bulb3": room_bright,
-            "bulb4": room_bright,
-            "transition_time":3,
+            "bulb1": [peach, 3000],
+            "bulb2": [waterfall_backwards, 3000],
+            "bulb3": [waterfall_backwards, 6000],
+            "bulb4": [room_bright, 3000],
+            //"transition_time":3,
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
             "thumbnail": "img/mode-two-preview.jpg",
             "description": "mode four test test test"
@@ -150,7 +161,10 @@ $( document ).ready(function() {
         return audioFile.play();
     }
 
+// -------------------- LIGHT LOOPS -------------------- \\
+
     function changeLightColour(bulb,colours,transitiontime) {
+        // transitiontime in miliseconds (tt = 3000 = 3 seconds)
         (function theLoop (i) {
             goThroughLights = setTimeout(function () {
                 console.log("iteration - ", i)
@@ -166,23 +180,21 @@ $( document ).ready(function() {
                 if (--i) {          // If i > 0, keep going
                     theLoop(i);       // Call the loop again, and pass it the current value of i
                 }
-            }, transitiontime*1000);
+            }, transitiontime);
         })(colours.length-1);
     }
 
-// -------------------- LIGHT LOOPS -------------------- \\
-
-    function startExperience(isLoops,bulbs,audio){
+    function startExperience(isLoops,bulbs,time,audio){
         // alert(selected.light);
         if (audio) {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
         }
 
-        changeLightColour(1, bulbs[0]);
-        changeLightColour(2, bulbs[1]);
-        changeLightColour(3, bulbs[2]);
-        changeLightColour(4, bulbs[3]);
+        changeLightColour(1, bulbs[0], time[0]);
+        changeLightColour(2, bulbs[1], time[1]);
+        changeLightColour(3, bulbs[2], time[2]);
+        changeLightColour(4, bulbs[3], time[3]);
 
         //
         // // assuming all lights have the same number of transitions
@@ -330,13 +342,14 @@ $( document ).ready(function() {
             selectedModeColours = selectedMode.lights_all;
         }
         else {
-            selectedModeColours = [selectedMode.bulb1,selectedMode.bulb2,selectedMode.bulb3,selectedMode.bulb4];
+            selectedModeColours = [selectedMode.bulb1[0],selectedMode.bulb2[0],selectedMode.bulb3[0],selectedMode.bulb4[0]];
         }
+            selectedModeTime = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]];
 
         console.log('selectedModeAudio: ', selectedModeAudio);
 
         stopped = false;
-        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeAudio);
+        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio);
 
     });
 
