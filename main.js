@@ -172,6 +172,7 @@ $( document ).ready(function() {
 
         var timed_colours = [bright, bright];
 
+        // add time-specific number of colours to timed_colours array
         for (i=0;i<repeats;i++) {
             Array.prototype.push.apply(timed_colours, colours);
         }
@@ -181,6 +182,7 @@ $( document ).ready(function() {
         console.log('timed colours result :',timed_colours);
         return timed_colours;
     }
+    
 // -------------------- LIGHT LOOPS -------------------- \\
 
     function changeLightColour(bulb,colours,transitiontime) {
@@ -189,7 +191,7 @@ $( document ).ready(function() {
         (function theLoop (i) {
             goThroughLights = setTimeout(function () {
                 console.log("iteration - ", i)
-                console.log("current colour", colours[i]);
+                console.log("current colour hue", colours[i][3]);
                 $.ajax({
                     url: url_ip+'/lights/'+bulb+'/state',
                     type: 'PUT',
@@ -373,12 +375,6 @@ $( document ).ready(function() {
                 createTimedColourArray(selectedMode.bulb3[0],selectedMode.bulb3[1],time_duration),
                 createTimedColourArray(selectedMode.bulb4[0],selectedMode.bulb4[1],time_duration)
             ];
-            // TODO maybe do something to array here,
-            // add repeating colours to an array based on transitiontime
-            // divide 3:30 by transitiontime or something. 3 minutes = 180 seconds
-            // 180 seconds of colours, and then fade to white
-
-            // createTimedColourArray(colours,time);
 
         stopped = false;
         startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio);
