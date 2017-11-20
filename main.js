@@ -23,6 +23,9 @@ $( document ).ready(function() {
     const fps = 0.2; // frame rate for calling hue functions
     var bri, sat, hue;
 
+    var audioFile;
+    var audioFile_guided;
+
 
 // -------------------- DATA -------------------- \\
 
@@ -326,6 +329,7 @@ $( document ).ready(function() {
         // // TODO 5000 is just a placeholder large number, can be transitiontime + 1000 or something.
         //
         audioFile.pause();
+        audioFile_guided.pause();
     }
 
 
