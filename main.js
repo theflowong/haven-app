@@ -121,11 +121,12 @@ $( document ).ready(function() {
             //"transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
             "audio_guided":"",
-            "thumbnail": "img/mode-one-preview.jpg",
+            "thumbnail": "img/islamic-prayer-orig.jpg",
             "description":  "Call to Adhan prayer, followed by silence, with sunrise lighting (pink, orange, peach hues) to brightness."
         },
         {
             "name":"Waterfall",
+            "time": "5 minutes",
             "loops": true,
             "duration":300000, // 5 min
             "bulb1": [waterfall_backwards, 3000],
@@ -135,7 +136,7 @@ $( document ).ready(function() {
             //"transition_time":3,
             "audio":"audio/waterfall/HAVEN_Music_Only.mp3", // 3:30
             "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
-            "thumbnail": "img/mode-three-preview.jpg",
+            "thumbnail": "img/water.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
         {
