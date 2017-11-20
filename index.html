@@ -92,7 +92,12 @@
           <section class="mode--single hidden-on-load" data-mode="{{name}}" >
           <header class="row" style="background-image: url('{{thumbnail}}')">
               <h1 class="mode-name">{{name}}</h1>
+              <p class="mode-subtitle">{{time}}</p>
               <button class="start-experience start-button haven-button salmon" data-mode="{{name}}">Start</button>
+              <section class="guided-input" style="display: none;">
+                <button class="guided-button haven-button lilac">Guided</button>
+                <button class="nonguided-button haven-button lilac">Non-Guided</button>
+              </section>
               <button class="stop-button haven-button salmon" style="display: none;">Stop</button>
               <button class="back-button">Back</button>
               <div class="container welcome-text">
