@@ -89,6 +89,7 @@ $( document ).ready(function() {
             "lights_all": [cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "transition_time":3,
             "audio":"audio/mode-zero.mp3",
+            "audio_guided":"",
             "thumbnail": "img/mode-zero-preview.jpg",
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
@@ -103,6 +104,7 @@ $( document ).ready(function() {
             "bulb4": [room_bright, 12000],
             //"transition_time":3,
             "audio":"",
+            "audio_guided":"",
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Slow transition into white lights."
         },
@@ -117,20 +119,22 @@ $( document ).ready(function() {
             "bulb4": [sunset_b_backwards, 60000],
             //"transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
+            "audio_guided":"",
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Call to Adhan prayer, followed by silence, with sunrise lighting (pink, orange, peach hues) to brightness."
         },
         {
             "name":"Waterfall",
             "loops": true,
-            "duration":210000, // 3:30
+            "duration":300000, // 5 min
             //"lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
             "bulb1": [waterfall_backwards, 3000],
             "bulb2": [waterfall_backwards, 4000],
             "bulb3": [waterfall_backwards, 5000],
             "bulb4": [waterfall_backwards, 3000],
             //"transition_time":3,
-            "audio":"audio/waterfall_3min.mp3", // 3:30
+            "audio":"audio/waterfall/HAVEN_Music_Only.mp3", // 3:30
+            "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
             "thumbnail": "img/mode-three-preview.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
@@ -144,6 +148,7 @@ $( document ).ready(function() {
             "bulb4": [room_bright, 3000],
             //"transition_time":3,
             "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
+            "audio_guided":"",
             "thumbnail": "img/mode-two-preview.jpg",
             "description": "mode four test test test"
         }
@@ -252,12 +257,16 @@ $( document ).ready(function() {
         })(colours.length-1);
     }
 
-    function startExperience(isLoops,bulbs,transition_time,audio,total_time){
+    function startExperience(isLoops,bulbs,transition_time,audio,audio_guided,total_time){
         stopped = false;
         // alert(selected.light);
         if (audio) {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
+        }
+        if (audio_guided) {
+            audioFile_guided = new Audio(audio_guided);
+            fetchAudioAndPlay(audioFile_guided);
         }
 
         // immediately start initial colours
@@ -381,7 +390,8 @@ $( document ).ready(function() {
 
         var selectedModeIsLoops = selectedMode.loops,
             selectedModeAudio = selectedMode.audio,
-            time_duration = selectedMode.duration,
+            selectedModeAudioGuided = selectedMode.audio_guided,
+            selectedModeDuration = selectedMode.duration,
         // if (selectedMode.lights_all) {
         //     selectedModeColours = selectedMode.lights_all;
         // }
@@ -390,15 +400,15 @@ $( document ).ready(function() {
         // }
             selectedModeTime = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]],
             selectedModeColours = [
-                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb1[0],selectedMode.bulb1[1],time_duration),
-                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb2[0],selectedMode.bulb2[1],time_duration),
-                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb3[0],selectedMode.bulb3[1],time_duration),
-                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb4[0],selectedMode.bulb4[1],time_duration)
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb1[0],selectedMode.bulb1[1],selectedModeDuration),
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb2[0],selectedMode.bulb2[1],selectedModeDuration),
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb3[0],selectedMode.bulb3[1],selectedModeDuration),
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb4[0],selectedMode.bulb4[1],selectedModeDuration)
             ];
 
         stopped = false;
-        console.log('time duration', time_duration);
-        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, time_duration);
+        console.log('time duration', selectedModeDuration);
+        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
 
     });
 
