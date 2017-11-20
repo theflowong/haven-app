@@ -80,6 +80,12 @@
 .mode--single.playing header {
   height: 100vh; }
 
+.welcome-text {
+  display: none;
+  color: white;
+  position: absolute;
+  bottom: 60px; }
+
 .back-button {
   background-color: white;
   position: absolute;

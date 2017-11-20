@@ -196,10 +196,6 @@ $( document ).ready(function() {
         }
     }
 
-    function displayIntroMessage() {
-        alert('please make yourself comfortable');
-    }
-
 // -------------------- LIGHT LOOPS -------------------- \\
 
     function coolDownLights() {
@@ -263,8 +259,6 @@ $( document ).ready(function() {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
         }
-
-        displayIntroMessage();
 
         // immediately start initial colours
         changeLightColour(1, bulbs[0][bulbs[0].length-1]);
@@ -371,6 +365,7 @@ $( document ).ready(function() {
 
         $(this).hide();
         $('.stop-button').show();
+        $('.welcome-text').show();
         $(this).closest('.mode--single').addClass('playing');
 
         var dataMode = $(this).attr('data-mode'),
@@ -409,6 +404,7 @@ $( document ).ready(function() {
 
     $(document).on('click','.stop-button', function(){
         $(this).hide();
+        $('.welcome-text').hide();
         $(".start-button").show();
         $('.mode--single').removeClass('playing');
         stopExperience();

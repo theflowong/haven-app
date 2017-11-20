@@ -25,6 +25,13 @@
 	}
 }
 
+.welcome-text {
+	display: none;
+	color: white;
+	position: absolute;
+	bottom: 60px;
+}
+
 .back-button{
 	background-color: white;
 	position: absolute;
@@ -54,4 +61,3 @@
 	font-weight: 100;
 	font-size: 1.6rem;
 }
-
