@@ -96,7 +96,7 @@ $( document ).ready(function() {
             "duration":180000,
             //"lights_all": [room_bright, room_bright, room_bright, room_bright],
             "bulb1": [room_bright, 12000],
-            "bulb2": [room_bright, 12000],
+            "bulb2": [room_bright, 1000],
             "bulb3": [room_bright, 12000],
             "bulb4": [room_bright, 12000],
             //"transition_time":3,
@@ -182,28 +182,44 @@ $( document ).ready(function() {
         console.log('timed colours result :',timed_colours);
         return timed_colours;
     }
-    
+
 // -------------------- LIGHT LOOPS -------------------- \\
+
+    function turnOffAllLights() {
+        $.ajax({
+            url: url_ip+url_allLights,
+            type: 'PUT',
+            data: '{"on":false}',
+            success: function () {
+            }
+        });
+    }
 
     function changeLightColour(bulb,colours,transitiontime) {
         // transitiontime in miliseconds (tt = 3000 = 3 seconds)
 
         (function theLoop (i) {
-            goThroughLights = setTimeout(function () {
-                console.log("iteration - ", i)
-                console.log("current colour hue", colours[i][3]);
-                $.ajax({
-                    url: url_ip+'/lights/'+bulb+'/state',
-                    type: 'PUT',
-                    data: convertColourArrayToAjax(colours[i]),
-                    success: function() {
-                    }
-                });
 
-                if (--i) {          // If i > 0, keep going
-                    theLoop(i);       // Call the loop again, and pass it the current value of i
-                }
-            }, transitiontime);
+            // conditionally check to see whether to start it again
+            if (stopped) { // if it's stopped
+                clearTimeout(goThroughLights);
+            } else {
+                goThroughLights = setTimeout(function () {
+                    console.log('bulb', bulb, ', iteration - ', i); // goes from colours.length-1 to 0
+                    console.log("current colour hue", colours[i][3]);
+                    $.ajax({
+                        url: url_ip+'/lights/'+bulb+'/state',
+                        type: 'PUT',
+                        data: convertColourArrayToAjax(colours[i]),
+                        success: function() {
+                        }
+                    });
+
+                    if (--i) {          // If i > 0, keep going
+                        theLoop(i);       // Call the loop again, and pass it the current value of i
+                    }
+                }, transitiontime);
+            };
         })(colours.length-1);
     }
 
@@ -219,63 +235,6 @@ $( document ).ready(function() {
         changeLightColour(3, bulbs[2], time[2]);
         changeLightColour(4, bulbs[3], time[3]);
 
-        //
-        // // assuming all lights have the same number of transitions
-        // (function theLoop (i) {
-        //     goThroughLights = setTimeout(function () {
-        //         console.log("iteration - ", i)
-        //         console.log("current colour", bulbs[0][i]);
-        //         $.ajax({
-        //             url: url_ip+'/lights/1/state',
-        //             type: 'PUT',
-        //             data: convertColourArrayToAjax(bulbs[0][i]),
-        //             success: function() {
-        //             }
-        //         });
-        //         $.ajax({
-        //             url: url_ip+'/lights/2/state',
-        //             type: 'PUT',
-        //             data: convertColourArrayToAjax(bulbs[1][i]),
-        //             success: function() {
-        //             }
-        //         });
-        //
-        //         if (--i) {          // If i > 0, keep going
-        //             theLoop(i);       // Call the loop again, and pass it the current value of i
-        //         }
-        //     }, 3*1000);
-        // })(bulbs[0].length-1);
-        //
-        // (function theLoop (i) {
-        //     goThroughLights = setTimeout(function () {
-        //         console.log("SECOND THELOOP. iteration - ", i)
-        //         console.log("SECOND THELOOP. current colour", bulbs[0][i]);
-        //         $.ajax({
-        //             url: url_ip+'/lights/3/state',
-        //             type: 'PUT',
-        //             data: convertColourArrayToAjax(bulbs[2][i]),
-        //             success: function() {
-        //             }
-        //         });
-        //         $.ajax({
-        //             url: url_ip+'/lights/4/state',
-        //             type: 'PUT',
-        //             data: convertColourArrayToAjax(bulbs[3][i]),
-        //             success: function() {
-        //             }
-        //         });
-        //
-        //         if (--i) {          // If i > 0, keep going
-        //             theLoop(i);       // Call the loop again, and pass it the current value of i
-        //         }
-        //     }, 3*1000);
-        // })(bulbs[0].length-1);
-
-
-
-
-
-
         // go through this function again
         // maybe delete if we're not looping...
         if (isLoops) {
@@ -285,18 +244,34 @@ $( document ).ready(function() {
                 }, 1000/fps);
             }
         }
+
     }
 
     function stopExperience(){
+        stopped = true;
         clearTimeout(goThroughLights);
-        console.log('stop experience, moving on');
-        $.ajax({
-            url: url_ip+url_allLights,
-            type: 'PUT',
-            data: '{"on":false}',
-            success: function () {
-            }
-        });
+        console.log('cleared timeout here');
+
+        turnOffAllLights();
+
+        // another turn off
+        setTimeout(function() {
+            console.log('second turn off all lights');
+            turnOffAllLights();
+        },2000);
+
+        // setTimeout(function() {
+        //     console.log('turning off all lights');
+        //     $.ajax({
+        //         url: url_ip+url_allLights,
+        //         type: 'PUT',
+        //         data: '{"on":false}',
+        //         success: function () {
+        //         }
+        //     });
+        // }, 3000);
+        // // TODO 5000 is just a placeholder large number, can be transitiontime + 1000 or something.
+        //
         audioFile.pause();
     }
 
@@ -385,7 +360,6 @@ $( document ).ready(function() {
         $(this).hide();
         $(".start-button").show();
         $('.mode--single').removeClass('playing');
-        stopped = true;
         stopExperience();
     });
 
