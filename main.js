@@ -17,6 +17,7 @@ $( document ).ready(function() {
         // or /lights/3/state (depending on light)
 
     // Hue Lights
+    var now;
     var stopped;
     var goThroughLights;
     const fps = 0.2; // frame rate for calling hue functions
@@ -94,7 +95,7 @@ $( document ).ready(function() {
         {
             "name":"Focus",
             "loops": false,
-            "duration":180000,
+            "duration":210000,
             //"lights_all": [room_bright, room_bright, room_bright, room_bright],
             "bulb1": [room_bright, 12000],
             "bulb2": [room_bright, 1000],
@@ -121,8 +122,8 @@ $( document ).ready(function() {
         },
         {
             "name":"Waterfall",
-            "loops": false,
-            "duration":180000,
+            "loops": true,
+            "duration":210000, // 3:30
             //"lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
             "bulb1": [waterfall_backwards, 3000],
             "bulb2": [waterfall_backwards, 4000],
@@ -168,27 +169,47 @@ $( document ).ready(function() {
         return audioFile.play();
     }
 
-    function createTimedColourArray(colours,transitiontime, totaltime) {
+    function createTimedColourArray(isLoops, colours, transitiontime, totaltime) {
 
+        if (isLoops) {
+            var tt = transitiontime+1000; // account for javascript delays
+            var totaltime_colours = colours.length * tt; // -10000 for the end transition to light
+            console.log ('repeats: ', totaltime, '/', totaltime_colours);
+            var repeats = Math.floor(totaltime/totaltime_colours);
 
+            // set up array
+            var timed_colours = [bright, bright];
 
-        var totaltime_colours = colours.length * transitiontime-10000; // -10000 for the end transition to light
-        var repeats = Math.floor(totaltime/totaltime_colours);
+            // add time-specific number of colours to timed_colours array
+            for (var i=0; i<repeats; i++) {
+                Array.prototype.push.apply(timed_colours, colours);
+            }
 
-        var timed_colours = [bright, bright];
+            // do something for sunset (if it's just a linear transition)
 
-        // add time-specific number of colours to timed_colours array
-        for (i=0;i<repeats;i++) {
-            Array.prototype.push.apply(timed_colours, colours);
+            console.log('timed colours made', timed_colours);
+            return timed_colours;
         }
 
-        // do something for sunset (if it's just a linear transition)
+        else {
+            return colours;
+        }
+    }
 
-        console.log('timed colours result :',timed_colours);
-        return timed_colours;
     }
 
 // -------------------- LIGHT LOOPS -------------------- \\
+
+    function coolDownLights() {
+
+        clearTimeout(goThroughLights);
+        // turns all lights back to normal classroom setting
+        changeLightColour(1, bright); //[1000,254,121,8597]
+        changeLightColour(2, bright); //[1000,254,121,8597]
+        changeLightColour(3, bright); //[1000,254,121,8597]
+        changeLightColour(4, bright); //[1000,254,121,8597]
+
+    }
 
     function turnOffAllLights() {
         $.ajax({
@@ -233,7 +254,7 @@ $( document ).ready(function() {
         })(colours.length-1);
     }
 
-    function startExperience(isLoops,bulbs,time,audio){
+    function startExperience(isLoops,bulbs,transition_time,audio,total_time){
         stopped = false;
         // alert(selected.light);
         if (audio) {
@@ -247,12 +268,28 @@ $( document ).ready(function() {
         changeLightColour(3, bulbs[2][bulbs[2].length-1]);
         changeLightColour(4, bulbs[3][bulbs[3].length-1]);
 
-        // update light colours for specific time
-        updateTimedColours(1, bulbs[0], time[0]);
-        updateTimedColours(2, bulbs[1], time[1]);
-        updateTimedColours(3, bulbs[2], time[2]);
-        updateTimedColours(4, bulbs[3], time[3]);
+        // update light colours for specific transitiontime
+        updateTimedColours(1, bulbs[0], transition_time[0]);
+        updateTimedColours(2, bulbs[1], transition_time[1]);
+        updateTimedColours(3, bulbs[2], transition_time[2]);
+        updateTimedColours(4, bulbs[3], transition_time[3]);
 
+        now = Date.now(); // in miliseconds
+        console.log('now', now);
+        // when it reaches time-30 seconds or something
+        // stop interval and coolDownLights
+
+        // constantly check if "now" has reached time-30 seconds
+        var checkIsTimeUp = setInterval(function() {
+            console.log('checking if time is up');
+            console.log('time passed ', Date.now() - now);
+            console.log('time', total_time-30000);
+            if (Date.now() - now > (total_time-30000)) { // if it reaches time-30 seconds
+                console.log('TIME IS UP');
+                coolDownLights();
+                clearInterval(checkIsTimeUp);
+            }
+        }, 5000); // check every 5 seconds?
     }
 
     function stopExperience(){
@@ -264,8 +301,10 @@ $( document ).ready(function() {
         // execute again after last Timeout execution
         setTimeout(function() {
             console.log('second turn off all lights');
-            turnOffAllLights();
-        },2000);
+            if (stopped) { // make sure experience didn't start again
+                turnOffAllLights();
+            }
+        },4000);
 
         // setTimeout(function() {
         //     console.log('turning off all lights');
@@ -352,14 +391,15 @@ $( document ).ready(function() {
         // }
             selectedModeTime = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]],
             selectedModeColours = [
-                createTimedColourArray(selectedMode.bulb1[0],selectedMode.bulb1[1],time_duration),
-                createTimedColourArray(selectedMode.bulb2[0],selectedMode.bulb2[1],time_duration),
-                createTimedColourArray(selectedMode.bulb3[0],selectedMode.bulb3[1],time_duration),
-                createTimedColourArray(selectedMode.bulb4[0],selectedMode.bulb4[1],time_duration)
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb1[0],selectedMode.bulb1[1],time_duration),
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb2[0],selectedMode.bulb2[1],time_duration),
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb3[0],selectedMode.bulb3[1],time_duration),
+                createTimedColourArray(selectedModeIsLoops,selectedMode.bulb4[0],selectedMode.bulb4[1],time_duration)
             ];
 
         stopped = false;
-        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio);
+        console.log('time duration', time_duration);
+        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, time_duration);
 
     });
 
