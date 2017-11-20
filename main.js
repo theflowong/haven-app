@@ -18,6 +18,7 @@ $( document ).ready(function() {
 
     // Hue Lights
     var now;
+    var started = false;
     var stopped;
     var goThroughLights;
     var checkIsTimeUp;
@@ -259,6 +260,7 @@ $( document ).ready(function() {
     }
 
     function startExperience(isLoops,bulbs,transition_time,audio,audio_guided,total_time){
+        started = true;
         stopped = false;
         // alert(selected.light);
         if (audio) {
@@ -301,6 +303,7 @@ $( document ).ready(function() {
     }
 
     function stopExperience(){
+        started = false;
         stopped = true;
         clearTimeout(goThroughLights);
         clearTimeout(checkIsTimeUp);
@@ -408,17 +411,47 @@ $( document ).ready(function() {
 
         stopped = false;
 
-        // buttons
-        $(this).hide();
-        $('.stop-button').show();
         if (selectedModeAudioGuided) {
             $('.guided-input').show();
+
+            $('.guided-button').click(function(){
+                audioFile_guided.volume = 1;
+            });
+            $('.nonguided-button').click(function(){
+                audioFile_guided.volume = 0;
+            });
+
+            $('.guided-input').click(function(){
+                // buttons
+                $('.start-button').hide();
+                $('.stop-button').show();
+                $('.welcome-text').show();
+                //$('.welcome-text').style.opacity = 1.0;
+                $('.start-button').closest('.mode--single').addClass('playing');
+
+                if (!started) {
+                    console.log('starting here');
+                    startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+                }
+            });
         }
-        $('.welcome-text').show();
-        $(this).closest('.mode--single').addClass('playing');
+        else {
+            // buttons
+            $(this).hide();
+            $('.stop-button').show();
+            $('.welcome-text').show();
+            $(this).closest('.mode--single').addClass('playing');
 
+            startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
 
-        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+        }
+
+        // $('.guided-button').click(function(){
+        //     audioFile_guided.volume = 1;
+        // });
+        // $('.nonguided-button').click(function(){
+        //     audioFile_guided.volume = 0;
+        // });
 
     });
 
@@ -443,14 +476,14 @@ $( document ).ready(function() {
         stopExperience();
     });
 
-    $(document).on('click','.nonguided-button', function(){
-        console.log('nonguided click');
-        audioFile_guided.volume = 0;
-    });
-    $(document).on('click','.guided-button', function(){
-        console.log('guided button click');
-        audioFile_guided.volume = 1;
-    });
+    // $(document).on('click','.nonguided-button', function(){
+    //     console.log('nonguided click');
+    //     audioFile_guided.volume = 0;
+    // });
+    // $(document).on('click','.guided-button', function(){
+    //     console.log('guided button click');
+    //     audioFile_guided.volume = 1;
+    // });
     //HANDLEBARS TEMPLATING SCRIPTS
     var $modeIndex = $("#placeholder")
     var $singleView = $("#secondPlaceholder");

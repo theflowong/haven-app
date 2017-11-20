@@ -80,11 +80,8 @@
 .mode--single.playing header {
   height: 100vh; }
 
-.guided-input {
-  display: inline-block; }
-
 .welcome-text {
-  display: none;
+  opacity: 1;
   color: white;
   transition: opacity .25s ease-in-out;
   -moz-transition: opacity .25s ease-in-out;

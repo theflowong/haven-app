@@ -93,18 +93,20 @@
           <header class="row" style="background-image: url('{{thumbnail}}')">
               <h1 class="mode-name">{{name}}</h1>
               <p class="mode-subtitle">{{time}}</p>
+
               <button class="start-experience start-button haven-button salmon" data-mode="{{name}}">Start</button>
               <section class="guided-input" style="display: none;">
-                <button class="guided-button haven-button lilac">Guided</button>
-                <button class="nonguided-button haven-button lilac">Non-Guided</button>
+                <button class="choice-button guided-button haven-button">Guided Breathing</button>
+                <button class="choice-button nonguided-button haven-button">Non-Guided Breathing</button>
               </section>
-              <button class="stop-button haven-button salmon" style="display: none;">Stop</button>
-              <button class="back-button">Back</button>
-              <div class="container welcome-text">
+              <div class="container welcome-text" style="display: none;">
                 <div class="col-6 col-md-auto">
                     <p>Your experience has now started.<br/>Please make yourself comfortable.</p>
                 </div>
               </div>
+              <button class="stop-button haven-button salmon" style="display: none;">Stop</button>
+              <button class="back-button">Back</button>
+
           </header>
 
 
