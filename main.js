@@ -104,7 +104,7 @@ $( document ).ready(function() {
             //"transition_time":3,
             "audio":"",
             "thumbnail": "img/mode-one-preview.jpg",
-            "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            "description":  "Slow transition into white lights."
         },
         {
             "name":"Islamic Prayer",
@@ -118,7 +118,7 @@ $( document ).ready(function() {
             //"transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
             "thumbnail": "img/mode-one-preview.jpg",
-            "description":  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            "description":  "Call to Adhan prayer, followed by silence, with sunrise lighting (pink, orange, peach hues) to brightness."
         },
         {
             "name":"Waterfall",
@@ -132,7 +132,7 @@ $( document ).ready(function() {
             //"transition_time":3,
             "audio":"audio/waterfall_3min.mp3", // 3:30
             "thumbnail": "img/mode-three-preview.jpg",
-            "description": "mode three test test test"
+            "description": "Waterfall sounds and blue lights, with guided breathing."
         },
         {
             "name":"Debug",
