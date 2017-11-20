@@ -41,6 +41,8 @@ $( document ).ready(function() {
 
     // hues
     const h_bright = 8597;
+    const h_red = 254;
+    const h_yellow = 7000;
 
     // finish light: bright white lights to transition back into real world
     const colour_finish = [30,255,255,56100]; // 3 seconds, pink;
@@ -60,8 +62,8 @@ $( document ).ready(function() {
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
-    const sunset_a_backwards = [bright, bright, [500,254,166,52393], [500,150,129,63848],[500,100,254,254]];
-    const sunset_b_backwards = [bright, bright, [500,254,254,7608],[500,150,177,64107],[500,100,254,7107]];
+    const sunset_a_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red]];
+    const sunset_b_backwards = [[500,254,254,7608],[500,150,177,64107],[500,100,180,h_yellow]];
 
     // Waterfall (linear)
     const waterfall_backwards_old = [bright,[1000,254,121,8597],light_blue,dark_blue,
@@ -69,7 +71,6 @@ $( document ).ready(function() {
                     dark_blue,light_blue,dark_blue,light_blue, bright];
 
     const waterfall_backwards = [dark_blue, light_blue, aqua];
-                    // 3 minutes of blueness, 30 sec transitioning into bright
 
 
     // Audio
@@ -109,10 +110,10 @@ $( document ).ready(function() {
             "loops": false,
             "duration":180000,
             //"lights_all": [sunset_a_backwards,sunset_b_backwards,sunset_a_backwards,sunset_b_backwards],
-            "bulb1": [sunset_a_backwards, 12000],
-            "bulb2": [sunset_b_backwards, 12000],
-            "bulb3": [sunset_a_backwards, 12000],
-            "bulb4": [sunset_b_backwards, 12000],
+            "bulb1": [sunset_a_backwards, 60000],
+            "bulb2": [sunset_b_backwards, 60000],
+            "bulb3": [sunset_a_backwards, 60000],
+            "bulb4": [sunset_b_backwards, 60000],
             //"transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
             "thumbnail": "img/mode-one-preview.jpg",
@@ -153,6 +154,7 @@ $( document ).ready(function() {
     function convertColourArrayToAjax(colour_theme) {
         // takes an array of four int color values [transitiontime, bri, sat, hue]
         // returns ajax string format
+
         tt = colour_theme[0];
         bri = colour_theme[1];
         sat = colour_theme[2];
@@ -167,6 +169,9 @@ $( document ).ready(function() {
     }
 
     function createTimedColourArray(colours,transitiontime, totaltime) {
+
+
+
         var totaltime_colours = colours.length * transitiontime-10000; // -10000 for the end transition to light
         var repeats = Math.floor(totaltime/totaltime_colours);
 
@@ -195,7 +200,17 @@ $( document ).ready(function() {
         });
     }
 
-    function changeLightColour(bulb,colours,transitiontime) {
+    function changeLightColour(bulb,colour) {
+        $.ajax({
+            url: url_ip+'/lights/'+bulb+'/state',
+            type: 'PUT',
+            data: convertColourArrayToAjax(colour),
+            success: function() {
+            }
+        });
+    }
+
+    function updateTimedColours(bulb,colours,transitiontime) {
         // transitiontime in miliseconds (tt = 3000 = 3 seconds)
 
         (function theLoop (i) {
@@ -207,13 +222,8 @@ $( document ).ready(function() {
                 goThroughLights = setTimeout(function () {
                     console.log('bulb', bulb, ', iteration - ', i); // goes from colours.length-1 to 0
                     console.log("current colour hue", colours[i][3]);
-                    $.ajax({
-                        url: url_ip+'/lights/'+bulb+'/state',
-                        type: 'PUT',
-                        data: convertColourArrayToAjax(colours[i]),
-                        success: function() {
-                        }
-                    });
+
+                    changeLightColour(bulb, colours[i]);
 
                     if (--i) {          // If i > 0, keep going
                         theLoop(i);       // Call the loop again, and pass it the current value of i
@@ -224,37 +234,34 @@ $( document ).ready(function() {
     }
 
     function startExperience(isLoops,bulbs,time,audio){
+        stopped = false;
         // alert(selected.light);
         if (audio) {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
         }
 
-        changeLightColour(1, bulbs[0], time[0]);
-        changeLightColour(2, bulbs[1], time[1]);
-        changeLightColour(3, bulbs[2], time[2]);
-        changeLightColour(4, bulbs[3], time[3]);
+        // immediately start initial colours
+        changeLightColour(1, bulbs[0][bulbs[0].length-1]);
+        changeLightColour(2, bulbs[1][bulbs[1].length-1]);
+        changeLightColour(3, bulbs[2][bulbs[2].length-1]);
+        changeLightColour(4, bulbs[3][bulbs[3].length-1]);
 
-        // go through this function again
-        // maybe delete if we're not looping...
-        if (isLoops) {
-            if (!stopped) {
-                setTimeout(function() {
-                    startExperience(isLoops,bulbs,'');
-                }, 1000/fps);
-            }
-        }
+        // update light colours for specific time
+        updateTimedColours(1, bulbs[0], time[0]);
+        updateTimedColours(2, bulbs[1], time[1]);
+        updateTimedColours(3, bulbs[2], time[2]);
+        updateTimedColours(4, bulbs[3], time[3]);
 
     }
 
     function stopExperience(){
         stopped = true;
         clearTimeout(goThroughLights);
-        console.log('cleared timeout here');
 
         turnOffAllLights();
 
-        // another turn off
+        // execute again after last Timeout execution
         setTimeout(function() {
             console.log('second turn off all lights');
             turnOffAllLights();
