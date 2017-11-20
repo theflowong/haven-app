@@ -13,8 +13,12 @@ A web app to choose modes and control lights/sound for the Meditation/Prayer Roo
 
 2. Install sass:
 ```
-$ gem install sass
+$ gem install sass // or sudo gem install sass
+```
+
+3. Watch changes:
+```
 $ sass --watch style.scss:style.css
 ```
 
-3. Open web app in your localhost.
+4. Open web app in your localhost.
