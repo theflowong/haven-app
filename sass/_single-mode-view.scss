@@ -26,7 +26,13 @@
 }
 
 .guided-input {
-	//display: inline-block;
+	//display: block;
+	display: inline-block;
+}
+
+.choice-button {
+	padding: 15px 20px;
+	width: 60%;
 }
 
 .welcome-text {

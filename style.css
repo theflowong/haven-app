@@ -80,6 +80,13 @@
 .mode--single.playing header {
   height: 100vh; }
 
+.guided-input {
+  display: inline-block; }
+
+.choice-button {
+  padding: 15px 20px;
+  width: 60%; }
+
 .welcome-text {
   opacity: 1;
   color: white;
