@@ -47,6 +47,11 @@
     border-color: #CCA5D1; }
   .haven-button.lilac:hover {
     color: #CCA5D1; }
+  .haven-button.salmon {
+    background-color: #F37478;
+    border-color: #F37478; }
+  .haven-button.salmon:hover {
+    color: #F37478; }
 
 .haven-button:hover {
   background-color: white;

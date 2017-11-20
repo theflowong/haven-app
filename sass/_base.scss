@@ -1,9 +1,6 @@
 *{
 	font-family: $sans;
 }
-.haven-button{
-
-}
 
 .haven-button{
 	border-radius: 50px;
@@ -28,6 +25,14 @@
     &.lilac:hover{
     	color: $lilac;
     }
+	&.salmon{
+    	background-color: $salmon;
+    	border-color: $salmon;
+    }
+    &.salmon:hover{
+    	color: $salmon;
+    }
+
 }
 
 .haven-button:hover{
