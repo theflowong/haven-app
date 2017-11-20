@@ -196,6 +196,8 @@ $( document ).ready(function() {
         }
     }
 
+    function displayIntroMessage() {
+        alert('please make yourself comfortable');
     }
 
 // -------------------- LIGHT LOOPS -------------------- \\
@@ -261,6 +263,8 @@ $( document ).ready(function() {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
         }
+
+        displayIntroMessage();
 
         // immediately start initial colours
         changeLightColour(1, bulbs[0][bulbs[0].length-1]);
