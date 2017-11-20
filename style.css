@@ -71,7 +71,7 @@
   -ms-transition: all, 0.3s;
   -o-transition: all, 0.3s;
   transition: all, 0.3s; }
-  .mode--single header .mode-name {
+  .mode--single header .mode-name, .mode--single header .mode-subtitle {
     color: white; }
 
 .mode--single.hidden-on-load {
@@ -80,11 +80,15 @@
 .mode--single.playing header {
   height: 100vh; }
 
+.guided-input {
+  display: inline-block; }
+
 .welcome-text {
   display: none;
   color: white;
-  position: absolute;
-  bottom: 60px; }
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out; }
 
 .back-button {
   background-color: white;

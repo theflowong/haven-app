@@ -20,6 +20,7 @@ $( document ).ready(function() {
     var now;
     var stopped;
     var goThroughLights;
+    var checkIsTimeUp;
     const fps = 0.2; // frame rate for calling hue functions
     var bri, sat, hue;
 
@@ -89,7 +90,6 @@ $( document ).ready(function() {
             "name":"modeZero",
             "loops":false,
             "duration":180000,
-            "lights_all": [cycle_seawater,cycle_seawater,cycle_seawater,cycle_seawater],
             "transition_time":3,
             "audio":"audio/mode-zero.mp3",
             "audio_guided":"",
@@ -100,7 +100,6 @@ $( document ).ready(function() {
             "name":"Focus",
             "loops": false,
             "duration":210000,
-            //"lights_all": [room_bright, room_bright, room_bright, room_bright],
             "bulb1": [room_bright, 12000],
             "bulb2": [room_bright, 1000],
             "bulb3": [room_bright, 12000],
@@ -115,7 +114,6 @@ $( document ).ready(function() {
             "name":"Islamic Prayer",
             "loops": false,
             "duration":180000,
-            //"lights_all": [sunset_a_backwards,sunset_b_backwards,sunset_a_backwards,sunset_b_backwards],
             "bulb1": [sunset_a_backwards, 60000],
             "bulb2": [sunset_b_backwards, 60000],
             "bulb3": [sunset_a_backwards, 60000],
@@ -130,7 +128,6 @@ $( document ).ready(function() {
             "name":"Waterfall",
             "loops": true,
             "duration":300000, // 5 min
-            //"lights_all":[waterfall_backwards, waterfall_backwards, waterfall_backwards, waterfall_backwards],
             "bulb1": [waterfall_backwards, 3000],
             "bulb2": [waterfall_backwards, 4000],
             "bulb3": [waterfall_backwards, 5000],
@@ -290,7 +287,7 @@ $( document ).ready(function() {
         // stop interval and coolDownLights
 
         // constantly check if "now" has reached time-30 seconds
-        var checkIsTimeUp = setInterval(function() {
+        checkIsTimeUp = setInterval(function() {
             console.log('checking if time is up');
             console.log('time passed ', Date.now() - now);
             console.log('time', total_time-30000);
@@ -305,6 +302,7 @@ $( document ).ready(function() {
     function stopExperience(){
         stopped = true;
         clearTimeout(goThroughLights);
+        clearTimeout(checkIsTimeUp);
 
         turnOffAllLights();
 
@@ -348,7 +346,6 @@ $( document ).ready(function() {
         $modeButtonWrapper.hide();
 
         $('body').attr('data-mode', dataMode);
-
             index = 0;
 
         var selectedMode = data.find(function(mode, i){
@@ -376,10 +373,13 @@ $( document ).ready(function() {
     $(document).on('click', '.start-button', function(){
         // Hide Start Button and show stop button
 
-        $(this).hide();
-        $('.stop-button').show();
-        $('.welcome-text').show();
-        $(this).closest('.mode--single').addClass('playing');
+        // $(this).hide();
+        // $('.stop-button').show();
+        // if (selectedModeAudioGuided) {
+        //     $('.guided-input').show();
+        // }
+        // $('.welcome-text').show();
+        // $(this).closest('.mode--single').addClass('playing');
 
         var dataMode = $(this).attr('data-mode'),
             index = 0;
@@ -396,12 +396,7 @@ $( document ).ready(function() {
             selectedModeAudio = selectedMode.audio,
             selectedModeAudioGuided = selectedMode.audio_guided,
             selectedModeDuration = selectedMode.duration,
-        // if (selectedMode.lights_all) {
-        //     selectedModeColours = selectedMode.lights_all;
-        // }
-        // else {
             selectedModeColours = [selectedMode.bulb1[0],selectedMode.bulb2[0],selectedMode.bulb3[0],selectedMode.bulb4[0]],
-        // }
             selectedModeTime = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]],
             selectedModeColours = [
                 createTimedColourArray(selectedModeIsLoops,selectedMode.bulb1[0],selectedMode.bulb1[1],selectedModeDuration),
@@ -411,13 +406,24 @@ $( document ).ready(function() {
             ];
 
         stopped = false;
-        console.log('time duration', selectedModeDuration);
+
+        // buttons
+        $(this).hide();
+        $('.stop-button').show();
+        if (selectedModeAudioGuided) {
+            $('.guided-input').show();
+        }
+        $('.welcome-text').show();
+        $(this).closest('.mode--single').addClass('playing');
+
+
         startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
 
     });
 
     $(document).on('click','.stop-button', function(){
         $(this).hide();
+        $('.guided-input').hide();
         $('.welcome-text').hide();
         $(".start-button").show();
         $('.mode--single').removeClass('playing');
@@ -436,7 +442,14 @@ $( document ).ready(function() {
         stopExperience();
     });
 
-
+    $(document).on('click','.nonguided-button', function(){
+        console.log('nonguided click');
+        audioFile_guided.volume = 0;
+    });
+    $(document).on('click','.guided-button', function(){
+        console.log('guided button click');
+        audioFile_guided.volume = 1;
+    });
     //HANDLEBARS TEMPLATING SCRIPTS
     var $modeIndex = $("#placeholder")
     var $singleView = $("#secondPlaceholder");

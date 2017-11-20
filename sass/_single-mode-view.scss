@@ -8,7 +8,7 @@
 	background-position: center center;
 	background-size: cover;
 	@include transition(all, 0.3s);
-	.mode-name{
+	.mode-name, .mode-subtitle{
 		color: white;
 	}
 
@@ -25,11 +25,18 @@
 	}
 }
 
+.guided-input {
+	display: inline-block;
+}
+
 .welcome-text {
 	display: none;
 	color: white;
-	position: absolute;
-	bottom: 60px;
+	transition: opacity .25s ease-in-out;
+	-moz-transition: opacity .25s ease-in-out;
+	-webkit-transition: opacity .25s ease-in-out;
+	//position: absolute;
+	//bottom: 60px;
 }
 
 .back-button{
