@@ -159,6 +159,17 @@ $( document ).ready(function() {
 
 // -------------------- HELPER FUNCTIONS -------------------- \\
 
+    function changeAvailability() {
+        // if available: change to room in use
+        // if room in use: change to available
+        if (document.getElementById('status').innerHTML == "Available") {
+            document.getElementById('status').innerHTML = "Room in Use";
+        }
+        else {
+            document.getElementById('status').innerHTML = "Available";
+        }
+    }
+
     function alertStartExperience() {
         swal({
           title: "Your Experience Will Begin Shortly",
@@ -484,8 +495,12 @@ $( document ).ready(function() {
         $('section.index-header').removeClass('single-view');
         $('body').attr('data-mode', '');
 
-        stopExperience();
+        //stopExperience();
     });
+
+    $(document).on('click','#changeAvailability', function(){
+        changeAvailability();
+    })
 
     // $(document).on('click','.nonguided-button', function(){
     //     console.log('nonguided click');
