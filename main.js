@@ -143,6 +143,7 @@ $( document ).ready(function() {
             "thumbnail": "img/water.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
+
         // {
         //     "name":"Debug",
         //     "loops": true,
@@ -295,7 +296,7 @@ $( document ).ready(function() {
         started = true;
         stopped = false;
 
-        changeAvailability("Room in Use");
+        //changeAvailability("Room in Use");
         alertStartExperience();
 
         if (audio) {
@@ -340,7 +341,7 @@ $( document ).ready(function() {
     function stopExperience(){
         started = false;
         stopped = true;
-        changeAvailability("Room Available");
+        //changeAvailability("Room Available");
         clearTimeout(goThroughLights);
         clearTimeout(checkIsTimeUp);
 
