@@ -164,9 +164,11 @@ $( document ).ready(function() {
         // if room in use: change to available
         if (document.getElementById('status').innerHTML == "Available") {
             document.getElementById('status').innerHTML = "Room in Use";
+            document.getElementById('status').style = "color: red;";
         }
         else {
             document.getElementById('status').innerHTML = "Available";
+            document.getElementById('status').style = "color: green;";
         }
     }
 
