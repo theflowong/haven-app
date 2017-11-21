@@ -20,6 +20,7 @@ $( document ).ready(function() {
     var now;
     var started = false;
     var stopped;
+    var brightness = 1.0;
     var goThroughLights;
     var checkIsTimeUp;
     const fps = 0.2; // frame rate for calling hue functions
@@ -48,6 +49,7 @@ $( document ).ready(function() {
     // hues
     const h_bright = 8597;
     const h_red = 254;
+    const h_red2 = 1386;
     const h_yellow = 7000;
 
     // finish light: bright white lights to transition back into real world
@@ -68,8 +70,9 @@ $( document ).ready(function() {
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
-    const sunset_a_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red]];
+    const sunset_a_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red2]];
     const sunset_b_backwards = [[500,254,254,7608],[500,150,177,64107],[500,100,180,h_yellow]];
+    const sunset_c_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red]];
 
     // Waterfall (linear)
     const waterfall_backwards_old = [bright,[1000,254,121,8597],light_blue,dark_blue,
@@ -117,7 +120,7 @@ $( document ).ready(function() {
             "duration":180000,
             "bulb1": [sunset_a_backwards, 60000],
             "bulb2": [sunset_b_backwards, 60000],
-            "bulb3": [sunset_a_backwards, 60000],
+            "bulb3": [sunset_c_backwards, 60000],
             "bulb4": [sunset_b_backwards, 60000],
             //"transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
