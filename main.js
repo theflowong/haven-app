@@ -159,6 +159,15 @@ $( document ).ready(function() {
 
 // -------------------- HELPER FUNCTIONS -------------------- \\
 
+    function alertStartExperience() {
+        swal({
+          title: "Your Experience Will Begin Shortly",
+          text: "Room Code 1050",
+          button: "Enter"
+
+        });
+    }
+
     function convertColourArrayToAjax(colour_theme) {
         // takes an array of four int color values [transitiontime, bri, sat, hue]
         // returns ajax string format
@@ -262,7 +271,9 @@ $( document ).ready(function() {
     function startExperience(isLoops,bulbs,transition_time,audio,audio_guided,total_time){
         started = true;
         stopped = false;
-        // alert(selected.light);
+
+        alertStartExperience();
+
         if (audio) {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
