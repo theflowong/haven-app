@@ -13,6 +13,7 @@
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <script src="main.js" type="text/javascript"></script>
       <script src="handlebars-v4.0.11.js" type="text/javascript"></script>
 
@@ -33,7 +34,7 @@
 
         <section class="row index-header">
           <div class="container">
-          <h1>Welcome To Haven</h1>
+          <h1 id="status">Available</h1>
           <h3>Select Your Experience To Get Started</h3>
           </div>
         </section>
@@ -130,3 +131,23 @@
 
     </body>
     </html>
+
+    <script type="text/javascript">
+     $( document ).ready(function() {
+          swal({
+            title: "Your Experience Will Begin Shortly",
+            text: "Room Code 1050",
+            button: "Enter"
+
+          });
+        });
+    </script>
+
+    <style type="text/css">
+      .swal-overlay {
+        background-color: rgba(43, 165, 137, 0.45);
+      }
+      .swal-button {
+        background: blue;
+        }
+    </style>
