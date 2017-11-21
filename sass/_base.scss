@@ -30,7 +30,9 @@
     	border-color: $salmon;
     }
     &.salmon:hover{
-    	color: $salmon;
+    	color: white;
+        background-color: darken($salmon, 10%); 
+        border-color: darken($salmon, 10%); 
     }
 
 }

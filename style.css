@@ -51,7 +51,9 @@
     background-color: #F37478;
     border-color: #F37478; }
   .haven-button.salmon:hover {
-    color: #F37478; }
+    color: white;
+    background-color: #ef454a;
+    border-color: #ef454a; }
 
 .haven-button:hover {
   background-color: white;
@@ -119,6 +121,74 @@
 .mode--single-body p {
   font-weight: 100;
   font-size: 1.6rem; }
+
+.time {
+  display: inline-block;
+  margin: 10px 0 0 0; }
+
+.booking-time-wrapper {
+  background-color: #eee;
+  display: block;
+  margin-bottom: 15px;
+  padding: 15px;
+  -webkit-box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.05);
+  -webkit-transition: all, 0.3s;
+  -moz-transition: all, 0.3s;
+  -ms-transition: all, 0.3s;
+  -o-transition: all, 0.3s;
+  transition: all, 0.3s; }
+  .booking-time-wrapper:hover {
+    -moz-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); }
+  .booking-time-wrapper .btn {
+    display: inline;
+    float: right; }
+
+#status {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 5rem; }
+
+#landing-page-header {
+  height: 300px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-position: center center;
+  background-size: cover;
+  background-color: #EBA687;
+  color: white; }
+
+.landing-page-body {
+  padding: 30px 0; }
+
+#status-click {
+  background-color: transparent;
+  border: none;
+  font-size: 5rem;
+  color: white; }
+  #status-click:focus {
+    outline: none;
+    border: none; }
+
+#text-target::before {
+  content: "Available";
+  top: 0;
+  left: 0; }
+
+body.in-use #text-target::before {
+  content: "In Use";
+  top: 0;
+  left: 0; }
+body.in-use .get-started {
+  display: none; }
 
 body {
   /*background-image: url('img/desert-duotone.png');*/
