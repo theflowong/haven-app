@@ -159,16 +159,23 @@ $( document ).ready(function() {
 
 // -------------------- HELPER FUNCTIONS -------------------- \\
 
-    function changeAvailability() {
-        // if available: change to room in use
-        // if room in use: change to available
-        if (document.getElementById('status').innerHTML == "Available") {
-            document.getElementById('status').innerHTML = "Room in Use";
-            document.getElementById('status').style = "color: red;";
+    function changeAvailability(text) {
+
+        if (text) {
+            document.getElementById('status').innerHTML = text;
         }
-        else {
-            document.getElementById('status').innerHTML = "Available";
-            document.getElementById('status').style = "color: green;";
+
+        else { // no arguments passed
+            // if available: change to room in use
+            // if room in use: change to available
+            if (document.getElementById('status').innerHTML == "Room Available") {
+                document.getElementById('status').innerHTML = "Room in Use";
+                document.getElementById('status').style = "color: red;";
+            }
+            else {
+                document.getElementById('status').innerHTML = "Room Available";
+                document.getElementById('status').style = "color: green;";
+            }
         }
     }
 
@@ -285,6 +292,7 @@ $( document ).ready(function() {
         started = true;
         stopped = false;
 
+        changeAvailability("Room in Use");
         alertStartExperience();
 
         if (audio) {
@@ -329,6 +337,7 @@ $( document ).ready(function() {
     function stopExperience(){
         started = false;
         stopped = true;
+        changeAvailability("Room Available");
         clearTimeout(goThroughLights);
         clearTimeout(checkIsTimeUp);
 
