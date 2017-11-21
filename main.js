@@ -97,20 +97,20 @@ $( document ).ready(function() {
             "thumbnail": "img/mode-zero-preview.jpg",
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
-        {
-            "name":"Focus",
-            "loops": false,
-            "duration":210000,
-            "bulb1": [room_bright, 12000],
-            "bulb2": [room_bright, 1000],
-            "bulb3": [room_bright, 12000],
-            "bulb4": [room_bright, 12000],
-            //"transition_time":3,
-            "audio":"",
-            "audio_guided":"",
-            "thumbnail": "img/mode-one-preview.jpg",
-            "description":  "Slow transition into white lights."
-        },
+        // {
+        //     "name":"Focus",
+        //     "loops": false,
+        //     "duration":210000,
+        //     "bulb1": [room_bright, 12000],
+        //     "bulb2": [room_bright, 1000],
+        //     "bulb3": [room_bright, 12000],
+        //     "bulb4": [room_bright, 12000],
+        //     //"transition_time":3,
+        //     "audio":"",
+        //     "audio_guided":"",
+        //     "thumbnail": "img/mode-one-preview.jpg",
+        //     "description":  "Slow transition into white lights."
+        // },
         {
             "name":"Islamic Prayer",
             "loops": false,
@@ -140,20 +140,20 @@ $( document ).ready(function() {
             "thumbnail": "img/water.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
-        {
-            "name":"Debug",
-            "loops": true,
-            "duration":180000,
-            "bulb1": [peach, 3000],
-            "bulb2": [waterfall_backwards, 3000],
-            "bulb3": [waterfall_backwards, 6000],
-            "bulb4": [room_bright, 3000],
-            //"transition_time":3,
-            "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
-            "audio_guided":"",
-            "thumbnail": "img/mode-two-preview.jpg",
-            "description": "mode four test test test"
-        }
+        // {
+        //     "name":"Debug",
+        //     "loops": true,
+        //     "duration":180000,
+        //     "bulb1": [peach, 3000],
+        //     "bulb2": [waterfall_backwards, 3000],
+        //     "bulb3": [waterfall_backwards, 6000],
+        //     "bulb4": [room_bright, 3000],
+        //     //"transition_time":3,
+        //     "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
+        //     "audio_guided":"",
+        //     "thumbnail": "img/mode-two-preview.jpg",
+        //     "description": "mode four test test test"
+        // }
     ]
 
 
