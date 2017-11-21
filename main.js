@@ -368,7 +368,8 @@ $( document ).ready(function() {
         // // TODO 5000 is just a placeholder large number, can be transitiontime + 1000 or something.
         //
         audioFile.pause();
-        audioFile_guided.pause();
+            audioFile_guided.pause();
+        }
     }
 
 
