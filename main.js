@@ -28,6 +28,21 @@ $( document ).ready(function() {
     var audioFile;
     var audioFile_guided;
 
+    var selectedModeIsLoops,// = selectedMode.loops,
+        selectedModeAudio, //= selectedMode.audio,
+        selectedModeAudioGuided,// = selectedMode.audio_guided,
+        selectedModeDuration,// = selectedMode.duration,
+        selectedModeColours,// = [selectedMode.bulb1[0],selectedMode.bulb2[0],selectedMode.bulb3[0],selectedMode.bulb4[0]],
+        selectedModeTime,// = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]],
+        selectedModeColours;// = [
+        //     createTimedColourArray(selectedModeIsLoops,selectedMode.bulb1[0],selectedMode.bulb1[1],selectedModeDuration),
+        //     createTimedColourArray(selectedModeIsLoops,selectedMode.bulb2[0],selectedMode.bulb2[1],selectedModeDuration),
+        //     createTimedColourArray(selectedModeIsLoops,selectedMode.bulb3[0],selectedMode.bulb3[1],selectedModeDuration),
+        //     createTimedColourArray(selectedModeIsLoops,selectedMode.bulb4[0],selectedMode.bulb4[1],selectedModeDuration)
+        // ];
+
+
+
 
 // -------------------- DATA -------------------- \\
 
@@ -159,6 +174,19 @@ $( document ).ready(function() {
 
 // -------------------- HELPER FUNCTIONS -------------------- \\
 
+    function displayStatus(text) {
+        console.log(text);
+        $('#status').innerHTML = text;
+    }
+
+    function alertStartExperience() {
+        swal({
+            title: "Your Experience Will Begin Shortly",
+            text: "Room Code 1050",
+            button: "Enter"
+        });
+    }
+
     function convertColourArrayToAjax(colour_theme) {
         // takes an array of four int color values [transitiontime, bri, sat, hue]
         // returns ajax string format
@@ -262,14 +290,19 @@ $( document ).ready(function() {
     function startExperience(isLoops,bulbs,transition_time,audio,audio_guided,total_time){
         started = true;
         stopped = false;
+
+        // change id=status to "in use"
+        displayStatus('Room in Use');
+
         // alert(selected.light);
         if (audio) {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
         }
         if (audio_guided) {
-            audioFile_guided = new Audio(audio_guided);
-            fetchAudioAndPlay(audioFile_guided);
+            fetchAudioAndPlay(audio_guided);
+            // audioFile_guided = new Audio(audio_guided);
+            // fetchAudioAndPlay(audioFile_guided);
         }
 
         // immediately start initial colours
@@ -303,6 +336,7 @@ $( document ).ready(function() {
     }
 
     function stopExperience(){
+        displayStatus('Room Available');
         started = false;
         stopped = true;
         clearTimeout(goThroughLights);
@@ -372,19 +406,7 @@ $( document ).ready(function() {
         $('.index-header').addClass('single-view');
 
 
-    });
-
-    $(document).on('click', '.start-button', function(){
-        // Hide Start Button and show stop button
-
-        // $(this).hide();
-        // $('.stop-button').show();
-        // if (selectedModeAudioGuided) {
-        //     $('.guided-input').show();
-        // }
-        // $('.welcome-text').show();
-        // $(this).closest('.mode--single').addClass('playing');
-
+        // assign data mode
         var dataMode = $(this).attr('data-mode'),
             index = 0;
         console.log('dataMode: ', dataMode);
@@ -396,7 +418,7 @@ $( document ).ready(function() {
             }
         });
 
-        var selectedModeIsLoops = selectedMode.loops,
+        selectedModeIsLoops = selectedMode.loops,
             selectedModeAudio = selectedMode.audio,
             selectedModeAudioGuided = selectedMode.audio_guided,
             selectedModeDuration = selectedMode.duration,
@@ -409,8 +431,73 @@ $( document ).ready(function() {
                 createTimedColourArray(selectedModeIsLoops,selectedMode.bulb4[0],selectedMode.bulb4[1],selectedModeDuration)
             ];
 
+        // show guided / nonguided button option if mode allows
+        if (selectedMode.audio_guided) {
+            audioFile_guided = new Audio(selectedModeAudioGuided);
+            $('.start-button').hide();
+            $('.guided-input').show();
+
+            $('.guided-button').click(function(){
+                selectedModeAudioGuided.volume = 1;
+            });
+            $('.nonguided-button').click(function(){
+                selectedModeAudioGuided.volume = 0;
+            });
+
+            $('.guided-input').click(function(){
+                // buttons
+                $('.start-button').show();
+                //$('.welcome-text').show();
+                //$('.welcome-text').style.opacity = 1.0;
+            });
+        }
+        else { // not guided
+            selectedModeAudioGuided = '';
+            $('.guided-input').hide();
+            $('.start-button').show();
+        }
+
+    });
+
+    $(document).on('click', '.start-button', function(){
+
+        $(this).hide();
+        $('.stop-button').show();
+        // if (selectedModeAudioGuided) {
+        //     $('.guided-input').show();
+        // }
+        $('.welcome-text').show();
+        $(this).closest('.mode--single').addClass('playing');
+
+        alertStartExperience();
+        //
+        // var dataMode = $(this).attr('data-mode'),
+        //     index = 0;
+        // console.log('dataMode: ', dataMode);
+        //
+        // var selectedMode = data.find(function(mode, i){
+        //     if(mode.name === dataMode){
+        //         index = i;
+        //         return i;
+        //     }
+        // });
+        //
+        // var selectedModeIsLoops = selectedMode.loops,
+        //     selectedModeAudio = selectedMode.audio,
+        //     selectedModeAudioGuided = selectedMode.audio_guided,
+        //     selectedModeDuration = selectedMode.duration,
+        //     selectedModeColours = [selectedMode.bulb1[0],selectedMode.bulb2[0],selectedMode.bulb3[0],selectedMode.bulb4[0]],
+        //     selectedModeTime = [selectedMode.bulb1[1],selectedMode.bulb2[1],selectedMode.bulb3[1],selectedMode.bulb4[1]],
+        //     selectedModeColours = [
+        //         createTimedColourArray(selectedModeIsLoops,selectedMode.bulb1[0],selectedMode.bulb1[1],selectedModeDuration),
+        //         createTimedColourArray(selectedModeIsLoops,selectedMode.bulb2[0],selectedMode.bulb2[1],selectedModeDuration),
+        //         createTimedColourArray(selectedModeIsLoops,selectedMode.bulb3[0],selectedMode.bulb3[1],selectedModeDuration),
+        //         createTimedColourArray(selectedModeIsLoops,selectedMode.bulb4[0],selectedMode.bulb4[1],selectedModeDuration)
+        //     ];
+
         stopped = false;
 
+        /*
         if (selectedModeAudioGuided) {
             $('.guided-input').show();
 
@@ -435,16 +522,22 @@ $( document ).ready(function() {
                 }
             });
         }
-        else {
+
+
+        */
+        //else {
             // buttons
             $(this).hide();
             $('.stop-button').show();
             $('.welcome-text').show();
             $(this).closest('.mode--single').addClass('playing');
 
-            startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+            if (!started) {
+                console.log('starting here');
+                startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+            }
 
-        }
+        //}
 
         // $('.guided-button').click(function(){
         //     audioFile_guided.volume = 1;
@@ -473,7 +566,7 @@ $( document ).ready(function() {
         $('section.index-header').removeClass('single-view');
         $('body').attr('data-mode', '');
 
-        stopExperience();
+        // stopExperience(); // (need to get back to home page for playtest tomorrow)
     });
 
     // $(document).on('click','.nonguided-button', function(){

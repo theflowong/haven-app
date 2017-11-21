@@ -32,7 +32,7 @@
 
 .choice-button {
 	padding: 15px 20px;
-	width: 60%;
+	width: 160px;
 }
 
 .welcome-text {
@@ -59,6 +59,15 @@
 	text-transform: uppercase;
 	font-size: 0.9rem;
 }
+
+// for alertStartExperience
+.swal-overlay {
+	background-color: rgba(43, 165, 137, 0.45);
+}
+.swal-button {
+	background: blue;
+}
+
 
 .description-heading{
 	text-transform: uppercase;
