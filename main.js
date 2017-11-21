@@ -20,6 +20,7 @@ $( document ).ready(function() {
     var now;
     var started = false;
     var stopped;
+    var brightness = 1.0;
     var goThroughLights;
     var checkIsTimeUp;
     const fps = 0.2; // frame rate for calling hue functions
@@ -48,6 +49,7 @@ $( document ).ready(function() {
     // hues
     const h_bright = 8597;
     const h_red = 254;
+    const h_red2 = 1386;
     const h_yellow = 7000;
 
     // finish light: bright white lights to transition back into real world
@@ -68,8 +70,9 @@ $( document ).ready(function() {
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
-    const sunset_a_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red]];
+    const sunset_a_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red2]];
     const sunset_b_backwards = [[500,254,254,7608],[500,150,177,64107],[500,100,180,h_yellow]];
+    const sunset_c_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red]];
 
     // Waterfall (linear)
     const waterfall_backwards_old = [bright,[1000,254,121,8597],light_blue,dark_blue,
@@ -97,27 +100,27 @@ $( document ).ready(function() {
             "thumbnail": "img/mode-zero-preview.jpg",
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
-        {
-            "name":"Focus",
-            "loops": false,
-            "duration":210000,
-            "bulb1": [room_bright, 12000],
-            "bulb2": [room_bright, 1000],
-            "bulb3": [room_bright, 12000],
-            "bulb4": [room_bright, 12000],
-            //"transition_time":3,
-            "audio":"",
-            "audio_guided":"",
-            "thumbnail": "img/mode-one-preview.jpg",
-            "description":  "Slow transition into white lights."
-        },
+        // {
+        //     "name":"Focus",
+        //     "loops": false,
+        //     "duration":210000,
+        //     "bulb1": [room_bright, 12000],
+        //     "bulb2": [room_bright, 1000],
+        //     "bulb3": [room_bright, 12000],
+        //     "bulb4": [room_bright, 12000],
+        //     //"transition_time":3,
+        //     "audio":"",
+        //     "audio_guided":"",
+        //     "thumbnail": "img/mode-one-preview.jpg",
+        //     "description":  "Slow transition into white lights."
+        // },
         {
             "name":"Islamic Prayer",
             "loops": false,
             "duration":180000,
             "bulb1": [sunset_a_backwards, 60000],
             "bulb2": [sunset_b_backwards, 60000],
-            "bulb3": [sunset_a_backwards, 60000],
+            "bulb3": [sunset_c_backwards, 60000],
             "bulb4": [sunset_b_backwards, 60000],
             //"transition_time":3,
             "audio":"audio/HAVEN_Adhan_Music.mp3",
@@ -140,24 +143,53 @@ $( document ).ready(function() {
             "thumbnail": "img/water.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
-        {
-            "name":"Debug",
-            "loops": true,
-            "duration":180000,
-            "bulb1": [peach, 3000],
-            "bulb2": [waterfall_backwards, 3000],
-            "bulb3": [waterfall_backwards, 6000],
-            "bulb4": [room_bright, 3000],
-            //"transition_time":3,
-            "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
-            "audio_guided":"",
-            "thumbnail": "img/mode-two-preview.jpg",
-            "description": "mode four test test test"
-        }
+        // {
+        //     "name":"Debug",
+        //     "loops": true,
+        //     "duration":180000,
+        //     "bulb1": [peach, 3000],
+        //     "bulb2": [waterfall_backwards, 3000],
+        //     "bulb3": [waterfall_backwards, 6000],
+        //     "bulb4": [room_bright, 3000],
+        //     //"transition_time":3,
+        //     "audio":"audio/HAVEN_Meditation2_GTFO.mp3",
+        //     "audio_guided":"",
+        //     "thumbnail": "img/mode-two-preview.jpg",
+        //     "description": "mode four test test test"
+        // }
     ]
 
 
 // -------------------- HELPER FUNCTIONS -------------------- \\
+
+    function changeAvailability(text) {
+
+        if (text) {
+            document.getElementById('status').innerHTML = text;
+        }
+
+        else { // no arguments passed
+            // if available: change to room in use
+            // if room in use: change to available
+            if (document.getElementById('status').innerHTML == "Room Available") {
+                document.getElementById('status').innerHTML = "Room in Use";
+                document.getElementById('status').style = "color: red;";
+            }
+            else {
+                document.getElementById('status').innerHTML = "Room Available";
+                document.getElementById('status').style = "color: green;";
+            }
+        }
+    }
+
+    function alertStartExperience() {
+        swal({
+          title: "Your Experience Will Begin Shortly",
+          text: "Room Code 1050",
+          button: "Enter"
+
+        });
+    }
 
     function convertColourArrayToAjax(colour_theme) {
         // takes an array of four int color values [transitiontime, bri, sat, hue]
@@ -262,7 +294,10 @@ $( document ).ready(function() {
     function startExperience(isLoops,bulbs,transition_time,audio,audio_guided,total_time){
         started = true;
         stopped = false;
-        // alert(selected.light);
+
+        changeAvailability("Room in Use");
+        alertStartExperience();
+
         if (audio) {
             audioFile = new Audio(audio);
             fetchAudioAndPlay(audioFile);
@@ -305,6 +340,7 @@ $( document ).ready(function() {
     function stopExperience(){
         started = false;
         stopped = true;
+        changeAvailability("Room Available");
         clearTimeout(goThroughLights);
         clearTimeout(checkIsTimeUp);
 
@@ -473,8 +509,12 @@ $( document ).ready(function() {
         $('section.index-header').removeClass('single-view');
         $('body').attr('data-mode', '');
 
-        stopExperience();
+        //stopExperience();
     });
+
+    $(document).on('click','#changeAvailability', function(){
+        changeAvailability();
+    })
 
     // $(document).on('click','.nonguided-button', function(){
     //     console.log('nonguided click');
