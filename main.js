@@ -132,14 +132,16 @@ $( document ).ready(function() {
             "name":"Waterfall",
             "time": "5 minutes",
             "loops": true,
-            "duration":300000, // 5 min
+            "duration":285000, // 5 min
             "bulb1": [waterfall_backwards, 3000],
             "bulb2": [waterfall_backwards, 4000],
             "bulb3": [waterfall_backwards, 5000],
             "bulb4": [waterfall_backwards, 3000],
             //"transition_time":3,
-            "audio":"audio/waterfall/HAVEN_Music_Only.mp3", // 3:30
-            "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
+            "audio":"audio/waterfall_vui_3min/HAVEN_Sprint10_MusicOnly.mp3", // 3:30
+            "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
+            // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
+            // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
             "thumbnail": "img/water.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
@@ -238,7 +240,7 @@ $( document ).ready(function() {
 
 // -------------------- LIGHT LOOPS -------------------- \\
 
-    function coolDownLights() {
+    function wakeUpLights() {
 
         clearTimeout(goThroughLights);
         // turns all lights back to normal classroom setting
@@ -323,7 +325,7 @@ $( document ).ready(function() {
         now = Date.now(); // in miliseconds
         console.log('now', now);
         // when it reaches time-30 seconds or something
-        // stop interval and coolDownLights
+        // stop interval and wakeUpLights
 
         // constantly check if "now" has reached time-30 seconds
         checkIsTimeUp = setInterval(function() {
@@ -332,7 +334,7 @@ $( document ).ready(function() {
             console.log('time', total_time-30000);
             if (Date.now() - now > (total_time-30000)) { // if it reaches time-30 seconds
                 console.log('TIME IS UP');
-                coolDownLights();
+                wakeUpLights();
                 clearInterval(checkIsTimeUp);
             }
         }, 5000); // check every 5 seconds?
@@ -368,6 +370,7 @@ $( document ).ready(function() {
         // // TODO 5000 is just a placeholder large number, can be transitiontime + 1000 or something.
         //
         audioFile.pause();
+        if (audioFile_guided) {
             audioFile_guided.pause();
         }
     }
