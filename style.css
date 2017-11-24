@@ -27,6 +27,9 @@
 * {
   font-family: "sofia-pro", sans-serif; }
 
+body {
+  background-color: #ebecde; }
+
 .haven-button {
   border-radius: 50px;
   background: #EBA687;
@@ -203,7 +206,8 @@ body {
   /*align-items: center;*/
   /*justify-content: center;*/
   /*flex-direction: column;*/
-  height: 100vh; }
+  height: 100vh;
+  background-color: #ebecde; }
 
 body[data-mode="modeOne"] {
   background-image: url("img/mode-one-preview.jpg"); }
