@@ -48,8 +48,8 @@ $( document ).ready(function() {
 
     // hues
     const h_bright = 8597;
-    const h_red = 254;
-    const h_red2 = 1386;
+    const h_orange = 5000;
+    const h_red2 = 4386;
     const h_yellow = 7000;
 
     // finish light: bright white lights to transition back into real world
@@ -70,9 +70,9 @@ $( document ).ready(function() {
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
-    const sunset_a_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red2]];
-    const sunset_b_backwards = [[500,254,254,7608],[500,150,177,64107],[500,100,180,h_yellow]];
-    const sunset_c_backwards = [[500,254,166,52393], [500,150,129,63848],[500,100,180,h_red]];
+    const sunset_a_backwards = [[500,254,166,52393], [500,200,129,63848],[500,150,180,h_orange]];
+    const sunset_b_backwards = [[500,254,254,7608],[500,200,177,64107],[500,150,180,h_yellow]];
+    const sunset_c_backwards = [[500,254,166,52393], [500,200,129,63848],[500,150,180,h_red2]];
 
     // Waterfall (linear)
     const waterfall_backwards_old = [bright,[1000,254,121,8597],light_blue,dark_blue,
