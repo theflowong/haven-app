@@ -14,7 +14,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+      <script src="main.js" type="text/javascript"></script>
+      <script src="handlebars-v4.0.11.js" type="text/javascript"></script>
 
       <script src="https://use.typekit.net/cng2euq.js"></script>
       <script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -24,63 +25,26 @@
 
 
     </head>
-    <body id="landing-page">
+    <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <header id="landing-page-header">
-          <button id="status-click" href="#"><span id="text-target"></span></button>
-          <a href="index.html"><button class="haven-button salmon get-started">Get Started</button></a>
-        </header>
+          <h1 class="mode-name">Single Mode</h1>
 
-        <div class="container landing-page-body">
+          <button>Start</button>
 
-          <h3 style="text-align: center;margin-bottom: 45px">Book Another Time</h3>
+          <script type="text/javascript">
+            $(document).ready(function(){
 
+              var text = window.location.hash.substring(1)
 
-        <div class="col-sm-10 col-sm-offset-1 booking-time-wrapper">
-          <h4 class="time">10:30</h4>
-          <button class="btn">Book Now</button>
-        </div>
-        <div class="col-sm-10 col-sm-offset-1 booking-time-wrapper">
-          <h4 class="time">11:00</h4>
-          <h6 style="display: inline-block;float: right; font-size: 1.2em;margin: 5px 0 0 0;">Reserved for Keyvan</h6>
-        </div>
+              $('.mode-name').text(text);
 
-        <div class="col-sm-10 col-sm-offset-1 booking-time-wrapper">
-          <h4 class="time">11:30</h4>
-          <button class="btn">Book Now</button>
-        </div>
-
-        </div>
-
-
+              console.log(text);
+            })
+          </script>
 
 
     </body>
-
-        <script type="text/javascript">
-        $( document ).ready(function() {
-
-          console.log('loaded');
-
-          $( "#status-click" ).on( "click", function() {
-            
-            $('body').toggleClass('in-use');
-
-
-
-          });
-
-
-        });
-
-    </script>
-
-
     </html>
-
-
-
-

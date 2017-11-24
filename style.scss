@@ -3,7 +3,8 @@
     "sass/_mixins",
     "sass/_base",
     "sass/_single-mode-view",
-    "sass/_landing"
+    "sass/_component--reservation-code-modal",
+    "sass/_page--landing"
 ;
 
 
@@ -15,7 +16,7 @@ body{
 	/*justify-content: center;*/
 	/*flex-direction: column;*/
 	height: 100vh;
-	background-color: #ebecde;
+	background-color: #ebecde!important;
 }
 
 body[data-mode="modeOne"]{
