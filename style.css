@@ -85,6 +85,9 @@ body {
 .mode--single.playing header {
   height: 100vh; }
 
+#availability {
+  color: white; }
+
 .guided-input {
   display: inline-block; }
 
