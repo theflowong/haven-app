@@ -2,11 +2,42 @@
 	text-align: center;
 }
 
+.landing-page-container{
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 100;
+}
+
+.landing-page-wrapper h1{
+	margin: 0 0 45px 0;
+}
+
+.landing-button-wrapper{
+	display: flex;
+	justify-content: space-around;
+}
 
 #landing-page h1{
 	text-align: center;
+	color: $navy;
 }
 
 #landing-page .page-header{
 	padding: 90px 0;
+	border-bottom: none;
 }
+
+#landing-page .btn{
+	background-color: $cta-color;
+	border: none;
+	width: 150px;
+	border-radius: 50px;
+	@include transition(all, 0.3s);
+	&:hover{
+		background-color: darken($cta-color, 10%);
+	}
+}
+

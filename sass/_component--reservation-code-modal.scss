@@ -1,5 +1,27 @@
 #reservation-code-modal{
+	.modal-content{
+		background-color: $off-white;
+		border: none;
+	}
 
+	.modal-header{
+		text-align: center;
+		padding: 45px 0 0 0;
+	}
+	.modal-footer{
+		border: none;
+		padding-bottom: 45px;
+	}
+	.modal-title{
+		color: $navy;
+	}
+	.modal-body{
+		text-align: center;
+		padding: 90px 0 60px 0;
+	}
+	#code-input-form{
+		margin-bottom: 45px;
+	}
 }
 
 #code-input{
@@ -7,9 +29,18 @@
 	font-size: 4em;
 	width: 100%;
 	text-align: center;
+	border: none;
+	background-color: rgba(255,255,255,0.4);
+	width: 200px;
+	margin: auto;
 
 	&:focus{
 		outline: none;
+	}
+
+	@include placeholder{
+		color:#ccc;
+		font-weight: 100;
 	}
 }
 
@@ -17,4 +48,9 @@
 #linkToSingleMode button{
 	@include center;
 	padding: 15px 45px;
+	color: white;
+}
+
+#linkToSingleMode:hover{
+	text-decoration: none;
 }

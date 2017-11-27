@@ -1,5 +1,19 @@
-.mode--single header{
-	height: 300px;
+#page--single-mode{
+	height: 100vh;
+	overflow: hidden;
+	#logotype path{
+		fill: white;
+	}
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;	
+}
+
+.single-mode--wrapper{
+	height: 100vh;
+	width: 100vw;
 	text-align: center;
 	display: flex;
 	align-items: center;
@@ -7,9 +21,27 @@
 	flex-direction: column;
 	background-position: center center;
 	background-size: cover;
-	@include transition(all, 0.3s);
-	.mode-name, .mode-subtitle{
+	background-attachment: fixed;
+	overflow: hidden;
+	@include transition(all, 0.5s);
+	@include color_overlay($navy, 0.5);
+
+	&.playing{
+		// margin-top: 200px;
+		height: 600px;
+		width: 600px;
+		border-radius: 50%;
+	}
+
+	.single-mode--inner{
+		position: relative;
+		z-index: 10;
 		color: white;
+	}
+	.mode-name, .mode-title{
+		color: white;
+		position: relative;
+		z-index: 10;
 	}
 
 }
@@ -23,6 +55,10 @@
 	header{
 		height: 100vh;
 	}
+}
+
+#change-modes-link{
+	color: white;
 }
 
 #availability {
@@ -79,11 +115,66 @@
 	color: $navy;
 }
 
-.mode--single-body{
+#mode-button-wrapper{
+	width: 100%;
+	text-align: center;
+}
+
+#single-mode--body{
 	padding: 45px 0;
 }
 
 .mode--single-body p{
 	font-weight: 100;
 	font-size: 1.6rem;
+}
+
+.starting-soon-wrapper{
+	display: none;
+}
+
+.in-use{
+	margin-bottom: 90px;
+}
+
+.room-in-use-wrapper{
+	display: none;
+}
+
+.playing .starting-soon-wrapper{
+	display: block;
+}
+
+.playing #change-modes-link{
+	display: none;
+}
+
+.playing .selected-heading{
+	display: none;
+}
+
+.playing {
+ animation: playing 10s infinite;
+ -webkit-animation: playing 10s infinite;
+ -moz-animation: playing 10s infinite;
+ -o-animation: playing 10s infinite;
+}
+ 
+@-webkit-keyframes playing {
+ 0%, 100%{-webkit-transform: scale(1);} 
+ 50% {-webkit-transform: scale(1.1);}
+}
+ 
+@-moz-keyframes playing {
+ 0%, 100%{-moz-transform: scale(1);}
+ 50% {-moz-transform: scale(1.1);}
+}
+ 
+@-o-keyframes playing {
+ 0%, 100%{-o-transform: scale(1);}
+ 50% {-o-transform: scale(1.1);}
+}
+@keyframes playing {
+ 0%, 100%{transform: scale(1);}
+ 50% {transform: scale(1.1);}
 }
