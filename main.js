@@ -125,7 +125,7 @@ $( document ).ready(function() {
             "bulb3": [sunset_c_backwards, 5000],
             "bulb4": [sunset_b_backwards, 5000],
             //"transition_time":3,
-            "audio":"audio/HAVEN_Adhan_Music.mp3",
+            "audio":"audio/islamic-mode.mp3",
             "audio_guided":"",
             "thumbnail": "img/islamic-prayer-orig.jpg",
             "description":  "Call to Adhan prayer, followed by silence, with sunrise lighting (pink, orange, peach hues) to brightness."
