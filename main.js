@@ -87,7 +87,7 @@ $( document ).ready(function() {
 
     // JSON of mode content
 
-    var data = [
+    data = [
 
         {
             // First Object is intentionally empty, don't remove
@@ -545,19 +545,8 @@ $( document ).ready(function() {
     //     console.log('guided button click');
     //     audioFile_guided.volume = 1;
     // });
-    //HANDLEBARS TEMPLATING SCRIPTS
-    var $modeIndex = $("#placeholder")
-    var $singleView = $("#secondPlaceholder");
 
-// -------------------- HANDLEBAR JS -------------------- \\
-    var handlebarsTemplate = $("#handlebars-template").html()
-    var secondTemplate = $("#second-template").html()
-    var templateCompile = Handlebars.compile(handlebarsTemplate)
-    var secondTemplateCompile = Handlebars.compile(handlebarsTemplate)
-    var secondTemplateCompile = Handlebars.compile(secondTemplate)
-    var processedData = data;
-    $modeIndex.html(templateCompile(processedData));
-    $singleView.html(secondTemplateCompile(processedData));
+
 
 });
 

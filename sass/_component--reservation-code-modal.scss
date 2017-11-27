@@ -1,0 +1,20 @@
+#reservation-code-modal{
+
+}
+
+#code-input{
+	// @include center;
+	font-size: 4em;
+	width: 100%;
+	text-align: center;
+
+	&:focus{
+		outline: none;
+	}
+}
+
+
+#linkToSingleMode button{
+	@include center;
+	padding: 15px 45px;
+}
