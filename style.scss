@@ -2,9 +2,14 @@
     "sass/_variables",
     "sass/_mixins",
     "sass/_base",
+    "sass/_nav",
     "sass/_single-mode-view",
     "sass/_component--reservation-code-modal",
+    "sass/_component--circles",
+    "sass/_start-experience-modal",
+    "sass/_modes-archive",
     "sass/_page--landing"
+    
 ;
 
 
@@ -38,33 +43,12 @@ body[data-mode="modeTwo"]{
 	display: none;
 }
 
-section.index-header{
-	background-color: $blush;
-	background-size:cover;
-	background-position: center center;
-	height: 300px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
 
-section.index-header h1{
-	color: #34334F;
-	font-size: 1.5rem;
-	text-transform: uppercase;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-section.index-header h3{
-	color: white;
-	font-weight: 100;
-	font-size: 4rem;
-}
 
-#section--mode-index{
-	padding: 45px 0;
-	margin-top: -90px;
-}
+// #section--mode-index{
+// 	padding: 45px 0;
+// 	margin-top: -90px;
+// }
 
 
 
@@ -84,26 +68,3 @@ section.index-header h3{
 }
 
 
-.grid-item--inner{
-	height: 200px;
-	background-size: cover;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	-webkit-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
-	-moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
-	box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
-	@include transition(all, 0.3s);
-	margin-bottom: 30px;
-	&:hover{
-		transform: translateY(-15px);
-	}
-
-}
-
-
-.grid-item--inner .mode-name{
-	color: white;
-	text-align: center;
-}

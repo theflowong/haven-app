@@ -6,14 +6,23 @@ body{
     background-color: #ebecde;
 }
 
-.haven-button{
+.page{
+    position: relative;
+    z-index: 10;
+}
+
+
+
+.haven-button, .haven-cta{
 	border-radius: 50px;
 	background: $blush;
+    display: block;
 	border: solid 2px $blush;
 	-webkit-transition: all 0.3s; /* Safari */
     transition: all 0.3s;
     font-size: 1em;
     color: white;
+    @include center;
     -webkit-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
 	-moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
 	box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
@@ -21,6 +30,16 @@ body{
     text-transform: uppercase;
     padding: 15px 60px;
     margin-bottom: 15px;
+
+    &:hover{
+        background-color: darken($blush, 10%);
+        border-color: darken($blush, 10%);
+    }
+    &:focus{
+        outline: none;
+        background-color: #E8554D;
+        border-color: #E8554D;
+    }
 
     &.lilac{
     	background-color: $lilac;

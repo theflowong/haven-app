@@ -11,14 +11,15 @@
 
       </div>
       <div class="modal-body">
-        <form>
-          <input id="code-input" type="text" maxlength="4"/>
+        <form id="code-input-form" autocomplete="false">
+          <input id="code-input" type="text" maxlength="4" placeholder="Code"/>
         </form>
+        <p>This can be found in your confirmation email</p>
 
       </div>
       <div class="modal-footer">
 
-        <a id="linkToSingleMode" href="" style="display: none;"><button class="btn btn-default">Go</button></a>
+        <a id="linkToSingleMode" href="" style="display: none;"><button type="submit" class="btn btn-default">Go</button></a>
 
       </div>
     </div>
@@ -46,7 +47,7 @@
 
       else if (codeInput == 2222){
         selectedMode = "Islamic Prayer";
-        modeLink = "single-mode.php#islamicprayer";
+        modeLink = "single-mode.php#islamic-prayer";
         linkToSingleMode.attr('href', modeLink);
         linkToSingleMode.fadeIn();
 
@@ -59,6 +60,7 @@
         linkToSingleMode.fadeIn();
 
       }
+
 
       console.log(selectedMode);
      

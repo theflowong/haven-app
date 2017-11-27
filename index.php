@@ -1,26 +1,26 @@
 <?php include 'header.php'; ?>
 
-<?php include 'nav.php'; ?>
 
     <body id="landing-page">
-      
-      <div class="container">
+
+      <?php include 'nav.php'; ?>
+      <?php include 'circles.php';?>
+
+      <div class="container landing-page-container">
         
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="landing-page-wrapper">
 
-          <header class="page-header">
-
+          <!-- <h1>Meditation Should Be Easy</h1> -->
           <h1>Already Reserved A Session?</h1>
 
-         </header>
 
-          <div class="col-sm-6 landing-col">
+          <div class="landing-button-wrapper">
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#reservation-code-modal">Yes</button>
-          </div>
-
-          <div class="col-sm-6 landing-col">
+    
+          
             <a href="modes.php"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#reservation-code-modal">Not Yet</button></a>
           </div>
+      
 
         </div>
 

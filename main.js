@@ -101,7 +101,8 @@ $( document ).ready(function() {
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
         {
-            "name":"Focus",
+            "name":"focus",
+            "title": "Focus",
             "loops": false,
             "duration":210000,
             "bulb1": [room_bright, 12000],
@@ -114,8 +115,9 @@ $( document ).ready(function() {
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Slow transition into white lights."
         },
-        {
-            "name":"Islamic Prayer",
+        {   
+            "name": "islamic-prayer",
+            "title":"Islamic Prayer",
             "loops": false,
             "duration":180000,
             "bulb1": [sunset_a_backwards, 5000],
@@ -129,7 +131,8 @@ $( document ).ready(function() {
             "description":  "Call to Adhan prayer, followed by silence, with sunrise lighting (pink, orange, peach hues) to brightness."
         },
         {
-            "name":"Waterfall",
+            "name":"waterfall",
+            "title": "Waterfall",
             "time": "5 minutes",
             "loops": true,
             "duration":285000, // 5 min
@@ -168,7 +171,7 @@ $( document ).ready(function() {
     function changeAvailability(text) {
 
         if (text) {
-            document.getElementById('availability').innerHTML = text;
+            // document.getElementById('availability').innerHTML = text;
         }
 
         else { // no arguments passed
@@ -186,11 +189,11 @@ $( document ).ready(function() {
     }
 
     function alertStartExperience() {
-        swal({
-          title: "Please enter the room and make yourself comfortable.",
-          text: "Your experience will begin shortly. The room code is 1050.",
-          button: "Enter"
-        });
+        // swal({
+        //   title: "Please enter the room and make yourself comfortable.",
+        //   text: "Your experience will begin shortly. The room code is 1050.",
+        //   button: "Enter"
+        // });
     }
 
     function convertColourArrayToAjax(colour_theme) {
@@ -314,7 +317,7 @@ $( document ).ready(function() {
                 audioFile_guided = new Audio(audio_guided);
                 fetchAudioAndPlay(audioFile_guided);
             }
-        }, 10000);
+        }, 100);
         // if (audio) {
         //     audioFile = new Audio(audio);
         //     fetchAudioAndPlay(audioFile);
@@ -498,6 +501,7 @@ $( document ).ready(function() {
             $('.stop-button').show();
             $('.welcome-text').show();
             $(this).closest('.mode--single').addClass('playing');
+            $('.single-mode--wrapper').addClass('playing');
 
             startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
 
@@ -517,7 +521,7 @@ $( document ).ready(function() {
         $('.guided-input').hide();
         $('.welcome-text').hide();
         $(".start-button").show();
-        $('.mode--single').removeClass('playing');
+        $('.single-mode--wrapper').removeClass('playing');
         stopExperience();
     });
 
@@ -551,9 +555,4 @@ $( document ).ready(function() {
 });
 
 
-$(window).load(function() {
-      // Resize grid item images so they remain square
-      var gridItemWidth = $('.grid-item--inner').width();
-      $('.grid-item--inner').height(gridItemWidth);
 
-});

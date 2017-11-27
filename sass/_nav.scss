@@ -1,0 +1,20 @@
+#nav{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	padding: 10px;
+	z-index: 1000;
+	text-align: center;
+}
+
+#logotype{
+	width: 100px;
+	@include transition(all, 0.3s);
+
+	&:hover{
+		path{
+			fill: darken($navy, 10%);
+		}
+	}
+}

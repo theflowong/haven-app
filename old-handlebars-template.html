@@ -1,0 +1,46 @@
+
+      <!-- TEMPLATE FOR SINGLE VIEW -->
+      <script type="text/handlebars-template" id="second-template">
+          {{#each this}}
+          {{#if @first}}
+         {{else}}
+
+          <section class="mode--single hidden-on-load" data-mode="{{name}}" >
+          <header class="row" style="background-image: url('{{thumbnail}}')">
+                <h1 id="availability"></h1>
+              <h1 class="mode-name">{{name}}</h1>
+              <p class="mode-subtitle">{{time}}</p>
+
+              <button class="start-experience start-button haven-button salmon" data-mode="{{name}}">Start</button>
+              <section class="guided-input" style="display: none;">
+                <button class="choice-button guided-button haven-button">Guided Breathing</button>
+                <button class="choice-button nonguided-button haven-button">Non-Guided Breathing</button>
+              </section>
+              <div class="container welcome-text" style="display: none;">
+                <div class="col-6 col-md-auto">
+                    <br/>
+                    <p>Your experience has now started.<br/>Please enter the room and make yourself comfortable.</p>
+                    <br/>
+                </div>
+              </div>
+              <button class="stop-button haven-button salmon" style="display: none;">Stop</button>
+              <button class="back-button">Back</button>
+
+          </header>
+
+
+          <div class="mode--single-body">
+            <div class="container">
+              <div class="col-sm-10 col-sm-offset-1">
+                <h3 class="description-heading">What To Expect</h3>
+                <p>{{description}}</p>
+              </div>
+            </div>
+          </div>
+
+          </section>
+
+          {{/if}}
+        {{/each}}
+
+      </script>

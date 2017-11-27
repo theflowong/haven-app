@@ -1,50 +1,97 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9">
-<!--[if IE]>         <html class="no-js ie">
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>HAVEN</title>
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      <script src="main.js" type="text/javascript"></script>
-      <script src="handlebars-v4.0.11.js" type="text/javascript"></script>
+<?php include 'header.php';?>
 
-      <script src="https://use.typekit.net/cng2euq.js"></script>
-      <script>try{Typekit.load({ async: true });}catch(e){}</script>
-
-      <link rel="stylesheet" type="text/css" href="style.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div id="page--single-mode">
+<?php include 'nav.php';?>
+<?php include 'start-experience-modal.php';?>
 
 
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<script type="text/javascript">
+  $(document).ready(function(){
 
-          <h1 class="mode-name">Single Mode</h1>
+      var dataMode = window.location.hash.substring(1);
+      $('body').attr('data-mode', dataMode);
+    
+      // index = 0;
+      //Match mode in URL to corresponding object in data.json
+      var selectedMode = data.find(function(mode, i){
+          if(mode.name == dataMode){
+              index = i;
+              return i;
+          }
+      });
+      //Set variables for values in data.json
+      var selectedName = selectedMode.name,
+            thumbnail = selectedMode.thumbnail,
+            title = selectedMode.title;
+            $('.single-mode--wrapper').css('background-image', 'url(' + thumbnail + ')');
+            $('.mode-title').text(title);
+            $('.start-button').attr('data-mode', dataMode)
+      
+      })
+</script>
 
-          <button>Start</button>
+      <section class="row single-mode--wrapper">
+          <div class="single-mode--inner">
+          
+          <div class="selected-experience-wrapper">
+          <h4 class="selected-heading">Your Selected Experience</h4>
+          <h3 class="mode-title"></h3>
+          </div>
+          
+          <!-- <h3 id="availability"></h3> -->
+          <div class="room-in-use-wrapper">
+            <h3 class="in-use">Haven Is Currently In Use</h3></div>
 
-          <script type="text/javascript">
-            $(document).ready(function(){
+          <div class="starting-soon-wrapper">
+            <h3>Your Experience Will Start Shortly</h3>
+            <h4>The door code is 1050#</h4>
+          </div>
 
-              var text = window.location.hash.substring(1)
+          <div id="mode-button-wrapper">
+          <button class="start-button haven-cta" data-mode   data-target="#start-experience-modal">Start</button>
+          <a id="change-modes-link" href="modes.php">Change Mode</a>
+          <button class="stop-button haven-button" style="display: none;">Stop</button>
+              <section class="guided-input" style="display: none;">
+                <button class="choice-button guided-button haven-button">Guided Breathing</button>
+                <button class="choice-button nonguided-button haven-button">Non-Guided Breathing</button>
+              </section>
+              <!-- TARGET FOR HANDLEBARS TO INJECT MARKUP -->
+              <div id="placeholder"></div>
+            </div>
+         </div>
+        </section>
 
-              $('.mode-name').text(text);
+<!--         <section id="single-mode--body" class="row">
+          <div class="container">
 
-              console.log(text);
-            })
-          </script>
+          </div>
+        </section> -->
+
+        <section class="debug">
+            <button id="changeAvailability" style="bottom:0; position:absolute;">Change Availability</button>
+        </section>
 
 
-    </body>
-    </html>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    function showInUse(){
+      $('.room-in-use-wrapper').show();
+      $('.starting-soon-wrapper').hide();
+      $('.selected-experience-wrapper').hide();
+    }
+
+    $('.start-button').click(function(){
+        setTimeout(showInUse, 3000);
+    });
+
+  })
+
+</script>
+
+
+
+<?php include 'footer.php'; ?>
