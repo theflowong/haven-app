@@ -324,7 +324,7 @@ $( document ).ready(function() {
                 audioFile_guided = new Audio(audio_guided);
                 fetchAudioAndPlay(audioFile_guided);
             }
-        }, 12000);
+        }, 10);
         // if (audio) {
         //     audioFile = new Audio(audio);
         //     fetchAudioAndPlay(audioFile);
