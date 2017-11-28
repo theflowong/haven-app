@@ -28,6 +28,7 @@ $( document ).ready(function() {
 
     var audioFile;
     var audioFile_guided;
+    const audioButton = new Audio('audio/button-1.wav');
 
 
 // -------------------- DATA -------------------- \\
@@ -71,9 +72,9 @@ $( document ).ready(function() {
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
-    const sunset_a_backwards = [[500,254,166,52393], [500,200,129,63848],[500,150,180,h_orange]];
-    const sunset_b_backwards = [[500,254,254,7608],[500,200,177,64107],[500,150,180,h_yellow]];
-    const sunset_c_backwards = [[500,254,166,52393], [500,200,129,63848],[500,150,180,h_red2]];
+    const sunset_a_backwards = [[500,254,166,8595], [500,200,129,5848],[500,150,180,h_orange]];
+    const sunset_b_backwards = [[500,254,254,7608],[500,200,177,4107],[500,150,180,h_yellow]];
+    const sunset_c_backwards = [[500,254,166,8595], [500,200,129,6848],[500,150,180,h_red2]];
 
     // Waterfall (linear)
     const waterfall_backwards_old = [bright,[1000,254,121,8597],light_blue,dark_blue,
@@ -83,7 +84,8 @@ $( document ).ready(function() {
     const waterfall_backwards = [dark_blue, light_blue, aqua];
 
     // Ocean Sunshine
-    const oceansunshine_backwards = [[30,59,84,62],light_blue, bright_short, aqua];
+    //const oceansunshine_backwards = [[500,59,84,62],light_blue, bright_short, [500,254,166,8000]];
+    const oceansunshine_backwards = [dark_blue, light_blue, aqua];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -104,25 +106,10 @@ $( document ).ready(function() {
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
         },
         {
-            "name":"focus",
-            "title": "Focus",
-            "loops": false,
-            "duration":210000,
-            "bulb1": [room_bright, 12000],
-            "bulb2": [room_bright, 1000],
-            "bulb3": [room_bright, 12000],
-            "bulb4": [room_bright, 12000],
-            //"transition_time":3,
-            "audio":"",
-            "audio_guided":"",
-            "thumbnail": "img/mode-one-preview.jpg",
-            "description":  "Slow transition into white lights."
-        },
-        {
             "name": "islamic-prayer",
             "title":"Islamic Prayer",
             "loops": false,
-            "duration":180000,
+            "duration":180000, // 3 min
             "bulb1": [sunset_a_backwards, 5000],
             "bulb2": [sunset_b_backwards, 5000],
             "bulb3": [sunset_c_backwards, 5000],
@@ -153,7 +140,7 @@ $( document ).ready(function() {
         },
         {
             "name":"beach-body-scan",
-            "title": "Ocean Body Scan",
+            "title": "Ocean Sunshine Scan",
             "time": "7 minutes",
             "loops": true,
             "duration":420000,
@@ -418,6 +405,7 @@ $( document ).ready(function() {
 // -------------------- BUTTON FUNCTIONS -------------------- \\
 
     $(document).on('click', '.mode-button', function(){
+        audioButton.play();
         // Show controls
 
         // $controls.show();
@@ -455,6 +443,7 @@ $( document ).ready(function() {
     });
 
     $(document).on('click', '.start-button', function(){
+        audioButton.play();
         // Hide Start Button and show stop button
 
         // $(this).hide();
@@ -565,6 +554,7 @@ $( document ).ready(function() {
     });
 
     $(document).on('click','.stop-button', function(){
+        audioButton.play();
         $(this).hide();
         $('.guided-input').hide();
         $('.welcome-text').hide();
@@ -577,6 +567,7 @@ $( document ).ready(function() {
     });
 
     $(document).on('click','.back-button', function(){
+        audioButton.play();
 
         $controls.hide();
         $modeButtonWrapper.show();
