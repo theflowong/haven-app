@@ -30,6 +30,9 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
+      $('#reservation-code-modal').on('shown.bs.modal', function () {
+          $('#code-input').focus();
+      })  
     $( "#code-input" ).keyup(function() {
 
       var codeInput = $(this).val(),

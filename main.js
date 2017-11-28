@@ -583,6 +583,10 @@ $( document ).ready(function() {
         changeAvailability();
     })
 
+    $(document).on('click','.reservation-modal-button', function(){
+       $('#code-input').focus();
+    })
+
     // $(document).on('click','.nonguided-button', function(){
     //     console.log('nonguided click');
     //     audioFile_guided.volume = 0;
