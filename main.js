@@ -45,6 +45,7 @@ $( document ).ready(function() {
     const green = [120,255,255,25500];
 
     const bright = [1000,254,121,8597];
+    const bright_short = [500, 254,121,8597];
 
     // hues
     const h_bright = 8597;
@@ -81,6 +82,8 @@ $( document ).ready(function() {
 
     const waterfall_backwards = [dark_blue, light_blue, aqua];
 
+    // Ocean Sunshine
+    const oceansunshine_backwards = [[30,59,84,62],light_blue, bright_short, aqua];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -132,7 +135,7 @@ $( document ).ready(function() {
         },
         {
             "name":"waterfall",
-            "title": "Waterfall",
+            "title": "Waterfall Breathing",
             "time": "5 minutes",
             "loops": true,
             "duration":285000, // 5 min
@@ -148,6 +151,23 @@ $( document ).ready(function() {
             "thumbnail": "img/water.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
+        {
+            "name":"beach-body-scan",
+            "title": "Ocean Body Scan",
+            "time": "7 minutes",
+            "loops": true,
+            "duration":420000,
+            "bulb1": [oceansunshine_backward, 3000],
+            "bulb2": [oceansunshine_backward, 4000],
+            "bulb3": [oceansunshine_backward, 5000],
+            "bulb4": [oceansunshine_backward, 3000],
+            "audio":"audio/waterfall_vui_3min/HAVEN_Sprint10_MusicOnly.mp3", // 3:30
+            "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
+            // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
+            // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
+            "thumbnail": "img/water.jpg",
+            "description": "Waterfall sounds and blue lights, with guided breathing."
+        }
 
         // {
         //     "name":"Debug",
