@@ -470,8 +470,8 @@ body {
   text-decoration: none; }
 
 .grid-item--inner {
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
   margin: 0 30px;
   opacity: 0;
   border-radius: 50%;

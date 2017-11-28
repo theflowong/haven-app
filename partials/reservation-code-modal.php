@@ -7,14 +7,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Please Input Your Reservation Code</h4>
+        <h4 class="modal-title">Please Input Your <br>Reservation Code</h4>
 
       </div>
       <div class="modal-body">
         <!-- <form id="code-input-form" autocomplete="false"> -->
           <input id="code-input" type="text" maxlength="4" placeholder="Code"/>
         <!-- </form> -->
-        <p>This can be found in your confirmation email</p>
+        <!-- <p>This can be found in your confirmation email</p> -->
 
       </div>
       <div class="modal-footer">
