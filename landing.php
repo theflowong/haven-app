@@ -109,13 +109,8 @@
 </style>
    <!--   <script src="https://use.typekit.net/cng2euq.js"></script>
       <script>try{Typekit.load({ async: true });}catch(e){}</script> -->
-       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-   <style type="text/css">
-      .wf-loading{
-        /* Hide the blog title and post titles while web fonts are loading */
-        visibility: hidden;
-      }
-    </style>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 
 	$(window).load(function() {
