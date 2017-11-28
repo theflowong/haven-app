@@ -54,9 +54,9 @@
           </div>
 
           <div id="mode-button-wrapper">
-          <button class="start-button haven-cta" data-mode ">Start</button>
+          <button class="start-button haven-cta soundOne" data-mode ">Start</button>
           <!-- <a id="change-modes-link" href="modes.php">Change Mode</a> -->
-          <button class="stop-button haven-button" style="display: none;">Stop</button>
+          <button class="stop-button haven-button " style="display: none;">Stop</button>
           <button class="choice-button guide-toggle  turn-off-guided-button" style="display: none;">Turn Off Guide</button>
           <button class="choice-button guide-toggle  turn-on-guided-button" style="display: none;">Turn On Guide</button>
               <section class="guided-input" style="display: none;">

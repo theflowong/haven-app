@@ -157,10 +157,10 @@ $( document ).ready(function() {
             "time": "7 minutes",
             "loops": true,
             "duration":420000,
-            "bulb1": [oceansunshine_backward, 3000],
-            "bulb2": [oceansunshine_backward, 4000],
-            "bulb3": [oceansunshine_backward, 5000],
-            "bulb4": [oceansunshine_backward, 3000],
+            "bulb1": [oceansunshine_backwards, 3000],
+            "bulb2": [oceansunshine_backwards, 4000],
+            "bulb3": [oceansunshine_backwards, 5000],
+            "bulb4": [oceansunshine_backwards, 3000],
             "audio":"audio/waterfall_vui_3min/HAVEN_Sprint10_MusicOnly.mp3", // 3:30
             "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
             // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
@@ -600,6 +600,17 @@ $( document ).ready(function() {
     //     console.log('guided button click');
     //     audioFile_guided.volume = 1;
     // });
+
+    $(document).on('click','.soundOne', function(){
+        var uiSound = new Audio('audio/beep_short_on.wav');
+        uiSound.play();
+    })
+
+    $(document).on('click','.soundTwo', function(){
+        var uiSound = new Audio('audio/beep_short_off.wav');
+        uiSound.play();
+        // alert('clcked');
+    })
 
 
 

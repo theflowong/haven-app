@@ -576,6 +576,34 @@ body {
     transform: scale(1); }
   50% {
     transform: scale(1.1); } }
+#splash--landing .flex-container {
+  height: 100vh;
+  display: flex;
+  align-items: center; }
+
+#splash--landing h1 {
+  color: #3C4F93;
+  font-size: 4.5em; }
+
+#splash--landing h3 {
+  color: #3C4F93;
+  font-size: 2em; }
+
+#splash--landing .haven-button {
+  margin: 30px 0; }
+
+.splash-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; }
+
+.nav-container {
+  padding: 30px 0; }
+
+.splash-nav #logotype {
+  width: 150px; }
+
 .landing-col {
   text-align: center; }
 

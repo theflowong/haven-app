@@ -14,20 +14,21 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     </style>
-     <script src="https://use.typekit.net/cng2euq.js"></script>
-      <script>try{Typekit.load({ async: true });}catch(e){}</script>
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-   <style type="text/css">
-      .wf-loading{
-        /* Hide the blog title and post titles while web fonts are loading */
-        visibility: hidden;
-      }
-    </style>
+
 
 
     </head>
     <body style="padding: 0; margin: 0;">
-    <div id="overlay">
+    <div id="overlay" style="background-color: #E9EBDE;
+		z-index: 10;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;">
     	<img id="haven-logo" class="logo" src="img/haven-transparent-logo.png">
     </div>
          
@@ -61,17 +62,7 @@
 	}
 
 	#overlay{
-		background-color: #E9EBDE;
-		/*background-color: red;*/
-		z-index: 10;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+
 	}
 
 	#haven-logo{
@@ -110,7 +101,15 @@
  50% {transform:  scale(1.2);}
 }
 </style>
-
+   <!--   <script src="https://use.typekit.net/cng2euq.js"></script>
+      <script>try{Typekit.load({ async: true });}catch(e){}</script> -->
+       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   <style type="text/css">
+      .wf-loading{
+        /* Hide the blog title and post titles while web fonts are loading */
+        visibility: hidden;
+      }
+    </style>
 <script type="text/javascript">
 	
 	$(window).load(function() {

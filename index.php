@@ -15,10 +15,10 @@
 
 
           <div class="landing-button-wrapper">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#reservation-code-modal">Yes</button>
+            <button type="button" class="btn btn-info btn-lg soundOne" data-toggle="modal" data-target="#reservation-code-modal">Yes</button>
     
           
-            <a href="modes.php"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#reservation-code-modal">Not Yet</button></a>
+            <a href="modes.php" class="soundTwo"><button type="button" class="btn btn-info btn-lg " data-toggle="modal" data-target="#reservation-code-modal">Not Yet</button></a>
           </div>
       
 
