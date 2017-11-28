@@ -54,6 +54,8 @@
 		color: white;
 		display: block;
 		font-size: 1.2em;
+		-webkit-transition: all, 0.3s; /* Safari */
+    	transition: all, 0.3s;
 
 	}
 	#button:hover{
