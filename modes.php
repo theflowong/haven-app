@@ -19,9 +19,9 @@
     </div>
   </section>
 
-  <section class="debug">
+<!--   <section class="debug">
       <button id="changeAvailability" style="bottom:0; position:absolute;">Change Availability</button>
-  </section>
+  </section> -->
 
 
 

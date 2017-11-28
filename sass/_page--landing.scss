@@ -13,6 +13,7 @@
 
 .landing-page-wrapper h1{
 	margin: 0 0 45px 0;
+	font-size: 4em;
 }
 
 .landing-button-wrapper{
@@ -33,7 +34,8 @@
 #landing-page .btn{
 	background-color: $cta-color;
 	border: none;
-	width: 150px;
+	width: 200px;
+	font-size: 2em;
 	border-radius: 50px;
 	@include transition(all, 0.3s);
 	&:hover{

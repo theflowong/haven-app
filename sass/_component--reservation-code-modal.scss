@@ -6,7 +6,7 @@
 
 	.modal-header{
 		text-align: center;
-		padding: 45px 0 0 0;
+		padding: 45px 30px;
 	}
 	.modal-footer{
 		border: none;
@@ -14,6 +14,7 @@
 	}
 	.modal-title{
 		color: $navy;
+		font-size: 2.5em;
 	}
 	.modal-body{
 		text-align: center;

@@ -26,8 +26,14 @@
             $('.single-mode--wrapper').css('background-image', 'url(' + thumbnail + ')');
             $('.mode-title').text(title);
             $('.start-button').attr('data-mode', dataMode)
+
+            if (selectedMode.audio_guided) {
+              $('.single-mode--wrapper').addClass('guided');
+            }
       
       })
+
+
 </script>
 
       <section class="row single-mode--wrapper">
@@ -43,17 +49,20 @@
             <h3 class="in-use">Haven Is Currently In Use</h3></div>
 
           <div class="starting-soon-wrapper">
-            <h3>Your Experience Will Start Shortly</h3>
-            <h4>The door code is 1050#</h4>
+            <h3>Please Enter The Room</h3>
+            <!-- <h4>The door code is 1050#</h4> -->
           </div>
 
           <div id="mode-button-wrapper">
-          <button class="start-button haven-cta" data-mode   data-target="#start-experience-modal">Start</button>
-          <a id="change-modes-link" href="modes.php">Change Mode</a>
+          <button class="start-button haven-cta" data-mode ">Start</button>
+          <!-- <a id="change-modes-link" href="modes.php">Change Mode</a> -->
           <button class="stop-button haven-button" style="display: none;">Stop</button>
+          <button class="choice-button guide-toggle  turn-off-guided-button" style="display: none;">Turn Off Guide</button>
+          <button class="choice-button guide-toggle  turn-on-guided-button" style="display: none;">Turn On Guide</button>
               <section class="guided-input" style="display: none;">
-                <button class="choice-button guided-button haven-button">Guided Breathing</button>
-                <button class="choice-button nonguided-button haven-button">Non-Guided Breathing</button>
+
+       <!--          <button class="choice-button guided-button haven-button">Guided Breathing</button>
+                <button class="choice-button nonguided-button haven-button">Non-Guided Breathing</button> -->
               </section>
               <!-- TARGET FOR HANDLEBARS TO INJECT MARKUP -->
               <div id="placeholder"></div>
@@ -67,9 +76,9 @@
           </div>
         </section> -->
 
-        <section class="debug">
+    <!--     <section class="debug">
             <button id="changeAvailability" style="bottom:0; position:absolute;">Change Availability</button>
-        </section>
+        </section> -->
 
 
 
@@ -79,13 +88,19 @@
   $(document).ready(function(){
 
     function showInUse(){
-      $('.room-in-use-wrapper').show();
+      $('.room-in-use-wrapper').fadeIn();
       $('.starting-soon-wrapper').hide();
       $('.selected-experience-wrapper').hide();
     }
 
     $('.start-button').click(function(){
-        setTimeout(showInUse, 3000);
+        setTimeout(showInUse, 10000);
+    });
+
+    $('.stop-button').click(function(){
+      $('.room-in-use-wrapper').hide();
+      // $('.starting-soon-wrapper').show();
+      // $('.selected-experience-wrapper').hide();
     });
 
   })

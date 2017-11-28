@@ -11,15 +11,15 @@
 
       </div>
       <div class="modal-body">
-        <form id="code-input-form" autocomplete="false">
+        <!-- <form id="code-input-form" autocomplete="false"> -->
           <input id="code-input" type="text" maxlength="4" placeholder="Code"/>
-        </form>
+        <!-- </form> -->
         <p>This can be found in your confirmation email</p>
 
       </div>
       <div class="modal-footer">
 
-        <a id="linkToSingleMode" href="" style="display: none;"><button type="submit" class="btn btn-default">Go</button></a>
+        <a id="linkToSingleMode" href="" style="display: none;"><button type="button" class="btn btn-default">Go</button></a>
 
       </div>
     </div>
@@ -58,11 +58,44 @@
         modeLink = "single-mode.php#focus";
         linkToSingleMode.attr('href', modeLink);
         linkToSingleMode.fadeIn();
-
       }
 
+      $("#code-input").keypress(function(e) {
+        e.stopPropagation();
 
-      console.log(selectedMode);
+        if(e.which == 13) {
+          var codeInput = $(this).val(),
+          linkToSingleMode = $('#linkToSingleMode');
+          var selectedMode;
+
+
+          if (codeInput == 1111){
+            selectedMode = "Waterfall";
+            modeLink = "single-mode.php#waterfall";
+            window.location.href = modeLink;
+            linkToSingleMode.fadeIn();
+
+          }
+
+          else if (codeInput == 2222){
+            selectedMode = "Islamic Prayer";
+            modeLink = "single-mode.php#islamic-prayer";
+            window.location.href = modeLink;
+            linkToSingleMode.fadeIn();
+
+          }
+
+          else if (codeInput == 3333){
+            selectedMode = "Focus";
+            modeLink = "single-mode.php#focus";
+            window.location.href = modeLink;
+            linkToSingleMode.fadeIn();
+          }
+        }
+      });
+
+
+      // console.log(selectedMode);
      
 
     });

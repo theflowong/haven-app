@@ -471,41 +471,69 @@ $( document ).ready(function() {
 
         stopped = false;
 
+        // buttons
+        $(this).hide();
+        $('.stop-button').show();
+        $('.welcome-text').show();
         if (selectedModeAudioGuided) {
-            $('.guided-input').show();
+            $('.turn-off-guided-button').show();
+        }
+        //$(this).closest('.mode--single').addClass('playing');
+        $('.single-mode--wrapper').addClass('playing');
 
-            $('.guided-button').click(function(){
-                audioFile_guided.volume = 1;
-            });
-            $('.nonguided-button').click(function(){
+        startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+
+
+        // if (selectedModeAudioGuided) {
+        //     $('.guided-input').show();
+
+        //     $('#mode-button-wrapper').addClass('offers-guided');
+
+        //     $('.guided-button').click(function(){
+        //         audioFile_guided.volume = 1;
+        //     });
+        //     $('.nonguided-button').click(function(){
+        //         audioFile_guided.volume = 0;
+        //     });
+
+            $('.turn-off-guided-button').click(function(){
                 audioFile_guided.volume = 0;
+                $(this).hide();
+                $('.turn-on-guided-button').show();
+
             });
 
-            $('.guided-input').click(function(){
-                // buttons
-                $('.start-button').hide();
-                $('.stop-button').show();
-                $('.welcome-text').show();
-                //$('.welcome-text').style.opacity = 1.0;
-                $('.start-button').closest('.mode--single').addClass('playing');
-
-                if (!started) {
-                    console.log('starting here');
-                    startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
-                }
+            $('.turn-on-guided-button').click(function(){
+                audioFile_guided.volume = 1;
+                $(this).hide();
+                $('.turn-off-guided-button').show();
             });
-        }
-        else {
-            // buttons
-            $(this).hide();
-            $('.stop-button').show();
-            $('.welcome-text').show();
-            $(this).closest('.mode--single').addClass('playing');
-            $('.single-mode--wrapper').addClass('playing');
 
-            startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+        //     $('.guided-input').click(function(){
+        //         // buttons
+        //         $('.start-button').hide();
+        //         $('.stop-button').show();
+        //         $('.welcome-text').show();
+        //         //$('.welcome-text').style.opacity = 1.0;
+        //         $('.start-button').closest('.single-mode--wrapper').addClass('playing');
 
-        }
+        //         if (!started) {
+        //             console.log('starting here');
+        //             startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+        //         }
+        //     });
+        // }
+        // else {
+        //     // buttons
+        //     $(this).hide();
+        //     $('.stop-button').show();
+        //     $('.welcome-text').show();
+        //     $(this).closest('.mode--single').addClass('playing');
+        //     $('.single-mode--wrapper').addClass('playing');
+
+        //     startExperience(selectedModeIsLoops, selectedModeColours, selectedModeTime, selectedModeAudio, selectedModeAudioGuided, selectedModeDuration);
+
+        // }
 
         // $('.guided-button').click(function(){
         //     audioFile_guided.volume = 1;
@@ -521,6 +549,9 @@ $( document ).ready(function() {
         $('.guided-input').hide();
         $('.welcome-text').hide();
         $(".start-button").show();
+        $(".selected-experience-wrapper").show();
+        $(".room-in-use-wrapper").hide();
+        $(".turn-off-guided-button").hide();
         $('.single-mode--wrapper').removeClass('playing');
         stopExperience();
     });

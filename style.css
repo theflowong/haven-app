@@ -36,9 +36,9 @@ body {
 
 .haven-button, .haven-cta {
   border-radius: 50px;
-  background: #EBA687;
+  background: #DC897E;
   display: block;
-  border: solid 2px #EBA687;
+  border: solid 2px #DC897E;
   -webkit-transition: all 0.3s;
   /* Safari */
   transition: all 0.3s;
@@ -51,12 +51,11 @@ body {
   -webkit-box-shadow: 10px 10px 15px 1px rgba(0, 0, 0, 0.11);
   -moz-box-shadow: 10px 10px 15px 1px rgba(0, 0, 0, 0.11);
   box-shadow: 10px 10px 15px 1px rgba(0, 0, 0, 0.11);
-  text-transform: uppercase;
   padding: 15px 60px;
   margin-bottom: 15px; }
   .haven-button:hover, .haven-cta:hover {
-    background-color: #e4865b;
-    border-color: #e4865b; }
+    background-color: #d16456;
+    border-color: #d16456; }
   .haven-button:focus, .haven-cta:focus {
     outline: none;
     background-color: #E8554D;
@@ -67,15 +66,14 @@ body {
   .haven-button.lilac:hover, .haven-cta.lilac:hover {
     color: #CCA5D1; }
   .haven-button.salmon, .haven-cta.salmon {
-    background-color: #F37478;
-    border-color: #F37478; }
+    background-color: #DC897E;
+    border-color: #DC897E; }
   .haven-button.salmon:hover, .haven-cta.salmon:hover {
     color: white;
-    background-color: #ef454a;
-    border-color: #ef454a; }
+    background-color: #d16456;
+    border-color: #d16456; }
 
 .haven-button:hover {
-  background-color: white;
   cursor: pointer; }
 
 #nav {
@@ -145,6 +143,20 @@ body {
     height: 600px;
     width: 600px;
     border-radius: 50%; }
+  .single-mode--wrapper.guided .guide-toggle {
+    display: block;
+    background-color: transparent;
+    border: none;
+    opacity: 0.8;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    display: block; }
+    .single-mode--wrapper.guided .guide-toggle:hover {
+      opacity: 1; }
+    .single-mode--wrapper.guided .guide-toggle:focus {
+      outline: none; }
   .single-mode--wrapper .single-mode--inner {
     position: relative;
     z-index: 10;
@@ -152,7 +164,9 @@ body {
   .single-mode--wrapper .mode-name, .single-mode--wrapper .mode-title {
     color: white;
     position: relative;
-    z-index: 10; }
+    z-index: 10;
+    margin-bottom: 45px;
+    font-size: 3em; }
 
 .mode--single.hidden-on-load {
   display: none; }
@@ -165,6 +179,9 @@ body {
 
 #availability {
   color: white; }
+
+.start-button {
+  font-size: 2em; }
 
 .guided-input {
   display: inline-block; }
@@ -217,7 +234,8 @@ body {
   font-size: 1.6rem; }
 
 .starting-soon-wrapper {
-  display: none; }
+  display: none;
+  margin-bottom: 45px; }
 
 .in-use {
   margin-bottom: 90px; }
@@ -265,12 +283,13 @@ body {
   border: none; }
 #reservation-code-modal .modal-header {
   text-align: center;
-  padding: 45px 0 0 0; }
+  padding: 45px 30px; }
 #reservation-code-modal .modal-footer {
   border: none;
   padding-bottom: 45px; }
 #reservation-code-modal .modal-title {
-  color: #3C4F93; }
+  color: #3C4F93;
+  font-size: 2.5em; }
 #reservation-code-modal .modal-body {
   text-align: center;
   padding: 90px 0 60px 0; }
@@ -569,7 +588,8 @@ body {
   z-index: 100; }
 
 .landing-page-wrapper h1 {
-  margin: 0 0 45px 0; }
+  margin: 0 0 45px 0;
+  font-size: 4em; }
 
 .landing-button-wrapper {
   display: flex;
@@ -586,7 +606,8 @@ body {
 #landing-page .btn {
   background-color: #DC897E;
   border: none;
-  width: 150px;
+  width: 200px;
+  font-size: 2em;
   border-radius: 50px;
   -webkit-transition: all, 0.3s;
   -moz-transition: all, 0.3s;

@@ -15,9 +15,9 @@ body{
 
 .haven-button, .haven-cta{
 	border-radius: 50px;
-	background: $blush;
+	background: $cta-color;
     display: block;
-	border: solid 2px $blush;
+	border: solid 2px $cta-color;
 	-webkit-transition: all 0.3s; /* Safari */
     transition: all 0.3s;
     font-size: 1em;
@@ -27,13 +27,13 @@ body{
 	-moz-box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
 	box-shadow: 10px 10px 15px 1px rgba(0,0,0,0.11);
     // font-weight: 100;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     padding: 15px 60px;
     margin-bottom: 15px;
 
     &:hover{
-        background-color: darken($blush, 10%);
-        border-color: darken($blush, 10%);
+        background-color: darken($cta-color, 10%);
+        border-color: darken($cta-color, 10%);
     }
     &:focus{
         outline: none;
@@ -61,6 +61,6 @@ body{
 }
 
 .haven-button:hover{
-	background-color: rgba(255,255,255,1);
+	// background-color: rgba(255,255,255,1);
 	cursor: pointer;
 }
