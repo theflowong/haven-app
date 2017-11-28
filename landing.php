@@ -61,6 +61,10 @@
 		cursor: pointer;
 	}
 
+	#button:focus{
+		outline: none;
+	}
+
 	#overlay{
 
 	}

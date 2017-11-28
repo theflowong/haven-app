@@ -140,7 +140,7 @@ $( document ).ready(function() {
         },
         {
             "name":"beach-body-scan",
-            "title": "Ocean Sunshine Scan",
+            "title": "Sunshine Scan",
             "time": "7 minutes",
             "loops": true,
             "duration":420000,
@@ -152,7 +152,7 @@ $( document ).ready(function() {
             "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
             // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
             // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
-            "thumbnail": "img/water.jpg",
+            "thumbnail": "img/sunshine.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         }
 
@@ -592,16 +592,21 @@ $( document ).ready(function() {
     //     audioFile_guided.volume = 1;
     // });
 
-    $(document).on('click','.soundOne', function(){
-        var uiSound = new Audio('audio/beep_short_on.wav');
-        uiSound.play();
-    })
+    // $(document).on('click','button', function(){
+    //     var uiSound = new Audio('audio/beep_short_on.wav');
+    //     audioButton.play();
+    // })
 
-    $(document).on('click','.soundTwo', function(){
-        var uiSound = new Audio('audio/beep_short_off.wav');
-        uiSound.play();
-        // alert('clcked');
-    })
+    //     $(document).on('click','a', function(){
+    //     var uiSound = new Audio('audio/beep_short_on.wav');
+    //     audioButton.play();
+    // })
+
+    // $(document).on('click','button', function(){
+    //     var uiSound = new Audio('audio/beep_short_off.wav');
+    //     audioButton.play();
+    //     // alert('clcked');
+    // })
 
 
 
