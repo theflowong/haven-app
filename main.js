@@ -83,7 +83,7 @@ $( document ).ready(function() {
     const waterfall_backwards = [dark_blue, light_blue, aqua];
 
     // Ocean Sunshine
-    const oceansunshine_backwards = [[30,59,84,62],light_blue, bright_short, aqua];
+    const oceansunshine_backwards = [[30,59,84,62],light_blue, bright_short];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
@@ -102,21 +102,6 @@ $( document ).ready(function() {
             "audio_guided":"",
             "thumbnail": "img/mode-zero-preview.jpg",
             "description": "Hey, it was one night of wild passion! And yet you didn\'t notice her body? I like to look in the mirror. I just haven\'t had sex in a month. You know, you\'ve been here two months. It\'s hard to gauge time. She keeps saying that God is going to show me a sign. The\u2026 something of my ways. Teamocil.\r\n\r\nAre all the guys in here\u2026 you know? George Sr.: No, not all of them. Barry: Yeah. It\'s never the ones you hope. It feels good to be back in a queen! And with deep, deep concentration and, and great focus, he\'s often able to achieve an erect\u2013 Happy Franklin Friday. No, it\'s the opposite. It\'s like my heart is getting hard.\r\n\r\nYou stay on top of her, Buddy. Don\'t be afraid to ride her. Hard. YOU\'RE the Chiclet! Not me. Caw ca caw, caw ca caw, caw ca caw! But where did the lighter fluid come from? You\'re Killing Me, Buster. Got a big ass room at the travelodge. What a fun, sexy time for you."
-        },
-        {
-            "name":"focus",
-            "title": "Focus",
-            "loops": false,
-            "duration":210000,
-            "bulb1": [room_bright, 12000],
-            "bulb2": [room_bright, 1000],
-            "bulb3": [room_bright, 12000],
-            "bulb4": [room_bright, 12000],
-            //"transition_time":3,
-            "audio":"",
-            "audio_guided":"",
-            "thumbnail": "img/mode-one-preview.jpg",
-            "description":  "Slow transition into white lights."
         },
         {
             "name": "islamic-prayer",
@@ -157,10 +142,10 @@ $( document ).ready(function() {
             "time": "7 minutes",
             "loops": true,
             "duration":420000,
-            "bulb1": [oceansunshine_backward, 3000],
-            "bulb2": [oceansunshine_backward, 4000],
-            "bulb3": [oceansunshine_backward, 5000],
-            "bulb4": [oceansunshine_backward, 3000],
+            "bulb1": [oceansunshine_backwards, 3000],
+            "bulb2": [oceansunshine_backwards, 4000],
+            "bulb3": [oceansunshine_backwards, 5000],
+            "bulb4": [oceansunshine_backwards, 3000],
             "audio":"audio/waterfall_vui_3min/HAVEN_Sprint10_MusicOnly.mp3", // 3:30
             "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
             // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
