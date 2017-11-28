@@ -46,7 +46,7 @@ $( document ).ready(function() {
     const green = [120,155,255,25500];
 
     const bright = [1000,254,121,8597];
-    const bright_short = [500, 254,121,8597];
+    const bright_short = [200, 254,121,8597];
 
     // hues
     const h_bright = 8597;
@@ -84,7 +84,7 @@ $( document ).ready(function() {
     const waterfall_backwards = [dark_blue, light_blue, aqua];
 
     // Ocean Sunshine
-    const oceansunshine_backwards = [[120,59,84,62], bright_short, [120,254,166,8000]];
+    const oceansunshine_backwards = [[120,59,184,62], bright_short, [120,254,166,8000], [120,254,166,h_orange]];
     //const oceansunshine_backwards = [dark_blue, light_blue, aqua];
 
     // Audio
@@ -148,8 +148,8 @@ $( document ).ready(function() {
             "bulb2": [oceansunshine_backwards, 4000],
             "bulb3": [oceansunshine_backwards, 5000],
             "bulb4": [oceansunshine_backwards, 3000],
-            "audio":"audio/waterfall_vui_3min/HAVEN_Sprint10_MusicOnly.mp3", // 3:30
-            "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
+            "audio":"audio/HAVEN_Beta_BodyScan.mp3", // 3:30
+            "audio_guided":"",
             // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
             // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
             "thumbnail": "img/sunshine.jpg",
