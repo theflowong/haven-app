@@ -28,7 +28,7 @@ $( document ).ready(function() {
 
     var audioFile;
     var audioFile_guided;
-    const audioButton = new Audio('audio/button-1.wav');
+    const audioButton = new Audio('audio/forward-button.mp3');
 
 
 // -------------------- DATA -------------------- \\
@@ -72,9 +72,9 @@ $( document ).ready(function() {
     const sunset_a_bright = [[500,30,254,254],[500,100,129,63848],[500,255,166,52393]];
     const sunset_b_bright = [[500,30,254,7107],[500,100,177,64107],[500,255,254,7608]];
 
-    const sunset_a_backwards = [[500,254,166,8595], [500,200,129,5848],[500,150,180,h_orange]];
-    const sunset_b_backwards = [[500,254,254,7608],[500,200,177,4107],[500,150,180,h_yellow]];
-    const sunset_c_backwards = [[500,254,166,8595], [500,200,129,6848],[500,150,180,h_red2]];
+    const sunset_a_backwards = [[500,154,166,8595], [500,100,129,5848],[500,150,180,h_orange]];
+    const sunset_b_backwards = [[500,154,254,7608],[500,200,177,4107],[500,100,180,h_yellow]];
+    const sunset_c_backwards = [[500,154,166,8595], [500,200,129,6848],[500,150,180,h_red2]];
 
     // Waterfall (linear)
     const waterfall_backwards_old = [bright,[1000,254,121,8597],light_blue,dark_blue,
@@ -84,7 +84,7 @@ $( document ).ready(function() {
     const waterfall_backwards = [dark_blue, light_blue, aqua];
 
     // Ocean Sunshine
-    const oceansunshine_backwards = [[120,59,184,62], bright_short, [120,254,166,8000], [120,254,166,h_orange]];
+    const oceansunshine_backwards = [[120,59,184,62], bright_short, [120,50,166,8000], [120,80,166,h_orange]];
     //const oceansunshine_backwards = [dark_blue, light_blue, aqua];
 
     // Audio
@@ -122,28 +122,28 @@ $( document ).ready(function() {
         },
         {
             "name":"waterfall",
-            "title": "Waterfall Breathing",
+            "title": "Guided Waterfall",
             "time": "5 minutes",
             "loops": true,
-            "duration":285000, // 5 min
+            "duration":300000, // 5 min
             "bulb1": [waterfall_backwards, 3000],
             "bulb2": [waterfall_backwards, 4000],
             "bulb3": [waterfall_backwards, 5000],
             "bulb4": [waterfall_backwards, 3000],
             //"transition_time":3,
-            "audio":"audio/waterfall_vui_3min/HAVEN_Sprint10_MusicOnly.mp3", // 3:30
-            "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
-            // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
-            // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
+            // "audio":"audio/waterfall_vui_3min/HAVEN_Sprint10_MusicOnly.mp3", // 3:30
+            // "audio_guided":"audio/waterfall_vui_3min/HAVEN_Sprint10_VoiceOnly.mp3",
+            "audio":"audio/beta-final/HAVEN_Beta_Waterfall_Wiz_MxOnly.mp3",
+            "audio_guided":"audio/beta-final/HAVEN_Beta_Waterfall_Wiz_VOOnly.mp3",
             "thumbnail": "img/water.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
         {
             "name":"beach-body-scan",
             "title": "Sunshine Scan",
-            "time": "7 minutes",
+            "time": "9 minutes",
             "loops": true,
-            "duration":420000,
+            "duration":540000,
             "bulb1": [oceansunshine_backwards, 3000],
             "bulb2": [oceansunshine_backwards, 4000],
             "bulb3": [oceansunshine_backwards, 5000],
@@ -324,7 +324,7 @@ $( document ).ready(function() {
                 audioFile_guided = new Audio(audio_guided);
                 fetchAudioAndPlay(audioFile_guided);
             }
-        }, 10);
+        }, 200);
         // if (audio) {
         //     audioFile = new Audio(audio);
         //     fetchAudioAndPlay(audioFile);
