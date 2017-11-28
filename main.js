@@ -115,7 +115,7 @@ $( document ).ready(function() {
             "thumbnail": "img/mode-one-preview.jpg",
             "description":  "Slow transition into white lights."
         },
-        {   
+        {
             "name": "islamic-prayer",
             "title":"Islamic Prayer",
             "loops": false,
@@ -317,7 +317,7 @@ $( document ).ready(function() {
                 audioFile_guided = new Audio(audio_guided);
                 fetchAudioAndPlay(audioFile_guided);
             }
-        }, 100);
+        }, 12000);
         // if (audio) {
         //     audioFile = new Audio(audio);
         //     fetchAudioAndPlay(audioFile);
@@ -584,6 +584,3 @@ $( document ).ready(function() {
 
 
 });
-
-
-
