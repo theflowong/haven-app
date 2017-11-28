@@ -1,6 +1,6 @@
       <div id="circle-one-wrapper" class="circle-wrapper">
       	<div id="circle-one" class="circle circle-one-moving" style="overflow: hidden;">
-      		<iframe src="https://player.vimeo.com/video/216569640?autoplay=1&loop=1&title=0&byline=0&portrait=0" width="889" height="500" frameborder="0" ></iframe>
+      	<!-- 	<iframe src="https://player.vimeo.com/video/216569640?autoplay=1&loop=1&title=0&byline=0&portrait=0" width="889" height="500" frameborder="0" ></iframe> -->
       	</div>
       </div>
 
