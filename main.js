@@ -36,14 +36,14 @@ $( document ).ready(function() {
     // Colours (one colour = one array): [transition time, bri, sat, hue]
     const colour_pink = [30,255,255,56100]; // 3 seconds, pink
 
-    const dark_blue = [30,255,255,46920]; // 12 seconds
-    const teal_blue = [30,255,255,33300];
-    const light_blue = [30,255,255,38300];
+    const dark_blue = [30,155,255,46920]; // 12 seconds
+    const teal_blue = [30,155,255,33300];
+    const light_blue = [30,155,255,38300];
     const light_blue1 = [30,169,254,41427];
     const light_blue2 = [30,169,254,39189];
     const light_blue3 = [30,169,254,41427]
-    const aqua = [120,255,255,33300];
-    const green = [120,255,255,25500];
+    const aqua = [120,155,255,33300];
+    const green = [120,155,255,25500];
 
     const bright = [1000,254,121,8597];
     const bright_short = [500, 254,121,8597];
@@ -84,8 +84,8 @@ $( document ).ready(function() {
     const waterfall_backwards = [dark_blue, light_blue, aqua];
 
     // Ocean Sunshine
-    //const oceansunshine_backwards = [[500,59,84,62],light_blue, bright_short, [500,254,166,8000]];
-    const oceansunshine_backwards = [dark_blue, light_blue, aqua];
+    const oceansunshine_backwards = [[120,59,84,62], bright_short, [120,254,166,8000]];
+    //const oceansunshine_backwards = [dark_blue, light_blue, aqua];
 
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
