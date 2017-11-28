@@ -30,8 +30,8 @@
     <div id="overlay">
     	<img id="haven-logo" class="logo" src="img/haven-transparent-logo.png">
     </div>
-         
-          
+
+
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -46,9 +46,9 @@
 		background-color:#DC897E;
 		padding: 20px;
 		position: absolute;
-		top:530px;
+		top:700px;
 		border: none;
-		left:120px;
+		right:50%;
 		/*margin-left: -100px;*/
 		color: white;
 		display: block;
@@ -84,23 +84,23 @@
 		height: auto;
 	}
 
-	.logo {	
+	.logo {
  animation: logo 5s infinite;
  -webkit-animation: logo 5s infinite;
  -moz-animation: logo 5s infinite;
  -o-animation: logo 5s infinite;
 }
- 
+
 @-webkit-keyframes logo {
- 0%, 100%{-webkit-transform:  scale(1);} 
+ 0%, 100%{-webkit-transform:  scale(1);}
  50% {-webkit-transform:  scale(1.2);}
 }
- 
+
 @-moz-keyframes logo {
  0%, 100%{-moz-transform: scale(1);}
  50% {-moz-transform: scale(1.2);}
 }
- 
+
 @-o-keyframes logo {
  0%, 100%{-o-transform: scale(1);}
  50% {-o-transform: scale(1.2);}
@@ -112,7 +112,7 @@
 </style>
 
 <script type="text/javascript">
-	
+
 	$(window).load(function() {
  		$("#overlay").fadeOut(1000);
 });
