@@ -37,8 +37,10 @@ $( document ).ready(function() {
     const colour_pink = [30,255,255,56100]; // 3 seconds, pink
 
     const dark_blue = [30,155,255,46920]; // 12 seconds
+    const dark_blue_bright = [30,255,255,46920]
     const teal_blue = [30,155,255,33300];
     const light_blue = [30,155,255,38300];
+    const light_blue_bright = [30,255,255,38300];
     const light_blue1 = [30,169,254,41427];
     const light_blue2 = [30,169,254,39189];
     const light_blue3 = [30,169,254,41427]
@@ -81,12 +83,13 @@ $( document ).ready(function() {
                     light_blue,dark_blue,light_blue,light_blue,aqua,
                     dark_blue,light_blue,dark_blue,light_blue, bright];
 
-    const waterfall_backwards = [dark_blue, light_blue, aqua];
+    const waterfall_backwards = [dark_blue, light_blue_bright, aqua];
+    const waterfall_backwards_bright = [dark_blue_bright, light_blue, aqua];
 
     // Ocean Sunshine
     const oceansunshine_backwards = [[120,59,184,62], bright_short, [120,50,166,8000], [120,80,166,h_orange]];
     //const oceansunshine_backwards = [dark_blue, light_blue, aqua];
-
+    const oceansunshine_backwards_bright = [[120,159,184,62], bright_short, [120,150,166,8000], [120,180,166,h_orange]];
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
 
@@ -154,6 +157,24 @@ $( document ).ready(function() {
             // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
             "thumbnail": "img/sunshine.jpg",
             "description": "Waterfall sounds and blue lights, with guided breathing."
+        },
+        {
+            "name":"starry-night",
+            "title": "Starry Night",
+            "time": "2 minutes",
+            "loops": true,
+            "duration":120000,
+            "bulb1": [waterfall_backwards_bright, 3000],
+            "bulb2": [oceansunshine_backwards, 4000],
+            "bulb3": [oceansunshine_backwards, 5000],
+            "bulb4": [waterfall_backwards_bright, 3000],
+            "audio":"audio/HAVEN_Beta_BodyScan.mp3", // 3:30
+            "audio_guided":"",
+            // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
+            // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
+            "thumbnail": "img/starry-night.png",
+            "description": "For our final presentation."
+
         }
 
         // {
@@ -324,7 +345,7 @@ $( document ).ready(function() {
                 audioFile_guided = new Audio(audio_guided);
                 fetchAudioAndPlay(audioFile_guided);
             }
-        }, 200);
+        }, 10000);
         // if (audio) {
         //     audioFile = new Audio(audio);
         //     fetchAudioAndPlay(audioFile);
