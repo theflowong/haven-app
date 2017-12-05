@@ -159,16 +159,16 @@ $( document ).ready(function() {
             "description": "Waterfall sounds and blue lights, with guided breathing."
         },
         {
-            "name":"starry-night",
-            "title": "Starry Night",
-            "time": "2 minutes",
+            "name":"heavenly-body",
+            "title": "Heavenly Body",
+            "time": "2 minutes 50 seconds",
             "loops": true,
             "duration":120000,
             "bulb1": [waterfall_backwards_bright, 3000],
             "bulb2": [oceansunshine_backwards, 4000],
             "bulb3": [oceansunshine_backwards, 5000],
             "bulb4": [waterfall_backwards_bright, 3000],
-            "audio":"audio/HAVEN_Beta_BodyScan.mp3", // 3:30
+            "audio":"audio/final_presentation/meditation_fixed.mp3", // 3:30
             "audio_guided":"",
             // "audio":"audio/waterfall/HAVEN_Music_Only.mp3",
             // "audio_guided":"audio/waterfall/HAVEN_Voice_Only.mp3",
@@ -345,7 +345,7 @@ $( document ).ready(function() {
                 audioFile_guided = new Audio(audio_guided);
                 fetchAudioAndPlay(audioFile_guided);
             }
-        }, 10000);
+        }, 1000);
         // if (audio) {
         //     audioFile = new Audio(audio);
         //     fetchAudioAndPlay(audioFile);
