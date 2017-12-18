@@ -47,8 +47,8 @@ $( document ).ready(function() {
     const aqua = [120,155,255,33300];
     const green = [120,155,255,25500];
 
-    const bright = [1000,254,121,8597];
-    const bright_short = [200, 254,121,8597];
+    const bright = [100,254,121,8597];
+    const bright_short = [30, 254,121,8597];
 
     // hues
     const h_bright = 8597;
@@ -87,9 +87,9 @@ $( document ).ready(function() {
     const waterfall_backwards_bright = [dark_blue_bright, light_blue, aqua];
 
     // Ocean Sunshine
-    const oceansunshine_backwards = [[120,59,184,62], bright_short, [120,50,166,8000], [120,80,166,h_orange]];
+    const oceansunshine_backwards = [[120,59,184,62], bright_short, [30,120,100,62], [120,50,166,8000], [120,80,166,h_orange]];
     //const oceansunshine_backwards = [dark_blue, light_blue, aqua];
-    const oceansunshine_backwards_bright = [[120,159,184,62], bright_short, [120,150,166,8000], [120,180,166,h_orange]];
+    const oceansunshine_backwards_bright = [[30,120,100,62], [30,70,156,8000], [30,80,180,h_orange]];
     // Audio
     // var audio = new Audio('audio/HAVEN_Music1.mp3');
 
@@ -163,10 +163,10 @@ $( document ).ready(function() {
             "title": "Heavenly Body",
             "time": "2 minutes 50 seconds",
             "loops": true,
-            "duration":120000,
+            "duration":150000,
             "bulb1": [waterfall_backwards_bright, 3000],
-            "bulb2": [oceansunshine_backwards, 4000],
-            "bulb3": [oceansunshine_backwards, 5000],
+            "bulb2": [oceansunshine_backwards_bright, 3000],
+            "bulb3": [oceansunshine_backwards, 3000],
             "bulb4": [waterfall_backwards_bright, 3000],
             "audio":"audio/final_presentation/meditation_fixed.mp3", // 3:30
             "audio_guided":"",
