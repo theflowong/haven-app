@@ -8,7 +8,8 @@ $( document ).ready(function() {
     var $modeButtonWrapper = $('#mode-button-wrapper');
 
     // Hue System
-    var url_ip = 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
+    var url_ip = 'http://10.159.5.131/api/FZJuUsttafRGVFd7QSHVyyBtrhVHQBw0d5WhRtGY'
+        // vr room: http://10.159.5.131
         // http://<bridge ip address>/debug/clip.html
         // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
         // Flo's room: 'http://192.168.0.182/api/P5L62etgqpkSUikcmdABFSCox4cOoyk7SIMefkO3',
