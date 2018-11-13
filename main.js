@@ -13,7 +13,8 @@ $( document ).ready(function() {
         // http://<bridge ip address>/debug/clip.html
         // Haven room: 'http://10.159.23.110/api/EhkJrEiZtacHKqMLWLHZ-OMTS7wpcXP87LfjImvn'
         // Flo's room: 'http://192.168.0.182/api/P5L62etgqpkSUikcmdABFSCox4cOoyk7SIMefkO3',
-        // Daniel's room: 'http://192.168.86.31/api/EQMB5CwjE2hYxWK4a-lqCvk9pKN5VoNoTvEACoDz'
+        // Daniel's room: 'http://192.168.86.31/api/EQMB5CwjE2hYxWK4a-lqCvk9pKN5VoNoTvEACoDz',
+        // Flo's room (with new 2018 hue lights): '192.168.0.162/api/OUTmkW7fdplyW3yJ3Up2MLObLV1-9fJTQ-SD6IKu'
     var url_allLights = '/groups/0/action';
         // or /lights/3/state (depending on light)
 
