@@ -1,6 +1,10 @@
 # Haven: Room Interactions
 
-A web app to choose modes and control lights/sound for the Meditation/Prayer Room in the Centre for Digital Media. Built primarily on Javascript, using Philips Hue API.
+A web app prototype built in 13 weeks at the Centre for Digital Media, with the HAVEN team.
+
+The app allows users to choose modes and control lights/sound for the Meditation/Prayer Room in the Centre for Digital Media. Built primarily on Javascript, using Philips Hue API.
+
+To explore more, check out my post on the [visual designs](https://www.flowong.com/haven/) we made.
 
 
 ## Set up & Install
