@@ -5,7 +5,7 @@ A web app to choose modes and control lights/sound for the Meditation/Prayer Roo
 
 ## Set up & Install
 
-*Note: The code is connected to the HAVEN Room Hue API lights. If you're using another room, you must replace some url's with your own IP address and Hue lights.*
+*Note: To use/test the code, you must have the Philips Hue lightbulbs already configured in your room. This code is specifically connected to one specific room. If you're using another room, you need to manually replace a URL with your own IP address and Hue lights.*
 
 1. Download the file directory. Move the file directory to your ``htdocs`` folder.
 
